@@ -2,16 +2,20 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Company extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 
+    protected $fillable = [
         'name',
-        'stack',
+        'stack_be',
+        'stack_fe',
         'database_driver',
         'devops',
         'ceo',
@@ -22,5 +26,14 @@ class Company extends Model
         'hr_contact',
         'testimonials',
         'salary_range',
+    ];
+
+    protected $casts = [
+
+        'stack_be' => 'array',
+        'stack_fe' => 'array',
+        'devops' => 'array',
+        'database_driver' => 'array'
+        
     ];
 }
