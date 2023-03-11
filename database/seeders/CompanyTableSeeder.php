@@ -15,14 +15,14 @@ class CompanyTableSeeder extends Seeder
      */
     public function run()
     {
-   
+
 
         Company::create([
             'name' => 'PayStack',
-            'stack_be' => ['1' => 'php', '2' => 'nodejs', '3'=>'java', '4' => 'rubyonrails'],
-            'stack_fe' => ['1' => 'javascript', '2' => 'react', '3'=>'vuejs', '4' => 'svelte'],
-            'devops' => ['1' => 'azure', '2' => 'digitalOcean', '3'=>'heroku'],
-            'database_driver' => ['1' =>'mysql'],
+            'stack_be' => ['php', 'nodejs', 'java', 'rubyonrails'],
+            'stack_fe' => ['javascript', 'react', 'vuejs', 'svelte'],
+            'devops' =>  ['azure', 'digitalOcean', 'heroku'],
+            'database_driver' => ['mariadb'],
             'ceo' => 'Ox',
             'ceo_contact' => 'linked.icom',
             'cto' => 'Odogwu Ox',
@@ -35,10 +35,10 @@ class CompanyTableSeeder extends Seeder
 
         Company::create([
             'name' => 'EdenLife',
-            'stack_be' => ['1' => 'php', '2' => 'laravel', '3'=>'mobile',],
-            'stack_fe' => ['1' => 'javascript', '2' => 'react', '3'=>'vuejs'],
-            'devops' => ['1' => 'azure', '2' => 'digitalOcean', '3'=>'heroku',],
-            'database_driver' => ['sqlite'],
+            'stack_be' => ['php', 'nodejs', 'java', 'rubyonrails'],
+            'stack_fe' => ['javascript', 'react', 'vuejs', 'svelte'],
+            'devops' =>  ['azure', 'digitalOcean', 'heroku'],
+            'database_driver' => ['mysql'],
             'ceo' => 'odogwu Machalla (unicode developer) ',
             'ceo_contact' => 'linked.icom/unicodedeveloper',
             'cto' => 'Odogwu Machalla',
@@ -52,10 +52,10 @@ class CompanyTableSeeder extends Seeder
 
         Company::create([
             'name' => 'Chowdeck',
-            'stack_be' => ['1' => 'php', '2' => 'laravel', '3'=>'mobile',],
-            'stack_fe' => ['1' => 'javascript', '2' => 'react', '3'=>'vuejs'],
-            'devops' => ['1' => 'azure', '2' => 'digitalOcean', '3'=>'heroku',],
-            'database_driver' => ['mysql', 'sqliite'],
+            'stack_be' => ['python', 'nodejs', 'java', 'rubyonrails'],
+            'stack_fe' => ['javascript', 'react', 'vuejs', 'svelte'],
+            'devops' => ['digitalOcean', 'heroku'],
+            'database_driver' => ['sqlite'],
             'ceo' => 'Babafemi Aluko ',
             'ceo_contact' => 'linked.icom/unicodedeveloper',
             'cto' => 'Babafemi Aluko            ',
@@ -70,10 +70,10 @@ class CompanyTableSeeder extends Seeder
 
         Company::create([
             'name' => 'FlutterWave',
-            'stack_be' => ['1' => 'nodejs', '2' => 'laravel', '3'=>'mobile',],
-            'stack_fe' => ['1' => 'javascript', '2' => 'react', '3'=>'vuejs'],
-            'devops' => ['1' => 'azure', '2' => 'digitalOcean', '3'=>'heroku',],
-            'database_driver' => ['no_sql', 'mysql'],
+            'stack_be' => [ 'java', 'rubyonrails'],
+            'stack_fe' => [ 'vuejs', 'svelte'],
+            'devops' =>['digitalOcean'],
+            'database_driver' => ['mysql'],
             'ceo' => 'Olugbenga Agboola ',
             'ceo_contact' => 'https://www.linkedin.com/in/gbagboola',
             'cto' => 'Babafemi Aluko            ',
