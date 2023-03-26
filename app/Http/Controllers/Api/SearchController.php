@@ -21,8 +21,8 @@ class SearchController extends Controller
 
         if ($req->item) {
             $results = $companyStack::query()
-                // ->where('name', 'LIKE', '%' . $req->item . '%')
-                ->whereJsonContains('stack_be', [$req->item])
+                ->where('name', 'LIKE', '%' . $req->item . '%')
+                ->orWhereJsonContains('stack_be', [$req->item])
                 ->orWhereJsonContains('stack_fe', [$req->item])
                 ->orWhereJsonContains('devops', [$req->item])
                 ->orWhereJsonContains('database_driver', [$req->item])
