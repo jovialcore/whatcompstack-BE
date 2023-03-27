@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/company/stack/results', [App\Http\Controllers\Api\SearchController::class, 'search']);
 
+Route::get('/company/stack/all', [App\Http\Controllers\Api\CompanyStackController::class, 'index']);
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
