@@ -13,7 +13,7 @@ class CompanyStackController extends Controller
     public function index()
     {
         $company = new Company();
-        $companies  = $company::all();
+        $companies  = $company::paginate(15);
 
         if (count($companies) > 0) {
             return response()->json([CompanyResource::collection($companies)], 200);
