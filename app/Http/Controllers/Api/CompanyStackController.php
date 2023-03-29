@@ -13,11 +13,11 @@ class CompanyStackController extends Controller
     public function index()
     {
         $company = new Company();
-        $companies  = $company::paginate(15);
+        $companies  = $company::paginate();
 
         if (count($companies) > 0) {
             CompanyResource::collection($companies); // 
-            return response()->json([ $companies ], 200);
+            return response()->json([$companies], 200);
         } else {
 
             return response()->json(['message' => 'No  Companies found '], 404);
@@ -25,11 +25,16 @@ class CompanyStackController extends Controller
     }
     public function show($id)
     {
-
         $company = new Company();
 
-        $companyStack = $company->first($id);
+        $companyStack = $company->where('id', $id)->first();
 
-        return response()->json(['company_details' =>  $companyStack]);
+        if ($companyStack) {
+
+            return response()->json(['company_details' =>  $companyStack]);
+        } else {
+
+            return response()->json(['message' => 'No  details for this company yet  '], 404);
+        }
     }
 }

@@ -17,8 +17,7 @@ class SearchController extends Controller
 
         $companyStack = new Company();
 
-        // dd($req->item);
-
+     
         if ($req->item) {
             $results = $companyStack::query()
                 ->where('name', 'LIKE', '%' . $req->item . '%')
