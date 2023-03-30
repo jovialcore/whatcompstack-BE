@@ -17,9 +17,12 @@ class CompanyStackController extends Controller
         $company = new Company();
         $companies  = $company::paginate();
 
+        // if the user enters a search term,  handle search logic
         if ($req->has('item')) {
 
-            (new SearchService($req->item, $company))->search();
+            return (new SearchService($req->item, $company))->search();
+
+            // if none, just list all results 
         } elseif (count($companies) > 0) {
             CompanyResource::collection($companies); // 
             return response()->json([$companies], 200);
@@ -31,7 +34,7 @@ class CompanyStackController extends Controller
 
 
 
-
+    // retrieving details about a particular stack 
     public function show($id)
     {
         $company = new Company();

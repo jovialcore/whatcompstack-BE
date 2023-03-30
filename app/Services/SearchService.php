@@ -12,6 +12,8 @@ class SearchService
 
     protected $companyModel;
 
+
+
     //dependency injection on the model 
 
     public function __construct($searchItem, $companyModel)
@@ -37,13 +39,11 @@ class SearchService
                 ->orderBy('id', 'DESC')->paginate(10);
 
 
-            if (count($results) > 0) {
-
-               
+            if (count($results) > 0)
                 return response()->json([SearchResultResource::collection($results)], 200);
-            } else {
+
+            else
                 return response()->json(['message' => 'No  results found '], 404);
-            }
         }
     }
 }
