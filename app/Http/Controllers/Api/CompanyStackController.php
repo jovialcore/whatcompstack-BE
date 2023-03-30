@@ -5,17 +5,22 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
+
+use App\Services\SearchService;
 use Illuminate\Http\Request;
 
 class CompanyStackController extends Controller
 {
 
-    public function index()
+    public function index(Request $req)
     {
         $company = new Company();
         $companies  = $company::paginate();
 
-        if (count($companies) > 0) {
+        if ($req->has('item')) {
+
+            (new SearchService($req->item, $company))->search();
+        } elseif (count($companies) > 0) {
             CompanyResource::collection($companies); // 
             return response()->json([$companies], 200);
         } else {
@@ -23,6 +28,10 @@ class CompanyStackController extends Controller
             return response()->json(['message' => 'No  Companies found '], 404);
         }
     }
+
+
+
+
     public function show($id)
     {
         $company = new Company();

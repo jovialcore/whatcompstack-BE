@@ -17,7 +17,7 @@ class SearchController extends Controller
 
         $companyStack = new Company();
 
-     
+
         if ($req->item) {
             $results = $companyStack::query()
                 ->where('name', 'LIKE', '%' . $req->item . '%')
@@ -27,6 +27,7 @@ class SearchController extends Controller
                 ->orWhereJsonContains('database_driver', [$req->item])
 
                 ->orderBy('id', 'DESC')->paginate(10);
+
 
             if (count($results) > 0)
                 return response()->json([SearchResultResource::collection($results)], 200);
