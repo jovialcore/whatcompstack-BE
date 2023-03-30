@@ -13,9 +13,6 @@ class SearchService
     protected $companyModel;
 
 
-
-    //dependency injection on the model 
-
     public function __construct($searchItem, $companyModel)
     {
 
