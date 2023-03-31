@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('testimonials')->nullable();
             $table->string('salary_range')->nullable();
             $table->text('about')->nullable();
+            $table->text('company_url')->nullable();
             $table->string('logo')->nullable();
 
             $table->timestamps();
