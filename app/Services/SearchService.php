@@ -32,15 +32,10 @@ class SearchService
                 ->orWhereJsonContains('stack_fe', [$this->searchItem])
                 ->orWhereJsonContains('devops', [$this->searchItem])
                 ->orWhereJsonContains('database_driver', [$this->searchItem])
-
                 ->orderBy('id', 'DESC')->paginate(10);
 
-
-            if (count($results) > 0)
-                return response()->json([SearchResultResource::collection($results)], 200);
-
-            else
-                return response()->json(['message' => 'No  results found '], 404);
+            $searchResults = SearchResultResource::collection($results);
+            return [$searchResults, ['status' => 200]];
         }
     }
 }

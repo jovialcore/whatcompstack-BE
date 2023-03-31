@@ -19,6 +19,7 @@ class CompanyTableSeeder extends Seeder
 
         Company::create([
             'name' => 'PayStack',
+            'company_url' => "https://paystack.com/",
             'stack_be' => ['php', 'nodejs', 'java', 'rubyonrails'],
             'stack_fe' => ['javascript', 'react', 'vuejs', 'svelte'],
             'devops' =>  ['azure', 'digitalOcean', 'heroku'],
@@ -37,6 +38,7 @@ class CompanyTableSeeder extends Seeder
 
         Company::create([
             'name' => 'EdenLife',
+            'company_url' => "https://ouredenlife.com/",
             'stack_be' => ['php', 'nodejs', 'java', 'rubyonrails'],
             'stack_fe' => ['javascript', 'react', 'vuejs', 'svelte'],
             'devops' =>  ['azure', 'digitalOcean', 'heroku'],
@@ -56,6 +58,7 @@ class CompanyTableSeeder extends Seeder
 
         Company::create([
             'name' => 'Chowdeck',
+            'company_url' => "https://chowdeck.com/",
             'stack_be' => ['python', 'nodejs', 'java', 'rubyonrails'],
             'stack_fe' => ['javascript', 'react', 'vuejs', 'svelte'],
             'devops' => ['digitalOcean', 'heroku'],
@@ -72,10 +75,11 @@ class CompanyTableSeeder extends Seeder
             'logo' => "https://res.cloudinary.com/chidiebere/image/upload/v1679843515/paysatack.png"
 
         ]);
-
+     
 
         Company::create([
             'name' => 'FlutterWave',
+            'company_url' => "https://www.flutterwave.com/",
             'stack_be' => [ 'java', 'rubyonrails'],
             'stack_fe' => [ 'vuejs', 'svelte'],
             'devops' =>['digitalOcean'],

@@ -12,9 +12,9 @@ use Illuminate\Http\Request;
 class CompanyStackController extends Controller
 {
 
-    public function index(Request $req)
+    public function index(Request $req, Company $company)  
     {
-        $company = new Company();
+
         $companies  = $company::paginate();
 
         // if the user enters a search term,  handle search logic
@@ -25,10 +25,7 @@ class CompanyStackController extends Controller
             // if none, just list all results 
         } elseif (count($companies) > 0) {
             CompanyResource::collection($companies); // 
-            return response()->json([$companies], 200);
-        } else {
-
-            return response()->json(['message' => 'No  Companies found '], 404);
+            return [$companies, ['status' => 200]];
         }
     }
 
