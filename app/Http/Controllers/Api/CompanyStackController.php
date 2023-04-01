@@ -12,10 +12,10 @@ use Illuminate\Http\Request;
 class CompanyStackController extends Controller
 {
 
-    public function index(Request $req, Company $company)  
+    public function index(Request $req, Company $company)
     {
 
-        $companies  = $company::paginate();
+        $companies  = $company::paginate(10);
 
         // if the user enters a search term,  handle search logic
         if ($req->has('item')) {
@@ -24,8 +24,8 @@ class CompanyStackController extends Controller
 
             // if none, just list all results 
         } elseif (count($companies) > 0) {
-            CompanyResource::collection($companies); // 
-            return [$companies, ['status' => 200]];
+            return CompanyResource::collection($companies); // 
+
         }
     }
 

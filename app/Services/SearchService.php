@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-
+use App\Http\Resources\CompanyResource;
 use App\Http\Resources\SearchResultResource;
 
 class SearchService
@@ -26,6 +26,7 @@ class SearchService
 
         if ($this->searchItem) {
 
+
             $results =   $this->companyModel::query()
                 ->where('name', 'LIKE', '%' . $this->searchItem . '%')
                 ->orWhereJsonContains('stack_be', [$this->searchItem])
@@ -34,8 +35,7 @@ class SearchService
                 ->orWhereJsonContains('database_driver', [$this->searchItem])
                 ->orderBy('id', 'DESC')->paginate(10);
 
-            $searchResults = SearchResultResource::collection($results);
-            return [$searchResults, ['status' => 200]];
+            return CompanyResource::collection($results);
         }
     }
 }
