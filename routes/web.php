@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get( '/scrapper/company', [App\Http\Controllers\ScraperController::class, 'fetch']);
+
+
 Route::get('/', function () {
     return view('welcome');
 });
