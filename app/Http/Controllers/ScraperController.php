@@ -11,6 +11,7 @@ class ScraperController extends Controller
         $client = new Client();
 
         $website = $client->request('GET', 'https://www.businesslist.com.ng/category/interior-design/city:lagos');
+        
 
         return $website->html();
     }
