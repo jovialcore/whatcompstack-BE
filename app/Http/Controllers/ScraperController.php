@@ -17,8 +17,9 @@ class ScraperController extends Controller
 
 
         // return $website->html();
-        $website->filter('div.job-details > ul')->each(function ($node) {
+        $website->filter('p + ul')->eq(1)->each(function ($node) {
             // dump($node->text() );
+           
             echo $node->text() . " <br/>";
         });
     }
