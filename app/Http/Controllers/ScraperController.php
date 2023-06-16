@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Goutte\Client;
 use Illuminate\Http\Request;
-use Illuminate\Support\Benchmark;
 
 use App\Helpers\Backend;
 
@@ -14,20 +13,13 @@ class ScraperController extends Controller
     {
         $client = new Client();
 
-        $website = $client->request('GET', 'https://www.businesslist.com.ng/category/interior-design/city:lagos');
+        $website = $client->request('GET', 'https://www.myjobmag.com/job/75131/junior-software-engineer-backend-paystack');
 
 
-        Benchmark::dd(function () {
-            $backendItems = Backend::getBeStack();
-            foreach ( $backendItems  as $key => $value) {
-                if($value == 'PHP') {
-                    return 'php';
-                }
-            }
-            // if (in_array('Nodejs',  $backendItems)) {
-            //     return 'python';
-            // }
+        // return $website->html();
+        $website->filter('div.job-details > ul')->each(function ($node) {
+            // dump($node->text() );
+            echo $node->text() . " <br/>";
         });
-        // return  $backendItems;
     }
 }
