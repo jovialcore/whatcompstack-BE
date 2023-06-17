@@ -1,127 +1,243 @@
 <?php
 $backend = [
     // Python
-    "Python", "Django", "Flask", "Pyramid", "Bottle", "CherryPy", "TurboGears", "Web2Py", "Tornado",
+    "Python" => "python", 
+    "Django" => "django", 
+    "Flask" => "flask", 
+    "Pyramid" => "pyramid", 
+    "Bottle" => "bottle", 
+    "CherryPy" => "cherrypy", 
+    "TurboGears" => "turbogears", 
+    "Web2Py" => "web2py", 
+    "Tornado" => "tornado",
 
     // JavaScript
-    "JavaScript", "Node.js", "Express.js", "Nest.js", "Hapi.js", "Koa.js", "Sails.js", "Meteor.js", "Adonis.js",
+    "JavaScript" => "javascript", 
+    "Node.js" => "node.js", 
+    "Express.js" => "express.js", 
+    "Nest.js" => "nest.js", 
+    "Hapi.js" => "hapi.js", 
+    "Koa.js" => "koa.js", 
+    "Sails.js" => "sails.js", 
+    "Meteor.js" => "meteor.js", 
+    "Adonis.js" => "adonis.js",
 
     // Java
-    "Java", "Spring Boot", "Apache Struts", "Play Framework", "Grails", "Dropwizard", "JavaServer Faces (JSF)",
-    "Vert.x", "Apache Wicket", "Apache Tapestry", "Spark", "JHipster",
+    "Java" => "java", 
+    "Spring Boot" => "spring boot", 
+    "Apache Struts" => "apache struts", 
+    "Play Framework" => "play framework", 
+    "Grails" => "grails", 
+    "Dropwizard" => "dropwizard", 
+    "JavaServer Faces (JSF)" => "javaserver faces (jsf)",
+    "Vert.x" => "vert.x", 
+    "Apache Wicket" => "apache wicket", 
+    "Apache Tapestry" => "apache tapestry", 
+    "Spark" => "spark", 
+    "JHipster" => "jhipster",
 
     // Ruby
-    "Ruby", "Ruby on Rails", "Sinatra", "Hanami", "Cuba", "Ramaze", "Volt", "Roda", "Trailblazer",
+    "Ruby" => "ruby", 
+    "Ruby on Rails" => "ruby on rails", 
+    "Sinatra" => "sinatra", 
+    "Hanami" => "hanami", 
+    "Cuba" => "cuba", 
+    "Ramaze" => "ramaze", 
+    "Volt" => "volt", 
+    "Roda" => "roda", 
+    "Trailblazer" => "trailblazer",
 
     // PHP
-    "PHP", "Laravel", "Symfony", "CodeIgniter", "Yii", "Zend Framework", "Phalcon", "CakePHP", "FuelPHP",
-    "Slim", "Lumen",
+    "PHP" => "php", 
+    "Laravel" => "laravel", 
+    "Symfony" => "symfony", 
+    "CodeIgniter" => "codeigniter", 
+    "Yii" => "yii", 
+    "Zend Framework" => "zend framework", 
+    "Phalcon" => "phalcon", 
+    "CakePHP" => "cakephp", 
+    "FuelPHP" => "fuelphp",
+    "Slim" => "slim", 
+    "Lumen" => "lumen",
 
     // Go
-    "Go", "Gin", "Echo", "Revel", "Buffalo", "Fiber", "Martini", "Beego", "Goji", "Kemal", "Gorilla",
+    "Go" => "go", 
+    "Gin" => "gin", 
+    "Echo" => "echo", 
+    "Revel" => "revel", 
+    "Buffalo" => "buffalo", 
+    "Fiber" => "fiber", 
+    "Martini" => "martini", 
+    "Beego" => "beego", 
+    "Goji" => "goji", 
+    "Kemal" => "kemal", 
+    "Gorilla" => "gorilla",
 
     // C#
-    "C#", "ASP.NET", ".NET Core", "Nancy", "ServiceStack", "Akka.NET", "Simple.Web", "Orchard Core",
-    "MVC Framework", "Web API",
+    "C#" => "c#", 
+    "ASP.NET" => "asp.net", 
+    ".NET Core" => ".net core", 
+    "Nancy" => "nancy", 
+    "ServiceStack" => "servicestack", 
+    "Akka.NET" => "akka.net", 
+    "Simple.Web" => "simple.web", 
+    "Orchard Core" => "orchard core",
+    "MVC Framework" => "mvc framework", 
+    "Web API" => "web api",
 
     // Rust
-    "Rust", "Rocket", "Actix", "Warp", "Tide", "Nickel", "Iron", "Gotham", "Rocket Framework", "Thruster",
+    "Rust" => "rust", 
+    "Rocket" => "rocket", 
+    "Actix" => "actix", 
+    "Warp" => "warp", 
+    "Tide" => "tide", 
+    "Nickel" => "nickel", 
+    "Iron" => "iron", 
+    "Gotham" => "gotham", 
+    "Rocket Framework" => "rocket framework", 
+    "Thruster" => "thruster",
 
     // Elixir
-    "Elixir", "Phoenix", "Nerves", "Sugar", "Rocket", "Maru", "Cavalry", "Raxx",
+    "Elixir" => "elixir", 
+    "Phoenix" => "phoenix", 
+    "Nerves" => "nerves", 
+    "Sugar" => "sugar", 
+    "Rocket" => "rocket", 
+    "Maru" => "maru", 
+    "Cavalry" => "cavalry", 
+    "Raxx" => "raxx",
 
     // Kotlin
-    "Kotlin", "Ktor", "Spring Boot", "Micronaut", "Vert.x", "Jooby", "Javalin", "TorqueBox",
+    "Kotlin" => "kotlin", 
+    "Ktor" => "ktor", 
+    "Spring Boot" => "spring boot", 
+    "Micronaut" => "micronaut", 
+    "Vert.x" => "vert.x", 
+    "Jooby" => "jooby", 
+    "Javalin" => "javalin", 
+    "TorqueBox" => "torquebox",
 
     // Swift
-    "Swift", "Vapor", "Perfect", "Kitura", "Zewo", "GCDWebServer", "Blackfish", "Swifter", "Noze.io",
+    "Swift" => "swift", 
+    "Vapor" => "vapor", 
+    "Perfect" => "perfect", 
+    "Kitura" => "kitura", 
+    "Zewo" => "zewo", 
+    "GCDWebServer" => "gcdwebserver", 
+    "Blackfish" => "blackfish", 
+    "Swifter" => "swifter", 
+    "Noze.io" => "noze.io",
 
     // Scala
-    "Scala", "Play Framework", "Lift", "Finatra", "Scalatra", "Akka", "Skinny", "Sangria",
+    "Scala" => "scala", 
+    "Play Framework" => "play framework", 
+    "Lift" => "lift", 
+    "Finatra" => "finatra", 
+    "Scalatra" => "scalatra", 
+    "Akka" => "akka", 
+    "Skinny" => "skinny", 
+    "Sangria" => "sangria",
 
     // Dart
-    "Dart", "Aqueduct", "Angel", "Shelf", "Jaguar", "Redstone", "Dio", "Grinder",
+    "Dart" => "dart", 
+    "Aqueduct" => "aqueduct", 
+    "Angel" => "angel", 
+    "Shelf" => "shelf", 
+    "Jaguar" => "jaguar", 
+    "Redstone" => "redstone", 
+    "Dio" => "dio", 
+    "Grinder" => "grinder",
 
     // Lua
-    "Lua", "Lapis", "OpenResty", "Mercury", "WSAPI", "Turbo.lua", "Orbit", "CGILua", "Nginx",
+    "Lua" => "lua", 
+    "Lapis" => "lapis", 
+    "OpenResty" => "openresty", 
+    "Mercury" => "mercury", 
+    "WSAPI" => "wsapi", 
+    "Turbo.lua" => "turbo.lua", 
+    "Orbit" => "orbit", 
+    "CGILua" => "cgilua", 
+    "Nginx" => "nginx",
 
     // Clojure
-    "Clojure", "Luminus", "Ring", "Duct", "Compojure", "Pedestal", "Buddy", "Immutant",
+    "Clojure" => "clojure", 
+    "Luminus" => "luminus", 
+    "Ring" => "ring", 
+    "Duct" => "duct", 
+    "Compojure" => "compojure", 
+    "Pedestal" => "pedestal", 
+    "Buddy" => "buddy", 
+    "Immutant" => "immutant",
 
     // R
-    "R", "Shiny", "Plumber", "httpuv", "opencpu", "RestRserve", "FastRWeb", "rApache", "Rook",
+    "R" => "r", 
+    "Shiny" => "shiny", 
+    "Plumber" => "plumber", 
+    "httpuv" => "httpuv", 
+    "opencpu" => "opencpu", 
+    "RestRserve" => "restrserve", 
+    "FastRWeb" => "fastrweb", 
+    "rApache" => "rapache", 
+    "Rook" => "rook",
 
     // Julia
-    "Julia", "Genie", "HTTP.jl", "Mux.jl", "Franklin.jl", "Julienned", "Escher", "WebIO", "Architect",
+    "Julia" => "julia", 
+    "Genie" => "genie", 
+    "HTTP.jl" => "http.jl", 
+    "Mux.jl" => "mux.jl", 
+    "Franklin.jl" => "franklin.jl", 
+    "Julienned" => "julienned", 
+    "Escher" => "escher", 
+    "WebIO" => "webio", 
+    "Architect" => "architect",
 
     // Perl
-    "Perl", "Mojolicious", "Dancer", "Catalyst", "Plack", "WebPerl", "Apache::ASP",
+    "Perl" => "perl", 
+    "Mojolicious" => "mojolicious", 
+    "Dancer" => "dancer", 
+    "Catalyst" => "catalyst", 
+    "Plack" => "plack", 
+    "WebPerl" => "webperl", 
+    "Apache::ASP" => "apache::asp",
 
     // .NET
-    ".NET", "ASP.NET", "ASP.NET Core", "WCF", "WebForms", "MVC", "Nancy", "ServiceStack",
+    ".NET" => ".net", 
+    "ASP.NET" => "asp.net", 
+    "ASP.NET Core" => "asp.net core", 
+    "WCF" => "wcf", 
+    "WebForms" => "webforms", 
+    "MVC" => "mvc", 
+    "Nancy" => "nancy", 
+    "ServiceStack" => "servicestack",
 
     // Haxe
-    "Haxe", "Tink", "KoHx", "HaxeFlixel", "HaxePunk", "HaxeUI", "HXCPP", "OpenFL",
+    "Haxe" => "haxe", 
+    "Tink" => "tink", 
+    "KoHx" => "kohx", 
+    "HaxeFlixel" => "haxeflixel", 
+    "HaxePunk" => "haxepunk", 
+    "HaxeUI" => "haxeui", 
+    "HXCPP" => "hxcpp", 
+    "OpenFL" => "openfl",
 
     // Groovy
-    "Groovy", "Grails", "Ratpack", "Spring Boot", "Spock", "Micronaut", "Geb",
+    "Groovy" => "groovy", 
+    "Grails" => "grails", 
+    "Ratpack" => "ratpack", 
+    "Spring Boot" => "spring boot", 
+    "Spock" => "spock", 
+    "Micronaut" => "micronaut", 
+    "Geb" => "geb",
 
     // PowerShell
-    "PowerShell", "Azure Functions", "PowerShell Web Access", "Pode", "PowerShell Universal Dashboard", "Universal",
-
-    // Erlang
-    "Erlang", "Chicago Boss", "Nitrogen", "Mochiweb", "Cowboy", "Elli", "Zotonic",
-
-    // Objective-C
-    "Objective-C", "Cocoa", "Cocoa Touch", "RestKit", "AFNetworking", "Alamofire", "Helios",
-
-    // C++
-    "C++", "Wt", "CppCMS", "CROW", "Poco", "Tufão", "TreeFrog", "Pistache",
-
-    // C
-    "C", "FastCGI", "CGI", "µWebSockets", "onion", "Ewan", "mjson", "mongoose",
-
-    // Perl
-    "Perl", "Catalyst", "Dancer", "Mojolicious", "PSGI", "Plack", "Rose", "Jifty",
-
-    // Crystal
-    "Crystal", "Kemal", "Amber", "Lucky", "Shards", "Athena", "Onyx", "Kemalyst",
-
-    // COBOL
-    "COBOL", "Micro Focus COBOL", "ACUCOBOL", "RM/COBOL", "IBM COBOL", "OpenCOBOL",
-
-    // Fortran
-    "Fortran", "GFortran", "Intel Fortran", "Absoft Fortran", "NAG Fortran", "Lahey Fortran",
-
-    // Lisp
-    "Lisp", "Common Lisp", "SBCL", "Clozure CL", "LispWorks", "ECL", "Allegro CL",
-
-    // Assembly
-    "Assembly", "x86 Assembly", "ARM Assembly", "MIPS Assembly", "PowerPC Assembly",
-
-    // MATLAB
-    "MATLAB", "Simulink", "MATLAB Coder", "Embedded MATLAB", "MATLAB Builder", "MATLAB Compiler",
-
-    // VHDL
-    "VHDL", "Xilinx Vivado", "Altera Quartus", "ModelSim", "GHDL", "Active-HDL",
-
-    // Verilog
-    "Verilog", "Xilinx ISE", "Altera Quartus", "ModelSim", "GHDL", "Active-HDL",
-
-    // COOL
-    "COOL", "COOL Compiler", "COOL Interpreter",
-
-    // Prolog
-    "Prolog", "SWI-Prolog", "GNU Prolog", "SICStus Prolog", "XSB", "YAP",
-
-    // Smalltalk
-    "Smalltalk", "Pharo", "Squeak", "GNU Smalltalk", "VisualWorks", "Amber",
-
-    // Pascal
-    "Pascal", "Free Pascal", "Delphi", "Lazarus", "Oxygene",
-
-    // LuaJIT
-    "LuaJIT", "Lapis", "OpenResty", "Mercury", "WSAPI", "Turbo.lua", "Orbit", "CGILua", "Nginx",
+    "PowerShell" => "powershell", 
+    "Azure Functions" => "azure functions", 
+    "PowerShell Web Access" => "powershell web access", 
+    "Pode" => "pode", 
+    "PowerShell Universal Dashboard" => "powershell universal dashboard", 
+    "Universal" => "universal", 
+    "PowerShell Server" => "powershell server", 
+    "REST APIs" => "rest apis"
 ];
 
-return $backend;
+

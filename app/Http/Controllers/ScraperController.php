@@ -24,30 +24,18 @@ class ScraperController extends Controller
             $text = $node->text() . "<br/>";
         });
 
-        $keywords = RakePlus::create($text, [
-            'sound',
-            'knowledge',
-            'frameworks',
-            'working',
-            'database',
-            'systems',
-            'familiarity',
-            'with',
-            'using',
-            'commands',
-            'ability',
-            'fair',
-            'understanding',
-            'building',
-            'restful',
-            'apis',
-            'rest',
-            'framework',
-            'oauth2',
-            'authentication',
-            'bonus',
-            'points'
-        ], 4)->keywords();
+        $keywords = RakePlus::create($text, ['en_US'], 4);
+
+        //check if the kewords are in
+
+        $result = [];
+
+        foreach ($keywords  as $keyword) {
+            in_array($keyword, Backend::getBeStack());
+            $result[] = $keyword;
+
+        }
+
         dump($keywords);
         echo $text;
     }
