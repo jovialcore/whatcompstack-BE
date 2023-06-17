@@ -11,6 +11,8 @@ use DonatelloZa\RakePlus\RakePlus;
 
 class ScraperController extends Controller
 {
+
+
     public function fetch()
     {
         $client = new Client();
@@ -19,24 +21,35 @@ class ScraperController extends Controller
 
         $text = "";
 
-        $website->filter('p + ul')->eq(1)->each(function ($node)  use (&$text) {
-
+        $website->filter('p + ul')->eq(1)->each(function ($node) use (&$text) {
             $text = $node->text() . "<br/>";
         });
 
-        $keywords = RakePlus::create($text, ['en_US'], 4);
+        $keywords = RakePlus::create($text, ['en_US'], 4)->keywords();
 
-        //check if the kewords are in
+        // Check if the keywords are in Backend::getBeStack()
 
         $result = [];
 
-        foreach ($keywords  as $keyword) {
-            in_array($keyword, Backend::getBeStack());
-            $result[] = $keyword;
+        // invoke this or pass to a constructor later
 
+        $backendArr  = Backend::getBeStack();
+
+
+        // loop throuh keywords
+        foreach ($keywords as $keyword) {
+
+            // convert to small case
+            $keyword = strtolower($keyword);
+
+            //check if keywords exist in $backend stacks and retrieve the matched keys
+            // using the $keyword as filter, we now return keys of $backendArr that represent the perfect naming
+            $matchedKeys = array_keys($backendArr, $keyword);
+
+            // push the matching item to the array
+            $result = array_merge($result, $matchedKeys);
         }
 
-        dump($keywords);
-        echo $text;
+        dump($result);
     }
 }

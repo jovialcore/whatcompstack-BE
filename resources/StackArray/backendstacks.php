@@ -1,6 +1,6 @@
 <?php
-$backend = [
-    // Python
+ $backend = [
+  
     "Python" => "python", 
     "Django" => "django", 
     "Flask" => "flask", 
@@ -11,7 +11,7 @@ $backend = [
     "Web2Py" => "web2py", 
     "Tornado" => "tornado",
 
-    // JavaScript
+   
     "JavaScript" => "javascript", 
     "Node.js" => "node.js", 
     "Express.js" => "express.js", 
@@ -22,7 +22,6 @@ $backend = [
     "Meteor.js" => "meteor.js", 
     "Adonis.js" => "adonis.js",
 
-    // Java
     "Java" => "java", 
     "Spring Boot" => "spring boot", 
     "Apache Struts" => "apache struts", 
@@ -36,7 +35,6 @@ $backend = [
     "Spark" => "spark", 
     "JHipster" => "jhipster",
 
-    // Ruby
     "Ruby" => "ruby", 
     "Ruby on Rails" => "ruby on rails", 
     "Sinatra" => "sinatra", 
@@ -47,7 +45,7 @@ $backend = [
     "Roda" => "roda", 
     "Trailblazer" => "trailblazer",
 
-    // PHP
+    
     "PHP" => "php", 
     "Laravel" => "laravel", 
     "Symfony" => "symfony", 
@@ -60,7 +58,7 @@ $backend = [
     "Slim" => "slim", 
     "Lumen" => "lumen",
 
-    // Go
+ 
     "Go" => "go", 
     "Gin" => "gin", 
     "Echo" => "echo", 
@@ -73,7 +71,7 @@ $backend = [
     "Kemal" => "kemal", 
     "Gorilla" => "gorilla",
 
-    // C#
+   
     "C#" => "c#", 
     "ASP.NET" => "asp.net", 
     ".NET Core" => ".net core", 
@@ -85,7 +83,6 @@ $backend = [
     "MVC Framework" => "mvc framework", 
     "Web API" => "web api",
 
-    // Rust
     "Rust" => "rust", 
     "Rocket" => "rocket", 
     "Actix" => "actix", 
@@ -97,7 +94,7 @@ $backend = [
     "Rocket Framework" => "rocket framework", 
     "Thruster" => "thruster",
 
-    // Elixir
+   
     "Elixir" => "elixir", 
     "Phoenix" => "phoenix", 
     "Nerves" => "nerves", 
@@ -107,7 +104,7 @@ $backend = [
     "Cavalry" => "cavalry", 
     "Raxx" => "raxx",
 
-    // Kotlin
+   
     "Kotlin" => "kotlin", 
     "Ktor" => "ktor", 
     "Spring Boot" => "spring boot", 
@@ -117,7 +114,6 @@ $backend = [
     "Javalin" => "javalin", 
     "TorqueBox" => "torquebox",
 
-    // Swift
     "Swift" => "swift", 
     "Vapor" => "vapor", 
     "Perfect" => "perfect", 
@@ -128,7 +124,7 @@ $backend = [
     "Swifter" => "swifter", 
     "Noze.io" => "noze.io",
 
-    // Scala
+  
     "Scala" => "scala", 
     "Play Framework" => "play framework", 
     "Lift" => "lift", 
@@ -138,7 +134,7 @@ $backend = [
     "Skinny" => "skinny", 
     "Sangria" => "sangria",
 
-    // Dart
+    
     "Dart" => "dart", 
     "Aqueduct" => "aqueduct", 
     "Angel" => "angel", 
@@ -148,7 +144,7 @@ $backend = [
     "Dio" => "dio", 
     "Grinder" => "grinder",
 
-    // Lua
+   
     "Lua" => "lua", 
     "Lapis" => "lapis", 
     "OpenResty" => "openresty", 
@@ -159,7 +155,7 @@ $backend = [
     "CGILua" => "cgilua", 
     "Nginx" => "nginx",
 
-    // Clojure
+ 
     "Clojure" => "clojure", 
     "Luminus" => "luminus", 
     "Ring" => "ring", 
@@ -169,7 +165,7 @@ $backend = [
     "Buddy" => "buddy", 
     "Immutant" => "immutant",
 
-    // R
+   
     "R" => "r", 
     "Shiny" => "shiny", 
     "Plumber" => "plumber", 
@@ -180,7 +176,6 @@ $backend = [
     "rApache" => "rapache", 
     "Rook" => "rook",
 
-    // Julia
     "Julia" => "julia", 
     "Genie" => "genie", 
     "HTTP.jl" => "http.jl", 
@@ -191,7 +186,7 @@ $backend = [
     "WebIO" => "webio", 
     "Architect" => "architect",
 
-    // Perl
+   
     "Perl" => "perl", 
     "Mojolicious" => "mojolicious", 
     "Dancer" => "dancer", 
@@ -200,7 +195,7 @@ $backend = [
     "WebPerl" => "webperl", 
     "Apache::ASP" => "apache::asp",
 
-    // .NET
+ 
     ".NET" => ".net", 
     "ASP.NET" => "asp.net", 
     "ASP.NET Core" => "asp.net core", 
@@ -210,7 +205,6 @@ $backend = [
     "Nancy" => "nancy", 
     "ServiceStack" => "servicestack",
 
-    // Haxe
     "Haxe" => "haxe", 
     "Tink" => "tink", 
     "KoHx" => "kohx", 
@@ -220,7 +214,6 @@ $backend = [
     "HXCPP" => "hxcpp", 
     "OpenFL" => "openfl",
 
-    // Groovy
     "Groovy" => "groovy", 
     "Grails" => "grails", 
     "Ratpack" => "ratpack", 
@@ -229,7 +222,6 @@ $backend = [
     "Micronaut" => "micronaut", 
     "Geb" => "geb",
 
-    // PowerShell
     "PowerShell" => "powershell", 
     "Azure Functions" => "azure functions", 
     "PowerShell Web Access" => "powershell web access", 
@@ -240,4 +232,4 @@ $backend = [
     "REST APIs" => "rest apis"
 ];
 
-
+return $backend;
