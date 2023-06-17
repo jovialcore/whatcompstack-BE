@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Helpers\Backend;
 
+use DonatelloZa\RakePlus\RakePlus;
+
 class ScraperController extends Controller
 {
     public function fetch()
@@ -17,10 +19,14 @@ class ScraperController extends Controller
 
 
         // return $website->html();
-        $website->filter('p + ul')->eq(1)->each(function ($node) {
+
+        $text = "";
+
+        $website->filter('p + ul')->eq(1)->each(function ($node)  use (&$text) {
             // dump($node->text() );
-           
-            echo $node->text() . " <br/>";
+
+            $text = $node->text() . "<br/>";
         });
+        echo $text;
     }
 }
