@@ -1,7 +1,5 @@
 <?php
-
-
-return [
+return  [
     'PHP',
     'Python',
     'Ruby',
@@ -22,4 +20,5 @@ return [
     'Objective-C',
     'Lua',
     'R',
+    'Julia'
 ];

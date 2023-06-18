@@ -15,7 +15,7 @@ class ScraperController extends Controller
 
     public function fetch(Company $company)
     {
-        dd(Backend::getBeStack('g'));
+
         $client = new Client();
 
         $website = $client->request('GET', 'https://www.myjobmag.com/job/141539/backend-developer-cowrywise');
@@ -34,12 +34,9 @@ class ScraperController extends Controller
 
         // invoke this or pass to a constructor later
 
-        
+
 
         $backendArr  =  Backend::getBeStack('allstacks');
-
-
-
 
 
         // loop throuh keywords
@@ -56,12 +53,26 @@ class ScraperController extends Controller
             $result = array_merge($result, $matchedKeys);
         }
 
-
+        // dd($result);
         // lets assume we have the Id of the company we want to save
         $company = $company->find(1);
 
-        $company->stack_be = $result;
+        $pLangArr  =  Backend::getBeStack('p_lang');
 
+       $be_format_for_db = Backend::getBeStack('be_format_for_db');
+      
+        $final_result = [];
+
+        foreach ($result as $key => $value) {
+           
+            if (in_array( $value, $pLangArr)) {
+                dd($be_format_for_db[$value] == $value);
+                $final_result[$value] = $be_format_for_db[$value];
+               dd( $final_result);
+            }
+        }
+
+        $company->stack_be = $result;
 
         $is_saved = $company->save();
 
