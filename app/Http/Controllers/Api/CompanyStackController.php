@@ -46,4 +46,10 @@ class CompanyStackController extends Controller
             return response()->json(['message' => 'No  details for this company yet  '], 404);
         }
     }
+
+
+    public function store()
+    {
+        
+    }
 }

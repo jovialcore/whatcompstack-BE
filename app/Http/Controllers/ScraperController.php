@@ -6,15 +6,16 @@ use Goutte\Client;
 use Illuminate\Http\Request;
 
 use App\Helpers\Backend;
-
+use App\Models\Company;
 use DonatelloZa\RakePlus\RakePlus;
 
 class ScraperController extends Controller
 {
 
 
-    public function fetch()
+    public function fetch(Company $company)
     {
+        dd(Backend::getBeStack('g'));
         $client = new Client();
 
         $website = $client->request('GET', 'https://www.myjobmag.com/job/141539/backend-developer-cowrywise');
@@ -33,7 +34,12 @@ class ScraperController extends Controller
 
         // invoke this or pass to a constructor later
 
-        $backendArr  = Backend::getBeStack();
+        
+
+        $backendArr  =  Backend::getBeStack('allstacks');
+
+
+
 
 
         // loop throuh keywords
@@ -50,6 +56,18 @@ class ScraperController extends Controller
             $result = array_merge($result, $matchedKeys);
         }
 
+
+        // lets assume we have the Id of the company we want to save
+        $company = $company->find(1);
+
+        $company->stack_be = $result;
+
+
+        $is_saved = $company->save();
+
+        if ($is_saved) {
+            dd('it has been saved');
+        }
         dump($result);
     }
 }
