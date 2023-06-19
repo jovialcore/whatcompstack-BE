@@ -57,24 +57,32 @@ class ScraperController extends Controller
         // lets assume we have the Id of the company we want to save
         $company = $company->find(1);
 
+        // return programming single lang
         $pLangArr  =  Backend::getBeStack('p_lang');
 
+
+
+        // return programming single lang
         $be_format_for_db = Backend::getBeStack('be_format_for_db');
 
 
 
-            // lets format the scrapped result propelly 
+        // lets format the scrapped result properly 
 
         $final_result = [];
 
         foreach ($result as $key => $scraped_result_item) {
 
+            // find/attach the programming language
             if (in_array($scraped_result_item, $pLangArr)) {
 
+                // get programming language
                 $final_result[$scraped_result_item] = $be_format_for_db[$scraped_result_item];
 
+                // determine the framework related to that programming language
                 $framework_result = array_intersect($final_result[$scraped_result_item], $result);
 
+                // append the detetermined framework to the programming language key
                 $final_result[$scraped_result_item] =  $framework_result;
             }
         }
