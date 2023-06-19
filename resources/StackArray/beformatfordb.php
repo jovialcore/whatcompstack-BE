@@ -9,7 +9,8 @@ return [
         'CherryPy',
         'TurboGears',
         'Web2Py',
-        'Tornado'
+        'Tornado',
+        'Ngnix'
     ],
     'JavaScript' => [
         'Node.js',

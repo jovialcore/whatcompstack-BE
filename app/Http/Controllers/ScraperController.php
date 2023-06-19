@@ -53,26 +53,33 @@ class ScraperController extends Controller
             $result = array_merge($result, $matchedKeys);
         }
 
-        // dd($result);
+
         // lets assume we have the Id of the company we want to save
         $company = $company->find(1);
 
         $pLangArr  =  Backend::getBeStack('p_lang');
 
-       $be_format_for_db = Backend::getBeStack('be_format_for_db');
-      
+        $be_format_for_db = Backend::getBeStack('be_format_for_db');
+
+
+
+            // lets format the scrapped result propelly 
+
         $final_result = [];
 
-        foreach ($result as $key => $value) {
-           
-            if (in_array( $value, $pLangArr)) {
-                dd($be_format_for_db[$value] == $value);
-                $final_result[$value] = $be_format_for_db[$value];
-               dd( $final_result);
+        foreach ($result as $key => $scraped_result_item) {
+
+            if (in_array($scraped_result_item, $pLangArr)) {
+
+                $final_result[$scraped_result_item] = $be_format_for_db[$scraped_result_item];
+
+                $framework_result = array_intersect($final_result[$scraped_result_item], $result);
+
+                $final_result[$scraped_result_item] =  $framework_result;
             }
         }
 
-        $company->stack_be = $result;
+        $company->stack_be = $final_result;
 
         $is_saved = $company->save();
 
