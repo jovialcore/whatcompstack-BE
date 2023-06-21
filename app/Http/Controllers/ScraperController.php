@@ -12,13 +12,13 @@ use DonatelloZa\RakePlus\RakePlus;
 class ScraperController extends Controller
 {
 
-    public function homepageScrape()
+    public function homepageScrape(Company $company)
     {
         $client = new Client();
         $homepage = $client->request('GET', 'https://www.myjobmag.com/jobs-at/cowrywise');
 
         // find link that match keyword to click on 
-        $homepage->filter('.job-info > ul > .mag-b')->each(function ($node) {
+        $homepage->filter('.job-info > ul > .mag-b ')->each(function ($node) use ($client, $company) {
 
             $jobTitles =   $node->text();
 
@@ -30,19 +30,25 @@ class ScraperController extends Controller
 
             // further extraction to return only one word i.e backend 
             $keyword = preg_replace("/\s.*/", '', ltrim($keyword));
-            
-            dump($keyword);
+
+            // click on the job description wit backend 
+            if ($keyword == 'backend') {
+
+                // find the link
+                $link = $node->selectLink($jobTitles)->link();
+                // click on the link
+                $website = $client->click($link);
+
+                dump($this->fetch($company, $website));
+            }
+
 
             // sieve the key word 
         });
     }
 
-    public function fetch(Company $company)
+    public function fetch($company, $website) // you see that I had to call the class client again? this is where dependency injection comes in. No DI so now, I will have to call the class and instatiate again
     {
-
-        $client = new Client();
-
-        $website = $client->request('GET', 'https://www.myjobmag.com/job/141539/backend-developer-cowrywise');
 
         $text = "";
 
@@ -58,8 +64,6 @@ class ScraperController extends Controller
         $result = [];
 
         // invoke this or pass to a constructor later
-
-
 
         $backendArr  =  Backend::getBeStack('allstacks');
 
@@ -91,7 +95,6 @@ class ScraperController extends Controller
         $be_format_for_db = Backend::getBeStack('be_format_for_db');
 
 
-
         // lets format the scrapped result properly 
 
         $final_result = [];
@@ -111,14 +114,14 @@ class ScraperController extends Controller
                 $final_result[$scraped_result_item] =  $framework_result;
             }
         }
+        return $final_result;
 
         $company->stack_be = $final_result;
 
         $is_saved = $company->save();
 
         if ($is_saved) {
-            dd('it has been saved');
+            return $result;
         }
-        dump($result);
     }
 }
