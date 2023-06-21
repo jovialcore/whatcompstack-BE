@@ -4,6 +4,7 @@ return [
     'Python' => [
         'Django',
         'Flask',
+        'Falcon',
         'Pyramid',
         'Bottle',
         'CherryPy',

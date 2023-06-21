@@ -10,6 +10,7 @@
     "TurboGears" => "turbogears", 
     "Web2Py" => "web2py", 
     "Tornado" => "tornado",
+    "Falcon" => 'falcon',
 
    
     "JavaScript" => "javascript", 
