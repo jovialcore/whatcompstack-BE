@@ -12,6 +12,30 @@ use DonatelloZa\RakePlus\RakePlus;
 class ScraperController extends Controller
 {
 
+    public function homepageScrape()
+    {
+        $client = new Client();
+        $homepage = $client->request('GET', 'https://www.myjobmag.com/jobs-at/cowrywise');
+
+        // find link that match keyword to click on 
+        $homepage->filter('.job-info > ul > .mag-b')->each(function ($node) {
+
+            $jobTitles =   $node->text();
+
+            // remove parentensis --just incase and any other stuff aside letters and alphabets and format to smaller letters too 
+            $purgedTitles =  strtolower(preg_replace('/[^a-z]/i', ' ', $jobTitles));
+
+            // get the particular keyword, which  in this case, it is "backend"
+            $keyword = substr($purgedTitles, strpos($purgedTitles, 'backend'));
+
+            // further extraction to return only one word i.e backend 
+            $keyword = preg_replace("/\s.*/", '', ltrim($keyword));
+            
+            dump($keyword);
+
+            // sieve the key word 
+        });
+    }
 
     public function fetch(Company $company)
     {
@@ -22,6 +46,7 @@ class ScraperController extends Controller
 
         $text = "";
 
+        // get the second link that matches the nodes specified 
         $website->filter('p + ul')->eq(1)->each(function ($node) use (&$text) {
             $text = $node->text() . "<br/>";
         });

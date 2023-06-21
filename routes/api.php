@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/company/stack/all', [App\Http\Controllers\Api\CompanyStackController::class, 'index']);
 
+
 Route::get('/company/stack/details/{id}', [App\Http\Controllers\Api\CompanyStackController::class, 'show']);
 
 
