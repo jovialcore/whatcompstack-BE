@@ -86,7 +86,6 @@ class ScraperController extends Controller
 
         /** ######    This section is used to select all stacks possible  #######  */
 
-
         // loop throuh keyword extracted
         foreach ($keywords as $keyword) {
 
@@ -101,6 +100,7 @@ class ScraperController extends Controller
             // push (merge) the matching item to the result  array
             $result = array_merge($result, $matchedKeys);
         }
+
 
 
         // lets assume we have the Id of the company we want to save
@@ -125,7 +125,11 @@ class ScraperController extends Controller
 
             // find/attach the programming language || get programming language
             if (in_array($scraped_result_item, $pLangArr)) {
-
+                // dump($scraped_result_item);
+                if ($scraped_result_item == 'JavaScript') {
+                    // some Backend job description lists, javascript as backend, so we do the needfull 
+                    $scraped_result_item = "Node.js";
+                }
                 // append the  programming language
                 $final_result[$scraped_result_item] = $be_format_for_db[$scraped_result_item];
 
@@ -136,6 +140,8 @@ class ScraperController extends Controller
                 $final_result[$scraped_result_item] =  $framework_result;
             }
         }
+
+        // dump($final_result);
 
         $j = array_merge($company->stack_be, $final_result);
 
