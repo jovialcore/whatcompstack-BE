@@ -39,7 +39,7 @@ class ScraperController extends Controller
                 // click on the link
                 $website = $client->click($link);
 
-                $this->fetch($company, $website);
+                dump($this->fetch($company, $website));
             }
 
 
@@ -47,7 +47,7 @@ class ScraperController extends Controller
         });
     }
 
-    public function fetch($company, $website) // you see that I had to call the class client again? this is where dependency injection comes in. No DI so now, I will have to call the class and instatiate again
+    public function fetch($company, $website)
     {
         $text = "";
 
@@ -57,48 +57,38 @@ class ScraperController extends Controller
             $pattern = '/\b(requirements|nice to haves|requirement|required)\b/i';
 
             $r =  strtolower($node->text());
-
-
+            // match the heading with title like "requirements "
             if (preg_match($pattern, $r)) {
 
-                // dump($node->text());
+                // get the heading with " job role  requirements  "
+                $roleRequirementNode = $website->filter('p:contains("' . $node->text() . '") ')->first();
 
-                $p = $website->filter('p:contains("TLDR Requirements:") ')->first();
-
-                dd($p->nextAll('ul')->first()->text());
-            
-                dd($p->nextAll()->filter('ul')->each(fn ($item) => $item->text()));
-            } else {
+                // match node (element) with  full text (.i.e immediately after heading or the job title)
+                $text  = $roleRequirementNode->nextAll('ul')->first()->text();
             }
-
-
-
-            $text = $node->text() . "<br/>";
         });
-
+        // etract keywords
         $keywords = RakePlus::create($text, ['en_US'], 4)->keywords();
 
 
-        // Check if the keywords are in Backend::getBeStack()
-
         $result = [];
-
-        // invoke this or pass to a constructor later
-
+        // get all backend stack 
         $backendArr  =  Backend::getBeStack('allstacks');
 
+        /** ######    This section is used to select all stacks possible  #######  */
 
-        // loop throuh keywords
+
+        // loop throuh keyword extracted
         foreach ($keywords as $keyword) {
 
             // convert to small case
             $keyword = strtolower($keyword);
 
             //check if keywords exist in $backend stacks and retrieve the matched keys
-            // using the $keyword as filter, we now return keys of $backendArr that represent the perfect naming
+            // using the $keyword as filter, we now return keys of $backendArr that represent which represent perfect name we want tosave in the db
             $matchedKeys = array_keys($backendArr, $keyword);
 
-            // push the matching item to the array
+            // push (merge) the matching item to the result  array
             $result = array_merge($result, $matchedKeys);
         }
 
@@ -109,22 +99,23 @@ class ScraperController extends Controller
         // return programming single lang
         $pLangArr  =  Backend::getBeStack('p_lang');
 
-
-
         // return programming single lang
         $be_format_for_db = Backend::getBeStack('be_format_for_db');
 
 
-        // lets format the scrapped result properly 
 
+        /** ######    This section is used to scategorize the stack in frameworks and programming lang  i.e [programming_language => ['framework 1', 'framework2', ]]  #######  */
+
+
+        // lets format the scrapped result properly 
         $final_result = [];
 
         foreach ($result as $key => $scraped_result_item) {
 
-            // find/attach the programming language
+            // find/attach the programming language || get programming language
             if (in_array($scraped_result_item, $pLangArr)) {
 
-                // get programming language
+                // append the  programming language
                 $final_result[$scraped_result_item] = $be_format_for_db[$scraped_result_item];
 
                 // determine the framework related to that programming language
@@ -134,9 +125,6 @@ class ScraperController extends Controller
                 $final_result[$scraped_result_item] =  $framework_result;
             }
         }
-
-
-        return $final_result;
 
         $company->stack_be = $final_result;
 
