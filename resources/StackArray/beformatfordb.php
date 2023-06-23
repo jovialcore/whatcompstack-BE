@@ -13,8 +13,7 @@ return [
         'Tornado',
         'Ngnix'
     ],
-    'JavaScript' => [
-        'Node.js',
+    'Node.js' => [
         'Express.js',
         'Nest.js',
         'Hapi.js',

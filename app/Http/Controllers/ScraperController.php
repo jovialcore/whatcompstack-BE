@@ -15,12 +15,14 @@ class ScraperController extends Controller
     public function homepageScrape(Company $company)
     {
         $client = new Client();
-        $homepage = $client->request('GET', 'https://www.myjobmag.com/jobs-at/cowrywise');
+        $homepage = $client->request('GET', 'https://www.myjobmag.com/jobs-at/flutterwave');
+        $keyword = "";
 
         // find link that match keyword to click on 
-        $homepage->filter('.job-info > ul > .mag-b ')->each(function ($node) use ($client, $company) {
+        $homepage->filter('.job-info > ul > .mag-b ')->each(function ($node) use ($client, $company, $keyword) {
 
             $jobTitles =   $node->text();
+
 
             // remove parentensis --just incase and any other stuff aside letters and alphabets and format to smaller letters too 
             $purgedTitles =  strtolower(preg_replace('/[^a-z]/i', ' ', $jobTitles));
@@ -36,9 +38,12 @@ class ScraperController extends Controller
 
                 // find the link
                 $link = $node->selectLink($jobTitles)->link();
+
                 // click on the link
                 $website = $client->click($link);
 
+
+                //  👀  side note or bud:  this stuff loops two times? why ? 👀 
                 dump($this->fetch($company, $website));
             }
 
@@ -54,9 +59,13 @@ class ScraperController extends Controller
         // get the second link that matches the nodes specified 
         $website->filter('p > strong')->each(function ($node) use (&$text, $website) {
 
-            $pattern = '/\b(requirements|nice to haves|requirement|required)\b/i';
+            $pattern = '/\b(requirements|nice to haves|requirement|Required competency and skillset to be a Waver|What Your Day to Day Activities Will Be Like:|required)\b/i';
+
+
 
             $r =  strtolower($node->text());
+
+
             // match the heading with title like "requirements "
             if (preg_match($pattern, $r)) {
 
@@ -68,7 +77,7 @@ class ScraperController extends Controller
             }
         });
         // etract keywords
-        $keywords = RakePlus::create($text, ['en_US'], 4)->keywords();
+        $keywords = RakePlus::create($text, ['.js'], 4)->keywords();
 
 
         $result = [];
@@ -86,6 +95,7 @@ class ScraperController extends Controller
 
             //check if keywords exist in $backend stacks and retrieve the matched keys
             // using the $keyword as filter, we now return keys of $backendArr that represent which represent perfect name we want tosave in the db
+
             $matchedKeys = array_keys($backendArr, $keyword);
 
             // push (merge) the matching item to the result  array
@@ -112,6 +122,7 @@ class ScraperController extends Controller
 
         foreach ($result as $key => $scraped_result_item) {
 
+
             // find/attach the programming language || get programming language
             if (in_array($scraped_result_item, $pLangArr)) {
 
@@ -126,7 +137,11 @@ class ScraperController extends Controller
             }
         }
 
-        $company->stack_be = $final_result;
+        $j = array_merge($company->stack_be, $final_result);
+
+        $company->stack_be =  $j;
+        dump($company);
+
 
         $is_saved = $company->save();
 
