@@ -39,7 +39,7 @@ class ScraperController extends Controller
                 // click on the link
                 $website = $client->click($link);
 
-                dump($this->fetch($company, $website));
+                $this->fetch($company, $website);
             }
 
 
@@ -49,15 +49,35 @@ class ScraperController extends Controller
 
     public function fetch($company, $website) // you see that I had to call the class client again? this is where dependency injection comes in. No DI so now, I will have to call the class and instatiate again
     {
-
         $text = "";
 
         // get the second link that matches the nodes specified 
-        $website->filter('p + ul')->eq(1)->each(function ($node) use (&$text) {
+        $website->filter('p > strong')->each(function ($node) use (&$text, $website) {
+
+            $pattern = '/\b(requirements|nice to haves|requirement|required)\b/i';
+
+            $r =  strtolower($node->text());
+
+
+            if (preg_match($pattern, $r)) {
+
+                // dump($node->text());
+
+                $p = $website->filter('p:contains("TLDR Requirements:") ')->first();
+
+                dd($p->nextAll('ul')->first()->text());
+            
+                dd($p->nextAll()->filter('ul')->each(fn ($item) => $item->text()));
+            } else {
+            }
+
+
+
             $text = $node->text() . "<br/>";
         });
 
         $keywords = RakePlus::create($text, ['en_US'], 4)->keywords();
+
 
         // Check if the keywords are in Backend::getBeStack()
 
@@ -114,6 +134,8 @@ class ScraperController extends Controller
                 $final_result[$scraped_result_item] =  $framework_result;
             }
         }
+
+
         return $final_result;
 
         $company->stack_be = $final_result;
