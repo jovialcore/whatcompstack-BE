@@ -143,9 +143,30 @@ class ScraperController extends Controller
 
         // dump($final_result);
 
+        // nexthing to do: determine the number of times, a programming lang appeared on several job postings' description
+        // add a number as an indicator for e.g, if java appeared two times, we would have something like 
+        // java => 2, Nodejs => 3. this will help us rate the  correctness of our stack suggestions
+
+        ///do tdo this: I need to get what is already inthe database, loop through it, if there is a matching, add 1 to the existing number and that should beit 
+        foreach ($company->stack_be as $key => $value) {
+            // get the programming lang e.g Node.js from "Node.js*1"
+            $p_lang = strstr($key, '*', true);
+            // check if the programminglang is same to that from db 
+            if ($p_lang == key($final_result)) {
+                // extract the programming lang rating and cast to integer. e.g "1" from "Node.js*1"
+                $ratingInteger =  (int)substr(strstr($key, '*'), 1);
+                //since we are hiting the programming language again from job desription, we add one to increase the rating
+                $ratingInteger =  $ratingInteger + 1;
+                // then append it again
+                
+            } else {
+                dd('no');
+            }
+        }
+
         $j = array_merge($company->stack_be, $final_result);
 
-        $company->stack_be =  $j;
+        $company->stack_be =  ['java' => 1, 'node' => 2];
         dump($company);
 
 
