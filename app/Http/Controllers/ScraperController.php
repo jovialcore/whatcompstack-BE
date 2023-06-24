@@ -148,21 +148,60 @@ class ScraperController extends Controller
         // java => 2, Nodejs => 3. this will help us rate the  correctness of our stack suggestions
 
         ///do tdo this: I need to get what is already inthe database, loop through it, if there is a matching, add 1 to the existing number and that should beit 
-        foreach ($company->stack_be as $key => $value) {
-            // get the programming lang e.g Node.js from "Node.js*1"
+        $stackUpdate = $company->stack_be;
+        // foreach ($stackUpdate as $key => $value) {
+
+        //     // get the programming lang e.g Node.js from "Node.js*1"
+        //     $p_lang = strstr($key, '*', true);
+        //     // check if the programminglang is same to that from db 
+        //     if ($p_lang == key($final_result)) {
+        //         // extract the programming lang rating and cast to integer. e.g "1" from "Node.js*1"
+        //         $ratingInteger =  (int)substr(strstr($key, '*'), 1);
+        //         //since we are hiting the programming language again from job desription, we add one to increase the rating
+        //         $ratingInteger =  $ratingInteger + 1;
+        //         // then append it again
+        //         $newkey = $p_lang . '*' . $ratingInteger;
+        //         $stackUpdate[$newkey] = $value;
+        //         dd($stackUpdate);
+
+        //         dd($company->stack_be);
+        //     } else {
+        //         dd('no');
+        //     }
+        // }
+
+
+
+        foreach ($stackUpdate as $key => $value) {
             $p_lang = strstr($key, '*', true);
-            // check if the programminglang is same to that from db 
-            if ($p_lang == key($final_result)) {
-                // extract the programming lang rating and cast to integer. e.g "1" from "Node.js*1"
-                $ratingInteger =  (int)substr(strstr($key, '*'), 1);
-                //since we are hiting the programming language again from job desription, we add one to increase the rating
-                $ratingInteger =  $ratingInteger + 1;
-                // then append it again
-                
-            } else {
-                dd('no');
+            if (array_key_exists($p_lang, $final_result)) {
+                $nk = $key;
+              
+                unset($stackUpdate[$key]);
+              
+                $ratingInteger = (int) substr(strstr($nk, '*'), 1);
+                $ratingInteger = $ratingInteger + 1;
+                $newkey = $p_lang . '*' . $ratingInteger;
+                $key = $newkey;
+
+                $stackUpdate[$key] = $value;
             }
         }
+
+        dd($stackUpdate);
+
+        // $a = array_walk($stackUpdate, function (&$value, $key) use ($final_result) {
+        //     $p_lang = strstr($key, '*', true);
+        //     if (array_key_exists($p_lang, $final_result)) {
+        //         $ratingInteger = (int) substr(strstr($key, '*'), 1);
+        //         $ratingInteger = $ratingInteger + 1;
+        //         $newkey = $p_lang . '*' . $ratingInteger;
+        //         $key = $newkey;
+        //     }
+        // });
+
+        // //using array reduce
+        // dd($stackUpdate);
 
         $j = array_merge($company->stack_be, $final_result);
 
