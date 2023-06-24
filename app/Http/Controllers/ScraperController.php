@@ -170,15 +170,44 @@ class ScraperController extends Controller
         //     }
         // }
 
+        $stackUpdate = array(
+            'key1' => 'value1',
+            'key2' => 'value2',
+            'key3' => 'value3'
+        );
+
+
+
+
+        $arr = array_reduce(
+            array_keys($stackUpdate),
+            function ($accumulator, $key) use ($final_result, $stackUpdate) {
+
+                $p_lang = strstr($key, '*', true);
+                if (array_key_exists($p_lang, $final_result)) {
+
+                    $ratingInteger = (int) substr(strstr($key, '*'), 1);
+                    $ratingInteger = $ratingInteger + 1;
+                    $newkey = $p_lang . '*' . $ratingInteger;
+                    $key = $newkey;
+
+                    $accumulator[$key] = $stackUpdate[$key];
+                    return $accumulator;
+                }
+            },
+
+            []
+        );
+        dd($arr);
 
 
         foreach ($stackUpdate as $key => $value) {
             $p_lang = strstr($key, '*', true);
             if (array_key_exists($p_lang, $final_result)) {
                 $nk = $key;
-              
+
                 unset($stackUpdate[$key]);
-              
+
                 $ratingInteger = (int) substr(strstr($nk, '*'), 1);
                 $ratingInteger = $ratingInteger + 1;
                 $newkey = $p_lang . '*' . $ratingInteger;
