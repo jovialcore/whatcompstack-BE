@@ -140,7 +140,7 @@ class ScraperController extends Controller
         }
 
 
-        $stackUpdate = ['Node.js*1' => ['']];
+        $stackUpdate =  $company->stack_be;
 
         // dd($stackUpdate);
 
@@ -162,14 +162,16 @@ class ScraperController extends Controller
             },
             []
         );
-       
-        $company->stack_be =     $newResult;
-       
 
-        $is_saved = $company->save();
+        if (!empty($newResult)) {
 
-        if ($is_saved) {
-            return $result;
+            $company->stack_be =  $newResult;
+
+            $is_saved =   $company->save();
+
+            if ($is_saved) {
+                return $newResult;
+            }
         }
     }
 }
