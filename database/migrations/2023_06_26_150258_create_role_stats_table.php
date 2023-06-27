@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('role_stats', function (Blueprint $table) {
             $table->id();
             $table->string('role');
-            $table->integer('no_of_times_scrapped');
+            $table->integer('no_of_times_scrapped_for');
             $table->timestamps();
         });
     }

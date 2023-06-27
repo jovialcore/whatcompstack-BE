@@ -146,7 +146,7 @@ class ScraperController extends Controller
 
         $newResult = array_reduce(
             array_keys($stackUpdate),
-            function ($result, $key) use ($stackUpdate, $final_result) {
+            function ($result, $key) use ($stackUpdate, $final_result, $company) {
 
 
                 $p_lang = strstr($key, '*', true);
@@ -156,6 +156,19 @@ class ScraperController extends Controller
                     $ratingInteger = $ratingInteger + 1;
                     $newKey = $p_lang . '*' . $ratingInteger;
                     $result[$newKey] =  $stackUpdate[$key];
+
+                    function array_push_overloaded($source, $element)
+                    {
+                        $source[] = $element;
+                        return $source;
+                    }
+
+                    $company->stack_be['Javascript*3'][] = 'jov';
+
+                  
+
+
+                    // dd($company->stack_be['Javascript*3'][] = "jov");
                 }
 
                 return $result;
@@ -165,9 +178,8 @@ class ScraperController extends Controller
 
         if (!empty($newResult)) {
 
-            $company->stack_be =  $newResult;
-
-            $is_saved =   $company->save();
+            $is_saved =   $company->fill(['stack_be' => $newResult]);
+            dd($company);
 
             if ($is_saved) {
                 return $newResult;
