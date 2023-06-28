@@ -141,48 +141,38 @@ class ScraperController extends Controller
 
 
         $stackUpdate =  $company->stack_be;
+        // dump($final_result);
 
-        // dd($stackUpdate);
+        foreach ($stackUpdate as $key => $value) {
+            $p_lang = strstr($key, '*', true);
+            if (!$p_lang) {
+                $p_lang = $key;
+            }
 
-        $newResult = array_reduce(
-            array_keys($stackUpdate),
-            function ($result, $key) use ($stackUpdate, $final_result, $company) {
+            if (array_key_exists($p_lang, $final_result)) {
+                $nk = $key;
 
+                unset($stackUpdate[$key]);
 
-                $p_lang = strstr($key, '*', true);
-                if (array_key_exists($p_lang, $final_result)) {
+                $ratingInteger = (int) substr(strstr($nk, '*'), 1);
+                $ratingInteger ?? 0; // if no number, just be zero
 
-                    $ratingInteger = (int) substr(strstr($key, '*'), 1);
-                    $ratingInteger = $ratingInteger + 1;
-                    $newKey = $p_lang . '*' . $ratingInteger;
-                    $result[$newKey] =  $stackUpdate[$key];
+                $ratingInteger = $ratingInteger + 1;
 
-                    function array_push_overloaded($source, $element)
-                    {
-                        $source[] = $element;
-                        return $source;
-                    }
+                $newkey = $p_lang . '*' . $ratingInteger;
 
-                    $company->stack_be['Javascript*3'][] = 'jov';
+                $stackUpdate[$newkey] = $value;
+            }
+        }
+        dump($stackUpdate);
 
-                  
+        if (!empty($stackUpdate)) {
 
-
-                    // dd($company->stack_be['Javascript*3'][] = "jov");
-                }
-
-                return $result;
-            },
-            []
-        );
-
-        if (!empty($newResult)) {
-
-            $is_saved =   $company->fill(['stack_be' => $newResult]);
-            dd($company);
+            $is_saved =   $company->stack_be =   $stackUpdate;
+            // dd($company);
 
             if ($is_saved) {
-                return $newResult;
+                return $result;
             }
         }
     }
