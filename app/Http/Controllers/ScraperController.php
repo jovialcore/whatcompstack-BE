@@ -15,7 +15,7 @@ class ScraperController extends Controller
     public function homepageScrape(Company $company)
     {
         $client = new Client();
-        $homepage = $client->request('GET', 'https://www.myjobmag.com/jobs-at/flutterwave');
+        $homepage = $client->request('GET', 'https://www.myjobmag.com/jobs-at/paystack/5');
         $keyword = "";
 
         // find link that match keyword to click on 
@@ -44,7 +44,7 @@ class ScraperController extends Controller
 
 
                 //  👀  side note or bud:  this stuff loops two times? why ? 👀 
-                dump($this->fetch($company, $website));
+                $this->fetch($company, $website);
             }
 
 
@@ -85,6 +85,7 @@ class ScraperController extends Controller
         /** ######    This section is used to select all stacks possible  #######  */
 
         // loop throuh keyword extracted
+
         foreach ($keywords as $keyword) {
 
             // convert to small case
@@ -94,6 +95,7 @@ class ScraperController extends Controller
             // using the $keyword as filter, we now return keys of $backendArr that represent which represent perfect name we want tosave in the db
 
             $matchedKeys = array_keys($backendArr, $keyword);
+
 
             // push (merge) the matching item to the result  array
             $result = array_merge($result, $matchedKeys);
@@ -124,10 +126,12 @@ class ScraperController extends Controller
             // find/attach the programming language || get programming language
             if (in_array($scraped_result_item, $pLangArr)) {
                 // dump($scraped_result_item);
+
                 if ($scraped_result_item == 'JavaScript') {
                     // some Backend job description lists, javascript as backend, so we do the needfull 
                     $scraped_result_item = "Node.js";
                 }
+
                 // append the  programming language
                 $final_result[$scraped_result_item] = $be_format_for_db[$scraped_result_item];
 
@@ -152,6 +156,7 @@ class ScraperController extends Controller
             if (array_key_exists($p_lang, $final_result)) {
                 $nk = $key;
 
+                // delete the item already existing in the column
                 unset($stackUpdate[$key]);
 
                 $ratingInteger = (int) substr(strstr($nk, '*'), 1);
@@ -161,14 +166,17 @@ class ScraperController extends Controller
 
                 $newkey = $p_lang . '*' . $ratingInteger;
 
+
                 $stackUpdate[$newkey] = $value;
             }
         }
-        dump($stackUpdate);
+
+        // next question is ? how do we make this work 
 
         if (!empty($stackUpdate)) {
 
-            $is_saved =   $company->stack_be =   $stackUpdate;
+            $company->stack_be =   $stackUpdate;
+            $is_saved = $company->save();
             // dd($company);
 
             if ($is_saved) {
