@@ -15,7 +15,7 @@ class ScraperController extends Controller
     public function homepageScrape(Company $company)
     {
         $client = new Client();
-        $homepage = $client->request('GET', 'https://www.myjobmag.com/jobs-at/paystack/5');
+        $homepage = $client->request('GET', 'https://www.myjobmag.com/jobs-at/konga/7');
         $keyword = "";
 
         // find link that match keyword to click on 
@@ -75,7 +75,7 @@ class ScraperController extends Controller
             }
         });
         // etract keywords
-        $keywords = RakePlus::create($text, ['.js'], 4)->keywords();
+        $keywords = RakePlus::create($text, ['.js'], 3)->keywords();
 
 
         $result = [];
@@ -85,7 +85,7 @@ class ScraperController extends Controller
         /** ######    This section is used to select all stacks possible  #######  */
 
         // loop throuh keyword extracted
-
+        // dd( $keywords);
         foreach ($keywords as $keyword) {
 
             // convert to small case
@@ -96,11 +96,10 @@ class ScraperController extends Controller
 
             $matchedKeys = array_keys($backendArr, $keyword);
 
-
+            // dump($matchedKeys);
             // push (merge) the matching item to the result  array
             $result = array_merge($result, $matchedKeys);
         }
-
 
 
         // lets assume we have the Id of the company we want to save
@@ -135,6 +134,7 @@ class ScraperController extends Controller
                 // append the  programming language
                 $final_result[$scraped_result_item] = $be_format_for_db[$scraped_result_item];
 
+
                 // determine the framework related to that programming language
                 $framework_result = array_intersect($final_result[$scraped_result_item], $result);
 
@@ -144,33 +144,37 @@ class ScraperController extends Controller
         }
 
 
+
         $stackUpdate =  $company->stack_be;
-        // dump($final_result);
-
-        foreach ($stackUpdate as $key => $value) {
-            $p_lang = strstr($key, '*', true);
-            if (!$p_lang) {
-                $p_lang = $key;
-            }
-
-            if (array_key_exists($p_lang, $final_result)) {
-                $nk = $key;
-
-                // delete the item already existing in the column
-                unset($stackUpdate[$key]);
-
-                $ratingInteger = (int) substr(strstr($nk, '*'), 1);
-                $ratingInteger ?? 0; // if no number, just be zero
-
-                $ratingInteger = $ratingInteger + 1;
-
-                $newkey = $p_lang . '*' . $ratingInteger;
 
 
-                $stackUpdate[$newkey] = $value;
+        foreach ($final_result as $key => $value) {
+
+            foreach ($stackUpdate as $k => $v) {
+                $p_lang = strstr($k, '*', true);
+                if (!$p_lang) {
+                    $p_lang = $k;
+                }
+
+                if ($p_lang  == $key) {
+
+                    $nk = $k;
+                    // delete the item already existing in the column db
+                    unset($stackUpdate[$k]);
+
+                    // get the rater e.g *1, *2, *3
+                    $ratingInteger = (int) substr(strstr($nk, '*'), 1) ?? 0; // if no rater, just be zero
+                    // add 1 to existing rater
+                    $ratingInteger = $ratingInteger + 1;
+                    // append the deliminter which is asterisk
+                    $newkey = $p_lang . '*' . $ratingInteger;
+                    // copy to stack details from db
+                    $stackUpdate[$newkey] = $value;
+                }
             }
         }
 
+        dump($stackUpdate);
         // next question is ? how do we make this work 
 
         if (!empty($stackUpdate)) {
