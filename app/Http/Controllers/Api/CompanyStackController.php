@@ -29,8 +29,6 @@ class CompanyStackController extends Controller
         }
     }
 
-
-
     // retrieving details about a particular stack 
     public function show($id)
     {

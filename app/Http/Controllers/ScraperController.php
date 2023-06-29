@@ -103,7 +103,9 @@ class ScraperController extends Controller
 
 
         // lets assume we have the Id of the company we want to save
-        $company = $company->find(1);
+        $company = $company->with('plangs')->find(1);
+
+        dd($company);
 
         // return programming single lang
         $pLangArr  =  Backend::getBeStack('p_lang');
@@ -113,86 +115,5 @@ class ScraperController extends Controller
 
 
 
-        /** ######    This section is used to scategorize the stack in frameworks and programming lang  i.e [programming_language => ['framework 1', 'framework2', ]]  #######  */
-
-
-        // lets format the scrapped result properly 
-        $final_result = [];
-
-        foreach ($result as $key => $scraped_result_item) {
-
-
-            // find/attach the programming language || get programming language
-            if (in_array($scraped_result_item, $pLangArr)) {
-                // dump($scraped_result_item);
-
-                if ($scraped_result_item == 'JavaScript') {
-                    // some Backend job description lists, javascript as backend, so we do the needfull 
-                    $scraped_result_item = "Node.js";
-                }
-
-                // append the  programming language
-                $final_result[$scraped_result_item] = $be_format_for_db[$scraped_result_item];
-
-
-                // determine the framework related to that programming language
-                $framework_result = array_intersect($final_result[$scraped_result_item], $result);
-
-                // append the detetermined framework to the programming language key
-                $final_result[$scraped_result_item] =  $framework_result;
-            }
-        }
-        // dd( $final_result );
-
-        $stackUpdate =  $company->stack_be;
-
-
-        foreach ($final_result as $key => $value) {
-
-            foreach ($stackUpdate as $k => $v) {
-                // remove the asterisks 
-
-                $p_lang = strstr($k, '*', true);
-                // if the key doesnt have asteriks, just return default 
-                if (!$p_lang) {
-                    $p_lang = $k;
-                }
-                // check if programming lanugae is same as programing langauges extracted in $final_result actually keys
-                if ($p_lang  == $key) {
-
-                    //copy key before deleting 
-                    $nk = $k;
-                    // delete the item already existing in the column db
-                    unset($stackUpdate[$k]);
-                    
-                    // get the rater e.g *1, *2, *3
-                    $ratingInteger = (int) substr(strstr($nk, '*'), 1) ?? 0; // if no rater, just be zero
-                    // add 1 to existing rater
-                    $ratingInteger = $ratingInteger + 1;
-                    // append the deliminter which is asterisk
-                    $newkey = $p_lang . '*' . $ratingInteger;
-                    // copy to stack details from db
-                    $stackUpdate[$newkey] = $value;
-                }
-                if ($p_lang  != $key) {
-                    $f[] = $key;
-                    dump($f);
-                }
-            }
-        }
-
-        dump($stackUpdate);
-        // next question is ? how do we make this work 
-
-        if (!empty($stackUpdate)) {
-
-            $company->stack_be =   $stackUpdate;
-            $is_saved = $company->save();
-            // dd($company);
-
-            if ($is_saved) {
-                return $result;
-            }
-        }
     }
 }

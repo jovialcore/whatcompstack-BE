@@ -34,6 +34,12 @@ class Company extends Model
         'stack_fe' => 'array',
         'devops' => 'array',
         'database_driver' => 'array'
-        
+
     ];
+
+
+    public function plangs()
+    {
+        return $this->belongsToMany(Plang::class, 'plang_company');
+    }
 }
