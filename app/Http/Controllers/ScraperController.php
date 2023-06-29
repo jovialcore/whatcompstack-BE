@@ -164,7 +164,7 @@ class ScraperController extends Controller
                     $nk = $k;
                     // delete the item already existing in the column db
                     unset($stackUpdate[$k]);
-
+                    
                     // get the rater e.g *1, *2, *3
                     $ratingInteger = (int) substr(strstr($nk, '*'), 1) ?? 0; // if no rater, just be zero
                     // add 1 to existing rater
