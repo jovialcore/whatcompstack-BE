@@ -142,8 +142,7 @@ class ScraperController extends Controller
                 $final_result[$scraped_result_item] =  $framework_result;
             }
         }
-
-
+        // dd( $final_result );
 
         $stackUpdate =  $company->stack_be;
 
@@ -151,13 +150,17 @@ class ScraperController extends Controller
         foreach ($final_result as $key => $value) {
 
             foreach ($stackUpdate as $k => $v) {
+                // remove the asterisks 
+
                 $p_lang = strstr($k, '*', true);
+                // if the key doesnt have asteriks, just return default 
                 if (!$p_lang) {
                     $p_lang = $k;
                 }
-
+                // check if programming lanugae is same as programing langauges extracted in $final_result actually keys
                 if ($p_lang  == $key) {
 
+                    //copy key before deleting 
                     $nk = $k;
                     // delete the item already existing in the column db
                     unset($stackUpdate[$k]);
@@ -170,6 +173,10 @@ class ScraperController extends Controller
                     $newkey = $p_lang . '*' . $ratingInteger;
                     // copy to stack details from db
                     $stackUpdate[$newkey] = $value;
+                }
+                if ($p_lang  != $key) {
+                    $f[] = $key;
+                    dump($f);
                 }
             }
         }
