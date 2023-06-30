@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('framework_company', function (Blueprint $table) {
+            $table->unsignedBigInteger('framework_id');
             $table->unsignedBigInteger('company_id'); //should incase we revert to using uuids
             $table->integer('rating');
 

@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Plang extends Model
 {
     use HasFactory;
+
+
+
+    function frameworks()
+    {
+        return $this->hasMany(Framework::class, 'plang_id');
+    }
 }

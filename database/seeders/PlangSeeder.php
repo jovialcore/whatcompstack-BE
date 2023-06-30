@@ -24,7 +24,6 @@ class PlangSeeder extends Seeder
             'Go',
             'Rust',
             'Node.js',
-            'JavaScript',
             'Perl',
             'C++',
             'C',

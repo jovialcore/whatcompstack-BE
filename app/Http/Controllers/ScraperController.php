@@ -80,7 +80,9 @@ class ScraperController extends Controller
 
         $result = [];
         // get all backend stack 
+
         $backendArr  =  Backend::getBeStack('allstacks');
+        $be_format_for_db  =  Backend::getBeStack('be_format_for_db');
 
         /** ######    This section is used to select all stacks possible  #######  */
 
@@ -101,19 +103,49 @@ class ScraperController extends Controller
             $result = array_merge($result, $matchedKeys);
         }
 
+        // lets get frameworks 
+        $result[] = 'Spring Boot';
 
+        $finalR = [];
+
+        $result[] = 'Spring Boot';
+
+
+        $o = array_map(function ($item) use ($be_format_for_db) {
+
+            $newItem = '';
+            if (array_key_exists($item, $be_format_for_db)) {
+                $newItem = $item;
+            };
+        }, $result);
+
+        foreach ($result as $key => $value) {
+
+            if (array_key_exists($value, $be_format_for_db)) {
+
+                $framework = array_intersect($be_format_for_db[$value], $result);
+                $item = array_search(implode($framework), $result);
+                array_splice($result, $item);
+
+                $result[$value] = $framework;
+                dd($result);
+            }
+        }
+
+        dd($result);
         // lets assume we have the Id of the company we want to save
-        $company = $company->with('plangs')->find(1);
+        $company = $company->with('plangs.frameworks')->find(2);
 
-        dd($company);
+        foreach ($company->plangs as $stuff) {
+            dd($stuff);
+        }
+
+        dd($company->flatMap->plangs);
 
         // return programming single lang
         $pLangArr  =  Backend::getBeStack('p_lang');
 
         // return programming single lang
         $be_format_for_db = Backend::getBeStack('be_format_for_db');
-
-
-
     }
 }
