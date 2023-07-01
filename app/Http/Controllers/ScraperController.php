@@ -105,34 +105,25 @@ class ScraperController extends Controller
 
         // lets get frameworks 
         $result[] = 'Spring Boot';
+        $result[] = 'Laravel';
+        $result[] = 'Symfony';
+        $result[] = 'Grails';
 
-        $finalR = [];
 
-        $result[] = 'Spring Boot';
-
-
-        $o = array_map(function ($item) use ($be_format_for_db) {
-
-            $newItem = '';
-            if (array_key_exists($item, $be_format_for_db)) {
-                $newItem = $item;
-            };
-        }, $result);
+        $k = [];
 
         foreach ($result as $key => $value) {
 
             if (array_key_exists($value, $be_format_for_db)) {
 
                 $framework = array_intersect($be_format_for_db[$value], $result);
-                $item = array_search(implode($framework), $result);
-                array_splice($result, $item);
 
-                $result[$value] = $framework;
-                dd($result);
+                $k[$value] = $framework;
             }
         }
+        dd($k);
 
-        dd($result);
+
         // lets assume we have the Id of the company we want to save
         $company = $company->with('plangs.frameworks')->find(2);
 
