@@ -14,7 +14,7 @@
 
    
     "JavaScript" => "javascript", 
-    "Node.js" => "node", 
+    "Node.js" => "node.js", 
     "Express.js" => "express.js", 
     "Nest.js" => "nest.js", 
     "Hapi.js" => "hapi.js", 
