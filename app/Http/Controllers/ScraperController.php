@@ -124,6 +124,8 @@ class ScraperController extends Controller
                 $k[$value] = $framework;
             }
         }
+
+        dd($k);
         // lets assume we have the Id of the company we want to save
         $company = $company->with('plangs.frameworks')->find(2);
 
