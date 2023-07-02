@@ -15,4 +15,9 @@ class Plang extends Model
     {
         return $this->hasMany(Framework::class, 'plang_id');
     }
+
+    function companies()
+    {
+        return $this->belongsToMany(Company::class, 'plang_company')->withPivot('rating');
+    }
 }

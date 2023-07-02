@@ -40,6 +40,6 @@ class Company extends Model
 
     public function plangs()
     {
-        return $this->belongsToMany(Plang::class, 'plang_company');
+        return $this->belongsToMany(Plang::class, 'plang_company')->withPivot('rating');
     }
 }
