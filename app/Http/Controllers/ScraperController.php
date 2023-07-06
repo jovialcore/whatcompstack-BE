@@ -129,18 +129,26 @@ class ScraperController extends Controller
         // lets assume we have the Id of the company we want to save
         $company = $company->with('plangs.frameworks.companies')->find(2);
 
+        $pLangArr  =  Backend::getBeStack('p_lang');
+        
         foreach ($company->plangs as $progrLang) {
+
+            // if the language is already in the database
             if (array_key_exists($progrLang->name, $k)) {
-                // just update the rating coulmn on pivot table                       // add plus one to the extra column
+                // just update the rating coulmn on pivot table                       // add plus one to the rating  column
                 $company->plangs()->updateExistingPivot($progrLang->id, ['rating' => $progrLang->pivot->rating + 1]);
-                dd('it went ');
+            } else {
+                
+                $company->plangs()->attach($progrLang->id, ['rating' => 0]);
             }
+           
         }
+        dump(  $company);
 
         // dd($company->flatMap->plangs);
 
         // return programming single lang
-        $pLangArr  =  Backend::getBeStack('p_lang');
+     
 
         // return programming single lang
         $be_format_for_db = Backend::getBeStack('be_format_for_db');
