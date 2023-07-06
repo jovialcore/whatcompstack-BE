@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Helpers\Backend;
 use App\Models\Company;
+use App\Models\Plang;
 use DonatelloZa\RakePlus\RakePlus;
 
 class ScraperController extends Controller
@@ -128,29 +129,49 @@ class ScraperController extends Controller
 
         // lets assume we have the Id of the company we want to save
         $company = $company->with('plangs.frameworks.companies')->find(2);
+        $allPlangs = Plang::all();
 
         $pLangArr  =  Backend::getBeStack('p_lang');
-        
-        foreach ($company->plangs as $progrLang) {
+        $notInDb = [];
+        $i = 0;
 
-            // if the language is already in the database
-            if (array_key_exists($progrLang->name, $k)) {
-                // just update the rating coulmn on pivot table                       // add plus one to the rating  column
-                $company->plangs()->updateExistingPivot($progrLang->id, ['rating' => $progrLang->pivot->rating + 1]);
-            } else {
-                
-                $company->plangs()->attach($progrLang->id, ['rating' => 0]);
+
+        // if the language is already in the database
+
+        if ($company->plangs->count() > 0) {
+            foreach ($company->plangs as $progrLang) {
+                if (array_key_exists($progrLang->name, $k)) {
+
+                    dump($progrLang->name);
+                    // just update the rating coulmn on pivot table                       // add plus one to the rating  column
+
+                    $company->plangs()->updateExistingPivot($progrLang->id, ['rating' => $progrLang->pivot->rating + 1]);
+                } else {
+
+                    $company->plangs()->attach($progrLang->id, ['rating' => 0]);
+                }
             }
-           
+        } else {
+            foreach ($allPlangs as $plang) {
+
+                // check if the  programming lang matches with the one in db
+
+                if (array_key_exists($plang->name, $k)) {
+                    // attach a programming language with the company
+                    $company->plangs()->attach($plang->id, ['rating' => 0]);
+                }
+
+                // find the framework related with that language and match that to the company
+
+            }
         }
-        dump(  $company);
+
+        dump($k);
 
         // dd($company->flatMap->plangs);
 
         // return programming single lang
-     
 
-        // return programming single lang
         $be_format_for_db = Backend::getBeStack('be_format_for_db');
     }
 }
