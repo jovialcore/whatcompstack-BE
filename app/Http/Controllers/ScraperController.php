@@ -161,7 +161,7 @@ class ScraperController extends Controller
                         }
                     }
                 } else {
-
+                        dd('yeah... array key does not exist');
                     $company->plangs()->attach($progrLang->id, ['rating' => 0]);
                 }
 
@@ -194,7 +194,8 @@ class ScraperController extends Controller
 
                 }
             }
-
+                //notes of to do
+            // revisist "hasManyThrough" "hasManyThrough" will definitely work !
             //what if we have frameworks and there is no programming language?  wahala !
 
             // find the framework related with that language and match that to the company

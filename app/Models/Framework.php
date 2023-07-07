@@ -9,7 +9,6 @@ class Framework extends Model
 {
     use HasFactory;
 
-
     function companies()
     {
         return $this->belongsToMany(Company::class, 'framework_company');
