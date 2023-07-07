@@ -136,7 +136,7 @@ class ScraperController extends Controller
 
         // if the language is already in the database
 
-        if ($company->plangs->count() < 0) {
+        if ($company->plangs->count() > 0) {
             foreach ($company->plangs as $progrLang) {
 
                 if (array_key_exists($progrLang->name, $k)) {
@@ -145,10 +145,29 @@ class ScraperController extends Controller
                     // just update the rating coulmn on pivot table                       // add plus one to the rating  column
 
                     $company->plangs()->updateExistingPivot($progrLang->id, ['rating' => $progrLang->pivot->rating + 1]);
+
+                    // if there are any frameworks and they are what we had before ? do the following
+                    if (!empty($k[$progrLang->name])) {
+
+                        // loop through the ssupposedly frameworks that we have
+                        foreach ($k[$progrLang->name] as $frameworkName) {
+                            // get the related framework id
+                            $frameworkId = $progrLang->frameworks->where('name', $frameworkName)->first()->id;
+                            // loop through company frameworks and update the pivot table of ids that match 
+                            foreach ($company->frameworks as $fw) {
+                                $company->frameworks()->updateExistingPivot( $frameworkId , ['rating' => $fw->pivot->rating + 1]);
+                            }
+                           
+                        }
+                    }
                 } else {
 
                     $company->plangs()->attach($progrLang->id, ['rating' => 0]);
                 }
+
+                // update framework rating too on the pivot table
+
+
             }
         } else {
             foreach ($allPlangs as $plang) {
@@ -160,17 +179,19 @@ class ScraperController extends Controller
 
                     $company->plangs()->attach($plang->id, ['rating' => 0]);
 
-                    // attach a framework 
+                    // attach the  framework under the programmming language
 
-                    foreach ($k[$plang->name] as $key => $frameworkName) {
-                        
-                        $framework_id = $plang->frameworks->where('name', $frameworkName)->first()->id;
+                    if (isset($k[$plang->name])) {
 
-                        $company->frameworks()->attach($framework_id, ['rating' => 0]);
+                        foreach ($k[$plang->name]  as $frameworkName) {
+                            // get the id of the framework that matched
+                            $framework_id = $plang->frameworks->where('name', $frameworkName)->first()->id;
+                            // attach to compnay_framework table 
+                            $company->frameworks()->attach($framework_id, ['rating' => 0]);
+                        }
                     }
-                   
                     // attach the framework id to the company
-                    
+
                 }
             }
 
