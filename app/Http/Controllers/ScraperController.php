@@ -157,11 +157,11 @@ class ScraperController extends Controller
         } else {
             foreach ($allPlangs as $plang) {
 
-                // check if the  programming lang matches with the one in db
+            // check if the  programming lang matches with the one in db
 
                 if (array_key_exists($plang->name, $k)) {
                     // attach a programming language with the company
-                    
+
                     $company->plangs()->attach($plang->id, ['rating' => 0]);
                     
                     $framework_id = $plang->frameworks->where('name', )->first()->id;
