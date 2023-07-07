@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Helpers\Backend;
 use App\Models\Company;
+use App\Models\Framework;
 use App\Models\Plang;
 use DonatelloZa\RakePlus\RakePlus;
 
@@ -119,17 +120,18 @@ class ScraperController extends Controller
         foreach ($result as $key => $value) {
 
             if (array_key_exists($value, $be_format_for_db)) {
+                
 
                 $framework = array_intersect($be_format_for_db[$value], $result);
-
+                
                 $k[$value] = $framework;
             }
         }
 
 
         // lets assume we have the Id of the company we want to save
-        $company = $company->with('plangs.frameworks.companies')->find(2);
-        $allPlangs = Plang::with('frameworks')->all();
+        $company = $company->with('plangs.frameworks.companies', 'frameworks')->find(2);
+        $allPlangs = Plang::with('frameworks')->get();
 
         $pLangArr  =  Backend::getBeStack('p_lang');
         $notInDb = [];
@@ -138,9 +140,9 @@ class ScraperController extends Controller
 
         // if the language is already in the database
 
-        if ($company->plangs->count() > 0) {
+        if ($company->plangs->count() < 0) {
             foreach ($company->plangs as $progrLang) {
-               
+
                 if (array_key_exists($progrLang->name, $k)) {
 
                     dump($progrLang->name);
@@ -154,31 +156,28 @@ class ScraperController extends Controller
             }
         } else {
             foreach ($allPlangs as $plang) {
-                dd($company->plangs);
+
                 // check if the  programming lang matches with the one in db
 
                 if (array_key_exists($plang->name, $k)) {
                     // attach a programming language with the company
+                    
                     $company->plangs()->attach($plang->id, ['rating' => 0]);
+                    
+                    $framework_id = $plang->frameworks->where('name', )->first()->id;
+        
+                    $company->frameworks()->attach($framework_id, ['rating' => 0]);
                 }
-                dd($company->plangs);
             }
 
             //what if we have frameworks and there is no programming language?  wahala !
-
-            foreach ($k as $key => $v) {
-
-                if (!in_array$v, $company->plangs->frameworks->attach) {
-                    dd($k);
-                }
-            }
 
             // find the framework related with that language and match that to the company
             // there should be something like company has many framework through plang-- i need to do "hasManyThrough"
 
         }
 
-        dump($k);
+        dump($company);
 
         // dd($company->flatMap->plangs);
 

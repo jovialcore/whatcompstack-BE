@@ -42,4 +42,8 @@ class Company extends Model
     {
         return $this->belongsToMany(Plang::class, 'plang_company')->withPivot('rating');
     }
+
+    public function frameworks(){
+        return $this->belongsToMany(Framework::class, 'framework_company');
+    }
 }
