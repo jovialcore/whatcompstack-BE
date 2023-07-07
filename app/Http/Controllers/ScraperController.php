@@ -133,19 +133,15 @@ class ScraperController extends Controller
         $company = $company->with('plangs.frameworks.companies', 'frameworks')->find(2);
         $allPlangs = Plang::with('frameworks')->get();
 
-        $pLangArr  =  Backend::getBeStack('p_lang');
-        $notInDb = [];
-        $i = 0;
-
 
         // if the language is already in the database
 
-        if ($company->plangs->count() < 0) {
+        if ($company->plangs->count() > 0) {
             foreach ($company->plangs as $progrLang) {
 
                 if (array_key_exists($progrLang->name, $k)) {
 
-                    dump($progrLang->name);
+                 
                     // just update the rating coulmn on pivot table                       // add plus one to the rating  column
 
                     $company->plangs()->updateExistingPivot($progrLang->id, ['rating' => $progrLang->pivot->rating + 1]);
@@ -164,8 +160,10 @@ class ScraperController extends Controller
 
                     $company->plangs()->attach($plang->id, ['rating' => 0]);
                     
-                    $framework_id = $plang->frameworks->where('name', )->first()->id;
-        
+                    // attach a framework 
+                    $framework_id = $plang->frameworks->where('name', $plang->name )->first()->id;
+                    
+                    // attach the framework id to the company
                     $company->frameworks()->attach($framework_id, ['rating' => 0]);
                 }
             }
