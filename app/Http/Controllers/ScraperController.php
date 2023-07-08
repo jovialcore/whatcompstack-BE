@@ -116,7 +116,7 @@ class ScraperController extends Controller
 
 
         $k = [];
-
+        // group them into programming langugaes and there frameworks 
         foreach ($result as $key => $value) {
 
             if (array_key_exists($value, $be_format_for_db)) {
@@ -155,13 +155,26 @@ class ScraperController extends Controller
                             $frameworkId = $progrLang->frameworks->where('name', $frameworkName)->first()->id;
                             // loop through company frameworks and update the pivot table of ids that match 
                             foreach ($company->frameworks as $fw) {
-                                $company->frameworks()->updateExistingPivot( $frameworkId , ['rating' => $fw->pivot->rating + 1]);
+                                $company->frameworks()->updateExistingPivot($frameworkId, ['rating' => $fw->pivot->rating + 1]);
                             }
-                           
                         }
                     }
                 } else {
-                        dd('yeah... array key does not exist');
+
+                    /// if there are no programming language from day one nko ?
+                    //detect the language, and then do the needful
+                    // in this situation, there are no frameworks from day one
+                    //so 
+                    //check if there are frameworks in company ?
+                    dd('yeah... array key does not exist');
+                    if (count($company->frameworks)) {
+                        //if there are frameworks, 
+                        //just update only frameworks
+                        //how
+                        // match the frameworks the list of frameworks we have. 
+                        // get your copy
+                        //
+                    }
                     $company->plangs()->attach($progrLang->id, ['rating' => 0]);
                 }
 
@@ -194,11 +207,14 @@ class ScraperController extends Controller
 
                 }
             }
-                //notes of to do
-            // revisist "hasManyThrough" "hasManyThrough" will definitely work !
+            //notes of to do
+            // revisist "hasManyThrough" "hasManyThrough" should work for getting frameworks through plang and for framework to get company through plang !
             //what if we have frameworks and there is no programming language?  wahala !
 
             // find the framework related with that language and match that to the company
+
+            // if a scraped result have only programming laguages, you should detect the framework
+            // after that, changed the model to use "hasManyThrough"
 
 
         }
