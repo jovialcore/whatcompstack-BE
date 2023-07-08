@@ -98,37 +98,53 @@ class ScraperController extends Controller
             //check if keywords exist in $backend stacks and retrieve the matched keys
             // using the $keyword as filter, we now return keys of $backendArr that represent which represent perfect name we want tosave in the db
             if ($keyword == 'javascript') {
-                $keyword = 'node.js';
+                $keyword = 'node.js'; // converted to the small form so we can use array_keys to get the properdb formate name, see below 👇👇👇
             }
 
-            $matchedKeys = array_keys($backendArr, $keyword);
+            $matchedKeys = array_keys($backendArr, $keyword); // note that array_keys can act as filters too 
 
             // dump($matchedKeys);
             // push (merge) the matching item to the result  array
             $result = array_merge($result, $matchedKeys);
         }
-
+        array_splice($result, 0);
         // lets get frameworks 
         $result[] = 'Spring Boot';
         $result[] = 'Laravel';
         $result[] = 'Symfony';
         $result[] = 'Grails';
+        $result[] = 'Swift';
+        $result[] = 'Lua';
+        $result[] = 'CakePHP';
 
 
+
+        /** ######    Group frameworks into their respective programming languages (as Assoc Array) #######  */
         $k = [];
-        // group them into programming langugaes and there frameworks 
+
         foreach ($result as $key => $value) {
 
+            // check if p_lang from scraped results match that of keys in the speculative db format arrangment
             if (array_key_exists($value, $be_format_for_db)) {
-
-
+                // the framework
                 $framework = array_intersect($be_format_for_db[$value], $result);
-
+                // then use the $value i.e programming langauge and assign the returned framework inside the new collector: $k array
                 $k[$value] = $framework;
+                // if no programming language are found, that means we have only frameworks, then assign the scrapped framework results to their respective programming languages  
+            } else {
+                foreach ($be_format_for_db as $key => $framework) {
+
+                    
+                    if (in_array($value, $be_format_for_db[$key])) {
+                        $k[$key][] = $value;
+                    }
+                }
             }
         }
+        // if no programming language are found, it is here that I need to cook ! 
 
 
+        dd($k);
         // lets assume we have the Id of the company we want to save
         $company = $company->with('plangs.frameworks.companies', 'frameworks')->find(2);
         $allPlangs = Plang::with('frameworks')->get();
@@ -136,88 +152,74 @@ class ScraperController extends Controller
 
         // if the language is already in the database
 
-        if ($company->plangs->count() > 0) {
-            foreach ($company->plangs as $progrLang) {
+        // if ($company->plangs->count() < 0) {
+        //     foreach ($company->plangs as $progrLang) {
 
-                if (array_key_exists($progrLang->name, $k)) {
-
-
-                    // just update the rating coulmn on pivot table                       // add plus one to the rating  column
-
-                    $company->plangs()->updateExistingPivot($progrLang->id, ['rating' => $progrLang->pivot->rating + 1]);
-
-                    // if there are any frameworks and they are what we had before ? do the following
-                    if (!empty($k[$progrLang->name])) {
-
-                        // loop through the ssupposedly frameworks that we have
-                        foreach ($k[$progrLang->name] as $frameworkName) {
-                            // get the related framework id
-                            $frameworkId = $progrLang->frameworks->where('name', $frameworkName)->first()->id;
-                            // loop through company frameworks and update the pivot table of ids that match 
-                            foreach ($company->frameworks as $fw) {
-                                $company->frameworks()->updateExistingPivot($frameworkId, ['rating' => $fw->pivot->rating + 1]);
-                            }
-                        }
-                    }
-                } else {
-
-                    /// if there are no programming language from day one nko ?
-                    //detect the language, and then do the needful
-                    // in this situation, there are no frameworks from day one
-                    //so 
-                    //check if there are frameworks in company ?
-                    dd('yeah... array key does not exist');
-                    if (count($company->frameworks)) {
-                        //if there are frameworks, 
-                        //just update only frameworks
-                        //how
-                        // match the frameworks the list of frameworks we have. 
-                        // get your copy
-                        //
-                    }
-                    $company->plangs()->attach($progrLang->id, ['rating' => 0]);
-                }
-
-                // update framework rating too on the pivot table
+        //         if (array_key_exists($progrLang->name, $k)) {
 
 
-            }
-        } else {
-            foreach ($allPlangs as $plang) {
+        //             // just update the rating coulmn on pivot table                       // add plus one to the rating  column
 
-                // check if the  programming lang matches with the one in db
+        //             $company->plangs()->updateExistingPivot($progrLang->id, ['rating' => $progrLang->pivot->rating + 1]);
 
-                if (array_key_exists($plang->name, $k)) {
-                    // attach a programming language with the company
+        //             // if there are any frameworks and they are what we had before ? do the following
+        //             if (!empty($k[$progrLang->name])) {
 
-                    $company->plangs()->attach($plang->id, ['rating' => 0]);
+        //                 // loop through the ssupposedly frameworks that we have
+        //                 foreach ($k[$progrLang->name] as $frameworkName) {
+        //                     // get the related framework id
+        //                     $frameworkId = $progrLang->frameworks->where('name', $frameworkName)->first()->id;
+        //                     // loop through company frameworks and update the pivot table of ids that match 
+        //                     foreach ($company->frameworks as $fw) {
+        //                         $company->frameworks()->updateExistingPivot($frameworkId, ['rating' => $fw->pivot->rating + 1]);
+        //                     }
+        //                 }
+        //             }
+        //         } else {
 
-                    // attach the  framework under the programmming language
-
-                    if (isset($k[$plang->name])) {
-
-                        foreach ($k[$plang->name]  as $frameworkName) {
-                            // get the id of the framework that matched
-                            $framework_id = $plang->frameworks->where('name', $frameworkName)->first()->id;
-                            // attach to compnay_framework table 
-                            $company->frameworks()->attach($framework_id, ['rating' => 0]);
-                        }
-                    }
-                    // attach the framework id to the company
-
-                }
-            }
-            //notes of to do
-            // revisist "hasManyThrough" "hasManyThrough" should work for getting frameworks through plang and for framework to get company through plang !
-            //what if we have frameworks and there is no programming language?  wahala !
-
-            // find the framework related with that language and match that to the company
-
-            // if a scraped result have only programming laguages, you should detect the framework
-            // after that, changed the model to use "hasManyThrough"
+        //             $company->plangs()->attach($progrLang->id, ['rating' => 0]);
+        //         }
 
 
-        }
+
+
+        //     }
+        // } else {
+        //     foreach ($allPlangs as $plang) {
+
+        //         // check if the  programming lang matches with the one in db
+
+        //         if (array_key_exists($plang->name, $k)) {
+        //             // attach a programming language with the company
+
+        //             $company->plangs()->attach($plang->id, ['rating' => 0]);
+
+        //             // attach the  framework under the programmming language
+
+        //             if (isset($k[$plang->name])) {
+
+        //                 foreach ($k[$plang->name]  as $frameworkName) {
+        //                     // get the id of the framework that matched
+        //                     $framework_id = $plang->frameworks->where('name', $frameworkName)->first()->id;
+        //                     // attach to compnay_framework table 
+        //                     $company->frameworks()->attach($framework_id, ['rating' => 0]);
+        //                 }
+        //             }
+        //             // attach the framework id to the company
+
+        //         }
+        //     }
+        //     //notes of to do
+        //     // revisist "hasManyThrough" "hasManyThrough" should work for getting frameworks through plang and for framework to get company through plang !
+        //     //what if we have frameworks and there is no programming language?  wahala !
+
+        //     // find the framework related with that language and match that to the company
+
+        //     // if a scraped result have only programming laguages, you should detect the framework
+        //     // after that, changed the model to use "hasManyThrough"
+
+
+        // }
 
         dump($company);
 
