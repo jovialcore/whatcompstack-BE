@@ -217,7 +217,7 @@ class ScraperController extends Controller
                             $company->frameworks()->attach($framework_id, ['rating' => 0]);
                         }
                     }
-                    // attach the framework id to the company
+                   
 
                 }
             }
@@ -226,11 +226,9 @@ class ScraperController extends Controller
             // after that, changed the model to use "hasManyThrough
         }
 
-        dump($company);
+     
 
-        // dd($company->flatMap->plangs);
-
-        // return programming single lang
+     
 
         $be_format_for_db = Backend::getBeStack('be_format_for_db');
     }
