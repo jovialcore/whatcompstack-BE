@@ -107,8 +107,8 @@ class ScraperController extends Controller
             // push (merge) the matching item to the result  array
             $result = array_merge($result, $matchedKeys);
         }
-       // array_splice($result, 0); // assuming there is no programming language 
-        //lets get frameworks 
+        // array_splice($result, 0); // assuming there is no programming language 
+        // lets get frameworks 
 
         $result[] = 'Spring Boot';
         $result[] = 'Laravel';
@@ -126,48 +126,33 @@ class ScraperController extends Controller
         $result[] = 'Express.js';
 
 
-        //  dd($result);
+        // dd($result);
         /** ######    Group frameworks into their respective programming languages (as Assoc Array) #######  */
         $k = [];
 
-
-        // $arr = array_reduce($result, function ($accum, $item) use ($be_format_for_db, $result) {
-        //     if (array_key_exists($item, $be_format_for_db)) {
-        //         if (!isset($accum[$item])) {
-        //             $accum[$item] = array_intersect($be_format_for_db[$item], $result);
-        //         }
-        //     } else {
-        //         $va = $item;
-        //         dd($item);
-        //         $item = array_search($item, $be_format_for_db);
-               
-        //         $accum[$item][] = $va;
-        //     }
-
-
-
-        //     return $accum;
-        // }, []);
-
-      
         foreach ($result as $key => $value) {
 
             // check if p_lang from scraped results match that of keys in the speculative db format arrangment
-        
-                foreach ($be_format_for_db as $keyy => $framework) {
+            if (array_key_exists($value, $be_format_for_db)) {
+                // the framework
+                $framework = array_intersect($be_format_for_db[$value], $result);
+                // then use the $value i.e programming langauge and assign the returned framework inside the new collector: $k array
+                $k[$value] = $framework;
+                // if no programming language are found, that means we have only frameworks, then assign the scrapped framework results to their respective programming languages  
+            } else {
+                foreach ($be_format_for_db as $keyy => $fwk) {
 
                     // cater for if we have progrmamming language in the array before so we avoid duplicates of values i.e frameworks e.g ( [PHP => 'laravel', 'cakephp', 'laravel])
                     if (in_array($value, $be_format_for_db[$keyy])) {
-                        $k[$keyy][] = $value;
-                       
-                    } else{
-                        $k[] = $value;
-                        break;
+                        if (isset($k[$keyy])) {
+                            if (!in_array($value, $k[$keyy]))
+                                $k[$keyy][] = $value;
+                        }
                     }
                 }
-            
+            }
         }
-dd($k);
+        dd($k);
 
         // lets assume we have the Id of the company we want to save
         $company = $company->with('plangs.frameworks.companies', 'frameworks')->find(2);
