@@ -32,7 +32,7 @@ class PlangSeeder extends Seeder
             'Scala',
             'Haskell',
             'Erlang',
-            'Groovy',
+            //'Groovy',
             'Objective-C',
             'Lua',
             'R',

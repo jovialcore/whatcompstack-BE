@@ -202,7 +202,7 @@ return [
         'HXCPP',
         'OpenFL'
     ],
-    'Groovy' => [
+    /* 'Groovy' => [
         'Grails',
         'Ratpack',
         'Spring Boot',
@@ -210,6 +210,7 @@ return [
         'Micronaut',
         'Geb'
     ],
+    */
     'PowerShell' => [
         'Azure Functions',
         'PowerShell Web Access',

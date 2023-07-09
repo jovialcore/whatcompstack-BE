@@ -107,7 +107,7 @@ class ScraperController extends Controller
             // push (merge) the matching item to the result  array
             $result = array_merge($result, $matchedKeys);
         }
-        // array_splice($result, 0); // assuming there is no programming language 
+        array_splice($result, 0); // assuming there is no programming language 
         // lets get frameworks 
 
         $result[] = 'Spring Boot';
@@ -147,12 +147,13 @@ class ScraperController extends Controller
                         if (isset($k[$keyy])) {
                             if (!in_array($value, $k[$keyy]))
                                 $k[$keyy][] = $value;
+                        } else {
+                            $k[$keyy][] = $value;
                         }
                     }
                 }
             }
         }
-        dd($k);
 
         // lets assume we have the Id of the company we want to save
         $company = $company->with('plangs.frameworks.companies', 'frameworks')->find(2);
@@ -192,7 +193,7 @@ class ScraperController extends Controller
         } else {
             foreach ($allPlangs as $plang) {
 
-                // check if the  programming lang matches with the one in db
+                // check if the  programming lang from scraped result matches with the one in db
 
                 if (array_key_exists($plang->name, $k)) {
                     // attach a programming language with the company
@@ -200,12 +201,18 @@ class ScraperController extends Controller
                     $company->plangs()->attach($plang->id, ['rating' => 0]);
 
                     // attach the  framework under the programmming language
-                    dd($k);
-                    if (isset($k[$plang->name])) {
 
+
+                    if (isset($k[$plang->name]) && $k[$plang->name] != "" && !is_null($k[$plang->name])) {
+
+                        $ffs = [];
                         foreach ($k[$plang->name]  as $frameworkName) {
+
                             // get the id of the framework that matched
+                          
                             $framework_id = $plang->frameworks->where('name', $frameworkName)->first()->id;
+
+
                             // attach to compnay_framework table 
                             $company->frameworks()->attach($framework_id, ['rating' => 0]);
                         }

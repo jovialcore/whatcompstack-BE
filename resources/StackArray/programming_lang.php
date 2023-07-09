@@ -16,7 +16,7 @@ return  [
     'Scala',
     'Haskell',
     'Erlang',
-    'Groovy',
+    //'Groovy',
     'Objective-C',
     'Lua',
     'R',
