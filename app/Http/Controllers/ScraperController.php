@@ -14,51 +14,58 @@ use DonatelloZa\RakePlus\RakePlus;
 class ScraperController extends Controller
 {
 
+    public function callerForScarping()
+    {
+    }
     public function homepageScrape(Company $company)
     {
         $client = new Client();
-        $homepage = $client->request('GET', '');
+        $pagination = 1;
+        $homepage = $client->request('GET', "https://www.myjobmag.com/jobs-at/konga/{$pagination}");
         $keyword = "";
 
+
         $ui = $homepage->filter('.job-info > ul > .mag-b ');
-        // dd($ui);
-        dd(array_key_last($ui));
+
+        $noOfResultsPerPage = 18;
+        $noOfResultsTracker = 0;
         // find link that match keyword to click on 
-        $homepage->filter('.job-info > ul > .mag-b ')->each(function ($node, $key) use ($client, $company, $keyword) {
+        $homepage->filter('.job-info > ul > .mag-b ')->each(function ($node, $key) use ($client, $company, $keyword, &$noOfResultsTracker,  $noOfResultsPerPage, &$pagination) {
+
+            $noOfResultsTracker++;
+            if ($noOfResultsTracker   < $noOfResultsPerPage) {
+                $jobTitles =   $node->text();
 
 
-            $jobTitles =   $node->text();
+                // remove parentensis --just incase and any other stuff aside letters and alphabets and format to smaller letters too 
+                $purgedTitles =  strtolower(preg_replace('/[^a-z]/i', ' ', $jobTitles));
 
+                // get the particular keyword, which  in this case, it is "backend"
+                $keyword = substr($purgedTitles, strpos($purgedTitles, 'backend'));
 
-            // remove parentensis --just incase and any other stuff aside letters and alphabets and format to smaller letters too 
-            $purgedTitles =  strtolower(preg_replace('/[^a-z]/i', ' ', $jobTitles));
+                // further extraction to return only one word i.e backend 
+                $keyword = preg_replace("/\s.*/", '', ltrim($keyword));
 
-            // get the particular keyword, which  in this case, it is "backend"
-            $keyword = substr($purgedTitles, strpos($purgedTitles, 'backend'));
+                // click on the job description wit backend 
+                if ($keyword == 'backend') {
 
-            // further extraction to return only one word i.e backend 
-            $keyword = preg_replace("/\s.*/", '', ltrim($keyword));
+                    // find the link
+                    $link = $node->selectLink($jobTitles)->link();
 
-            // click on the job description wit backend 
-            if ($keyword == 'backend') {
+                    // click on the link
+                    $website = $client->click($link);
 
-                // find the link
-                $link = $node->selectLink($jobTitles)->link();
-
-                // click on the link
-                $website = $client->click($link);
-
-
-                //  👀  side note or bud:  this stuff loops two times? why ? 👀 
-                $this->fetch($company, $website);
-            } else {
-                dump('nothing was found');
+                    //  👀  side note or bud:  this stuff loops two times? why ? 👀 
+                    $this->fetch($company, $website);
+                }
             }
-
-
             // sieve the key word 
         });
+
+        dump($noOfResultsTracker);
     }
+
+
 
     public function fetch($company, $website)
     {
