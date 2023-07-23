@@ -17,11 +17,15 @@ class ScraperController extends Controller
     public function homepageScrape(Company $company)
     {
         $client = new Client();
-        $homepage = $client->request('GET', 'https://www.myjobmag.com/jobs-at/konga/7');
+        $homepage = $client->request('GET', '');
         $keyword = "";
 
+        $ui = $homepage->filter('.job-info > ul > .mag-b ');
+        // dd($ui);
+        dd(array_key_last($ui));
         // find link that match keyword to click on 
-        $homepage->filter('.job-info > ul > .mag-b ')->each(function ($node) use ($client, $company, $keyword) {
+        $homepage->filter('.job-info > ul > .mag-b ')->each(function ($node, $key) use ($client, $company, $keyword) {
+
 
             $jobTitles =   $node->text();
 
@@ -47,6 +51,8 @@ class ScraperController extends Controller
 
                 //  👀  side note or bud:  this stuff loops two times? why ? 👀 
                 $this->fetch($company, $website);
+            } else {
+                dump('nothing was found');
             }
 
 
@@ -118,6 +124,7 @@ class ScraperController extends Controller
         $result[] = 'Flask';
 
         $result[] = 'Symfony';
+        $result[] = 'CherryPy';
         $result[] = 'Grails';
         $result[] = 'Swift';
         $result[] = 'Lua';
@@ -154,6 +161,8 @@ class ScraperController extends Controller
                 }
             }
         }
+        dump($k);
+
 
         // lets assume we have the Id of the company we want to save
         $company = $company->with('plangs.frameworks.companies', 'frameworks')->find(2);
@@ -162,7 +171,7 @@ class ScraperController extends Controller
 
         // if the language is already in the database
 
-        if ($company->plangs->count() < 0) {
+        if ($company->plangs->count() > 0) {
             foreach ($company->plangs as $progrLang) {
 
                 if (array_key_exists($progrLang->name, $k)) {
@@ -186,7 +195,7 @@ class ScraperController extends Controller
                         }
                     }
                 } else {
-
+                    // this is not doing anything
                     $company->plangs()->attach($progrLang->id, ['rating' => 0]);
                 }
             }
@@ -205,11 +214,11 @@ class ScraperController extends Controller
 
                     if (isset($k[$plang->name]) && $k[$plang->name] != "" && !is_null($k[$plang->name])) {
 
-                        $ffs = [];
+
                         foreach ($k[$plang->name]  as $frameworkName) {
 
                             // get the id of the framework that matched
-                          
+
                             $framework_id = $plang->frameworks->where('name', $frameworkName)->first()->id;
 
 
@@ -217,19 +226,11 @@ class ScraperController extends Controller
                             $company->frameworks()->attach($framework_id, ['rating' => 0]);
                         }
                     }
-                   
-
                 }
             }
 
             // if a scraped result have only programming laguages, you should detect the framework
             // after that, changed the model to use "hasManyThrough
         }
-
-     
-
-     
-
-        $be_format_for_db = Backend::getBeStack('be_format_for_db');
     }
 }
