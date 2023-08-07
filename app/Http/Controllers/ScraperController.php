@@ -29,17 +29,17 @@ class ScraperController extends Controller
         $keyword = "";
         while (true) { // controls moving to next page asin controls flow of pagination
 
-            $homepage = $client->request('GET', "site example");
+            $homepage = $client->request('GET', "example.com/{$pagination}");
 
-
+            dump($homepage);
             $ui = $homepage->filter('.job-info > ul > .mag-b ');
 
 
             // find link that match keyword to click on 
 
-            while ($noOfResultsTracker   < $noOfResultsPerPage) { /// controls no of sections per page 
+            if ($noOfResultsTracker   < $noOfResultsPerPage) { /// controls no of sections per page 
 
-
+                // while is false, repeat this block of code
                 dump($noOfResultsTracker . ' new ');
                 $homepage->filter('.job-info > ul > .mag-b ')->each(function ($node, $key) use ($client, $company, &$keyword, &$cc, &$noOfResultsTracker) {
                     // $noOfResultsTracker++;
@@ -72,8 +72,6 @@ class ScraperController extends Controller
 
                     // sieve the key word 
                 });
-
-                break;
             }
 
             if ($noOfResultsTracker   ===   18) {
@@ -84,13 +82,15 @@ class ScraperController extends Controller
                 dump('Page ' . $pagination . ' initiated.  and this is the value of tracker ' . $noOfResultsTracker);
 
 
-                if ($pagination == 3) {
+                if ($pagination == 8) {
 
                     dump($keyword);
                     dump($cc);
-                    dump('We have reached the maximun no of pages which is ' . $pagination . " and this is the site: https://www.myjobmag.com/jobs-at/konga/{$pagination}");
+                    dump('We have reached the maximun no of pages which is ' . $pagination . " and this is the site: exaple.com");
 
                     break; //exit the loop
+                } else {
+                    $noOfResultsTracker = 0;
                 }
             } else {
                 dd($noOfResultsTracker);
