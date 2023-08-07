@@ -19,50 +19,84 @@ class ScraperController extends Controller
     }
     public function homepageScrape(Company $company)
     {
+
         $client = new Client();
-        $pagination = 1;
-        $homepage = $client->request('GET', "https://www.myjobmag.com/jobs-at/konga/{$pagination}");
-        $keyword = "";
 
-
-        $ui = $homepage->filter('.job-info > ul > .mag-b ');
-
-        $noOfResultsPerPage = 18;
         $noOfResultsTracker = 0;
-        // find link that match keyword to click on 
-        $homepage->filter('.job-info > ul > .mag-b ')->each(function ($node, $key) use ($client, $company, $keyword, &$noOfResultsTracker,  $noOfResultsPerPage, &$pagination) {
+        $noOfResultsPerPage = 17;
+        $cc = '';
+        $pagination = 1;
+        $keyword = "";
+        while (true) { // controls moving to next page asin controls flow of pagination
 
-            $noOfResultsTracker++;
-            if ($noOfResultsTracker   < $noOfResultsPerPage) {
-                $jobTitles =   $node->text();
+            $homepage = $client->request('GET', "site example");
 
 
-                // remove parentensis --just incase and any other stuff aside letters and alphabets and format to smaller letters too 
-                $purgedTitles =  strtolower(preg_replace('/[^a-z]/i', ' ', $jobTitles));
+            $ui = $homepage->filter('.job-info > ul > .mag-b ');
 
-                // get the particular keyword, which  in this case, it is "backend"
-                $keyword = substr($purgedTitles, strpos($purgedTitles, 'backend'));
 
-                // further extraction to return only one word i.e backend 
-                $keyword = preg_replace("/\s.*/", '', ltrim($keyword));
+            // find link that match keyword to click on 
 
-                // click on the job description wit backend 
-                if ($keyword == 'backend') {
+            while ($noOfResultsTracker   < $noOfResultsPerPage) { /// controls no of sections per page 
 
-                    // find the link
-                    $link = $node->selectLink($jobTitles)->link();
 
-                    // click on the link
-                    $website = $client->click($link);
+                dump($noOfResultsTracker . ' new ');
+                $homepage->filter('.job-info > ul > .mag-b ')->each(function ($node, $key) use ($client, $company, &$keyword, &$cc, &$noOfResultsTracker) {
+                    // $noOfResultsTracker++;
+                    // dd($noOfResultsTracker);
+                    $jobTitles =   $node->text();
+                    dump($jobTitles);
+                    dump($noOfResultsTracker++);
 
-                    //  👀  side note or bud:  this stuff loops two times? why ? 👀 
-                    $this->fetch($company, $website);
-                }
+                    // remove parentensis --just incase and any other stuff aside letters and alphabets and format to smaller letters too 
+                    $purgedTitles =  strtolower(preg_replace('/[^a-z]/i', ' ', $jobTitles));
+
+                    // get the particular keyword, which  in this case, it is "backend"
+                    $keyword = substr($purgedTitles, strpos($purgedTitles, 'backend'));
+
+                    // further extraction to return only one word i.e backend 
+                    $keyword = preg_replace("/\s.*/", '', ltrim($keyword));
+
+                    // click on the job description wit backend 
+                    if ($keyword == 'backend') {
+
+                        // find the link
+                        $link = $node->selectLink($jobTitles)->link();
+
+                        // click on the link
+                        $website = $client->click($link);
+
+                        //  👀  side note or bud:  this stuff loops two times? why ? 👀 
+                        $cc = $this->fetch($company, $website);
+                    }
+
+                    // sieve the key word 
+                });
+
+                break;
             }
-            // sieve the key word 
-        });
 
-        dump($noOfResultsTracker);
+            if ($noOfResultsTracker   ===   18) {
+
+                $pagination = $pagination + 1;
+                //  dd($noOfResultsTracker,  $pagination);
+
+                dump('Page ' . $pagination . ' initiated.  and this is the value of tracker ' . $noOfResultsTracker);
+
+
+                if ($pagination == 3) {
+
+                    dump($keyword);
+                    dump($cc);
+                    dump('We have reached the maximun no of pages which is ' . $pagination . " and this is the site: https://www.myjobmag.com/jobs-at/konga/{$pagination}");
+
+                    break; //exit the loop
+                }
+            } else {
+                dd($noOfResultsTracker);
+                dd('not equals to 17');
+            }
+        }
     }
 
 
@@ -168,7 +202,7 @@ class ScraperController extends Controller
                 }
             }
         }
-        dump($k);
+        return $k;
 
 
         // lets assume we have the Id of the company we want to save
