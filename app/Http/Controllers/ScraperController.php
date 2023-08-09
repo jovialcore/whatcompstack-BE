@@ -29,10 +29,17 @@ class ScraperController extends Controller
         $keyword = "";
         while (true) { // controls moving to next page asin controls flow of pagination
 
-            $homepage = $client->request('GET', "example.com/{$pagination}");
+            $homepage = $client->request('GET', "");
 
-            dump($homepage);
-            $ui = $homepage->filter('.job-info > ul > .mag-b ');
+            // check if the nextpage has content, if not, it means that we have reached the end of the pagination
+            $isItEndOfPaginationResult = $homepage->filter('.job-list > .job-list-li')->first()->count();
+
+            dump(' end of the page is ' . $isItEndOfPaginationResult);
+
+            if ((int) $isItEndOfPaginationResult == 0) {
+                $pagination =  $pagination - 1;
+                return "Sorry wise one. We have reached the end of the pagination. this page ends at {$pagination}";
+            }
 
 
             // find link that match keyword to click on 
@@ -74,6 +81,10 @@ class ScraperController extends Controller
                 });
             }
 
+            // if ($isItEndOfPaginationResult === 0) {
+            //     $pagination =  $pagination - 1;
+            //     return "Sorry wise one. We have reached the end of the pagination. this page ends at {$pagination}";
+            // }
             if ($noOfResultsTracker   ===   18) {
 
                 $pagination = $pagination + 1;
@@ -82,14 +93,16 @@ class ScraperController extends Controller
                 dump('Page ' . $pagination . ' initiated.  and this is the value of tracker ' . $noOfResultsTracker);
 
 
-                if ($pagination == 8) {
-
+                if ($isItEndOfPaginationResult === 0) {
+                    dd('i was hit');
+                    $pagination =  $pagination - 1;
                     dump($keyword);
                     dump($cc);
-                    dump('We have reached the maximun no of pages which is ' . $pagination . " and this is the site: exaple.com");
+                    dump('We have reached the maximun no of pages which is ' . $pagination . " and this is the site: ");
 
                     break; //exit the loop
                 } else {
+                    //reset
                     $noOfResultsTracker = 0;
                 }
             } else {
