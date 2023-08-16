@@ -34,12 +34,11 @@ class ScraperController extends Controller
             // check if the nextpage has content, if not, it means that we have reached the end of the pagination
             $isItEndOfPaginationResult = $homepage->filter('.job-list > .job-list-li')->first()->count();
 
-            dump(' end of the page is ' . $isItEndOfPaginationResult);
-
-            if ((int) $isItEndOfPaginationResult == 0) {
-                $pagination =  $pagination - 1;
-                return "Sorry wise one. We have reached the end of the pagination. this page ends at {$pagination}";
-            }
+            // if ($isItEndOfPaginationResult == 0) {
+            //     dump(' end of the page is ' . $isItEndOfPaginationResult);
+            //     $pagination =  $pagination - 1;
+            //     return "Sorry wise one. We have reached the end of the pagination. this page ends at {$pagination}";
+            // }
 
 
             // find link that match keyword to click on 
@@ -85,20 +84,21 @@ class ScraperController extends Controller
             //     $pagination =  $pagination - 1;
             //     return "Sorry wise one. We have reached the end of the pagination. this page ends at {$pagination}";
             // }
-            if ($noOfResultsTracker   ===   18) {
+            if ($noOfResultsTracker   <=  18) {
 
                 $pagination = $pagination + 1;
                 //  dd($noOfResultsTracker,  $pagination);
 
                 dump('Page ' . $pagination . ' initiated.  and this is the value of tracker ' . $noOfResultsTracker);
 
-
                 if ($isItEndOfPaginationResult === 0) {
-                    dd('i was hit');
-                    $pagination =  $pagination - 1;
+                    dump('i was hit');
+                    $pagination =  $pagination - 2;
                     dump($keyword);
-                    dump($cc);
+
                     dump('We have reached the maximun no of pages which is ' . $pagination . " and this is the site: ");
+
+                    return $cc;
 
                     break; //exit the loop
                 } else {
@@ -170,21 +170,21 @@ class ScraperController extends Controller
         array_splice($result, 0); // assuming there is no programming language 
         // lets get frameworks 
 
-        $result[] = 'Spring Boot';
-        $result[] = 'Laravel';
+        // $result[] = 'Spring Boot';
+        // $result[] = 'Laravel';
 
-        $result[] = 'Ruby on Rails';
-        $result[] = 'Django';
-        $result[] = 'Flask';
+        // $result[] = 'Ruby on Rails';
+        // $result[] = 'Django';
+        // $result[] = 'Flask';
 
-        $result[] = 'Symfony';
-        $result[] = 'CherryPy';
-        $result[] = 'Grails';
-        $result[] = 'Swift';
-        $result[] = 'Lua';
+        // $result[] = 'Symfony';
+        // $result[] = 'CherryPy';
+        // $result[] = 'Grails';
+        // $result[] = 'Swift';
+        // $result[] = 'Lua';
 
-        $result[] = 'CakePHP';
-        $result[] = 'Express.js';
+        // $result[] = 'CakePHP';
+        // $result[] = 'Express.js';
 
 
         // dd($result);
@@ -215,8 +215,6 @@ class ScraperController extends Controller
                 }
             }
         }
-        return $k;
-
 
         // lets assume we have the Id of the company we want to save
         $company = $company->with('plangs.frameworks.companies', 'frameworks')->find(2);
