@@ -31,28 +31,17 @@ class ScraperController extends Controller
 
             $homepage = $client->request('GET', "");
 
-            // check if the nextpage has content, if not, it means that we have reached the end of the pagination
             $isItEndOfPaginationResult = $homepage->filter('.job-list > .job-list-li')->first()->count();
-
-            // if ($isItEndOfPaginationResult == 0) {
-            //     dump(' end of the page is ' . $isItEndOfPaginationResult);
-            //     $pagination =  $pagination - 1;
-            //     return "Sorry wise one. We have reached the end of the pagination. this page ends at {$pagination}";
-            // }
-
-
-            // find link that match keyword to click on 
 
             if ($noOfResultsTracker   < $noOfResultsPerPage) { /// controls no of sections per page 
 
-                // while is false, repeat this block of code
+
                 dump($noOfResultsTracker . ' new ');
                 $homepage->filter('.job-info > ul > .mag-b ')->each(function ($node, $key) use ($client, $company, &$keyword, &$cc, &$noOfResultsTracker) {
-                    // $noOfResultsTracker++;
-                    // dd($noOfResultsTracker);
+
                     $jobTitles =   $node->text();
-                    dump($jobTitles);
-                    dump($noOfResultsTracker++);
+
+                    $noOfResultsTracker++;
 
                     // remove parentensis --just incase and any other stuff aside letters and alphabets and format to smaller letters too 
                     $purgedTitles =  strtolower(preg_replace('/[^a-z]/i', ' ', $jobTitles));
@@ -66,14 +55,18 @@ class ScraperController extends Controller
                     // click on the job description wit backend 
                     if ($keyword == 'backend') {
 
+
                         // find the link
                         $link = $node->selectLink($jobTitles)->link();
+
 
                         // click on the link
                         $website = $client->click($link);
 
+
+
                         //  👀  side note or bud:  this stuff loops two times? why ? 👀 
-                        $cc = $this->fetch($company, $website);
+                        $this->fetch($company, $website);
                     }
 
                     // sieve the key word 
@@ -116,6 +109,7 @@ class ScraperController extends Controller
 
     public function fetch($company, $website)
     {
+
         $text = "";
 
         // get the second link that matches the nodes specified 
@@ -138,6 +132,7 @@ class ScraperController extends Controller
         });
         // etract keywords
         $keywords = RakePlus::create($text, ['.js'], 3)->keywords();
+
 
 
         $result = [];
@@ -163,12 +158,13 @@ class ScraperController extends Controller
 
             $matchedKeys = array_keys($backendArr, $keyword); // note that array_keys can act as filters too 
 
+
             // dump($matchedKeys);
             // push (merge) the matching item to the result  array
             $result = array_merge($result, $matchedKeys);
         }
-        array_splice($result, 0); // assuming there is no programming language 
-        // lets get frameworks 
+        //array_splice($result, 0); // assuming there is no programming language 
+        //lets get frameworks 
 
         // $result[] = 'Spring Boot';
         // $result[] = 'Laravel';
@@ -184,12 +180,13 @@ class ScraperController extends Controller
         // $result[] = 'Lua';
 
         // $result[] = 'CakePHP';
-        // $result[] = 'Express.js';
+        // $result[] = 'Express.js'; 
 
 
         // dd($result);
         /** ######    Group frameworks into their respective programming languages (as Assoc Array) #######  */
         $k = [];
+
 
         foreach ($result as $key => $value) {
 
@@ -216,10 +213,13 @@ class ScraperController extends Controller
             }
         }
 
+        // dd($k);
+
         // lets assume we have the Id of the company we want to save
         $company = $company->with('plangs.frameworks.companies', 'frameworks')->find(2);
-        $allPlangs = Plang::with('frameworks')->get();
 
+
+        // dd( $company );
 
         // if the language is already in the database
 
@@ -252,6 +252,7 @@ class ScraperController extends Controller
                 }
             }
         } else {
+            $allPlangs = Plang::with('frameworks')->get();
             foreach ($allPlangs as $plang) {
 
                 // check if the  programming lang from scraped result matches with the one in db
@@ -266,16 +267,22 @@ class ScraperController extends Controller
 
                     if (isset($k[$plang->name]) && $k[$plang->name] != "" && !is_null($k[$plang->name])) {
 
-
+                        dump($plang->name);
+                        dump($k[$plang->name] );
                         foreach ($k[$plang->name]  as $frameworkName) {
 
                             // get the id of the framework that matched
 
-                            $framework_id = $plang->frameworks->where('name', $frameworkName)->first()->id;
+                            $framework_id = $plang->frameworks->where('name', $frameworkName)->first();
 
-
-                            // attach to compnay_framework table 
-                            $company->frameworks()->attach($framework_id, ['rating' => 0]);
+                            if ($framework_id) {
+                                // dd($framework_id);
+                                // attach to compnay_framework table 
+                                $company->frameworks()->attach($framework_id->id, ['rating' => 0]);
+                            } else {
+                                dump($plang->frameworks);
+                                dd('cant find ' . $frameworkName . ' cos it is related to ' . $plang->name);
+                            }
                         }
                     }
                 }

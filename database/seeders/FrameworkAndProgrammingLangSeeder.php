@@ -52,7 +52,7 @@ class FrameworkAndProgrammingLangSeeder extends Seeder
                 'plang_id' => 2, // Python
             ],
             [
-                'name' => 'Ngnix',
+                'name' => 'Nginx',
                 'plang_id' => 2, // Python
             ],
             [
@@ -373,39 +373,33 @@ class FrameworkAndProgrammingLangSeeder extends Seeder
             ],
             [
                 'name' => 'Quarkus',
-                'plang_id' => 12, // Scala
+                'plang_id' => 14, // Scala
             ],
             [
                 'name' => 'Play Framework',
-                'plang_id' => 12, // Scala
+                'plang_id' => 14, // Scala
             ],
-            [
-                'name' => 'Lift',
-                'plang_id' => 12, // Scala
-            ],
+    
             [
                 'name' => 'Scalatra',
-                'plang_id' => 12, // Scala
+                'plang_id' => 14, // Scala
             ],
-            [
-                'name' => 'Finatra',
-                'plang_id' => 12, // Scala
-            ],
+        
             [
                 'name' => 'Skinny',
-                'plang_id' => 12, // Scala
+                'plang_id' => 14, // Scala
             ],
             [
                 'name' => 'Slick',
-                'plang_id' => 12, // Scala
+                'plang_id' => 14, // Scala
             ],
             [
                 'name' => 'Akka HTTP',
-                'plang_id' => 12, // Scala
+                'plang_id' => 14, // Scala
             ],
             [
                 'name' => 'http4s',
-                'plang_id' => 12, // Scala
+                'plang_id' => 14, // Scala
             ],
             [
                 'name' => 'Vapor',
@@ -439,10 +433,7 @@ class FrameworkAndProgrammingLangSeeder extends Seeder
                 'name' => 'Noze.io',
                 'plang_id' => 12, // Swift
             ],
-            [
-                'name' => 'Play Framework',
-                'plang_id' => 14, // Scala
-            ],
+      
             [
                 'name' => 'Lift',
                 'plang_id' => 14, // Scala
@@ -451,18 +442,8 @@ class FrameworkAndProgrammingLangSeeder extends Seeder
                 'name' => 'Finatra',
                 'plang_id' => 14, // Scala
             ],
-            [
-                'name' => 'Scalatra',
-                'plang_id' => 14, // Scala
-            ],
-            [
-                'name' => 'Akka',
-                'plang_id' => 14, // Scala
-            ],
-            [
-                'name' => 'Skinny',
-                'plang_id' => 14, // Scala
-            ],
+
+    
             [
                 'name' => 'Sangria',
                 'plang_id' => 14, // Scala
@@ -671,10 +652,7 @@ class FrameworkAndProgrammingLangSeeder extends Seeder
                 'name' => 'ServiceStack',
                 'plang_id' => 5, // C#
             ],
-            [
-                'name' => 'Akka.NET',
-                'plang_id' => 5, // C#
-            ],
+     
             [
                 'name' => 'Simple.Web',
                 'plang_id' => 5, // C#

@@ -11,7 +11,7 @@ return [
         'TurboGears',
         'Web2Py',
         'Tornado',
-        'Ngnix'
+        'Nginx'
     ],
     'Node.js' => [
         'Express.js',

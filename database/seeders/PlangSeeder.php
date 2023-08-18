@@ -16,32 +16,31 @@ class PlangSeeder extends Seeder
 
 
         $programmingLanguages = [
-            'PHP',
-            'Python',
-            'Ruby',
-            'Java',
-            'C#',
-            'Go',
-            'Rust',
-            'Node.js',
-            'Perl',
-            'C++',
-            'C',
-            'Swift',
-            'Kotlin',
-            'Scala',
-            'Haskell',
-            'Erlang',
-            //'Groovy',
-            'Objective-C',
-            'Lua',
-            'R',
-            'Julia',
+            ['id' => 1, 'name' => 'PHP'],
+            ['id' => 2, 'name' => 'Python'],
+            ['id' => 3, 'name' => 'Ruby'],
+            ['id' => 4, 'name' => 'Java'],
+            ['id' => 5, 'name' => 'C#'],
+            ['id' => 6, 'name' => 'Go'],
+            ['id' => 7, 'name' => 'Rust'],
+            ['id' => 8, 'name' => 'Node.js'],
+            ['id' => 9, 'name' => 'Elixir'],
+            ['id' => 10, 'name' => 'Perl'],
+            ['id' => 11, 'name' => 'Haskell'],
+            ['id' => 12, 'name' => 'Swift'],
+            ['id' => 13, 'name' => 'Kotlin'],
+            ['id' => 14, 'name' => 'Scala'],
+            ['id' => 15, 'name' => 'Clojure'],
+            ['id' => 16, 'name' => 'Erlang'],
+            ['id' => 18, 'name' => 'Objective-C'],
+            ['id' => 20, 'name' => 'R'],
+            ['id' => 19, 'name' => 'Lua'],
+            ['id' => 21, 'name' => 'Julia'],
         ];
 
         foreach ($programmingLanguages as $language) {
 
-            Plang::create(['name' => $language]);
+            Plang::create($language);
         }
     }
 }
