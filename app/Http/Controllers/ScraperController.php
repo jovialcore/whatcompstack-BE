@@ -29,11 +29,11 @@ class ScraperController extends Controller
         $keyword = "";
         while (true) { // controls moving to next page asin controls flow of pagination
 
-            $homepage = $client->request('GET', "");
+            $homepage = $client->request('GET', "https://www.myjobmag.com/jobs-at/interswitch/{$pagination}");
 
             $isItEndOfPaginationResult = $homepage->filter('.job-list > .job-list-li')->first()->count();
 
-            if ($noOfResultsTracker   < $noOfResultsPerPage) { /// controls no of sections per page 
+            if ($noOfResultsTracker < $noOfResultsPerPage) { /// controls no of sections per page 
 
 
                 dump($noOfResultsTracker . ' new ');
@@ -89,7 +89,7 @@ class ScraperController extends Controller
                     $pagination =  $pagination - 2;
                     dump($keyword);
 
-                    dump('We have reached the maximun no of pages which is ' . $pagination . " and this is the site: ");
+                    dump('We have reached the maximun no of pages which is ' . $pagination );
 
                     return $cc;
 
@@ -213,10 +213,10 @@ class ScraperController extends Controller
             }
         }
 
-        // dd($k);
+        dump($k);
 
         // lets assume we have the Id of the company we want to save
-        $company = $company->with('plangs.frameworks.companies', 'frameworks')->find(2);
+        $company = $company->with('plangs.frameworks.companies', 'frameworks')->find(3);
 
 
         // dd( $company );
@@ -264,11 +264,9 @@ class ScraperController extends Controller
 
                     // attach the  framework under the programmming language
 
-
                     if (isset($k[$plang->name]) && $k[$plang->name] != "" && !is_null($k[$plang->name])) {
 
-                        dump($plang->name);
-                        dump($k[$plang->name] );
+                        
                         foreach ($k[$plang->name]  as $frameworkName) {
 
                             // get the id of the framework that matched
