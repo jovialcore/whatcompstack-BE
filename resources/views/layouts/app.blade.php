@@ -127,6 +127,15 @@
                             </a>
                         </li>
 
+                        <!-- Scarping -->
+                        <li class="menu-item ">
+                            <a href="{{ route('scrapper') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-cube-alt"></i>
+                                <div data-i18n="Analytics">Scrapping</div>
+                            </a>
+                        </li>
+                        <!-- / Scarping -->
+
                         <!-- Layouts -->
                         <li class="menu-item">
                             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -545,10 +554,10 @@
                         <!-- Content -->
 
                         <div class="container-xxl flex-grow-1 container-p-y">
-
-                            @yield('content')
+                            <div class="row">
+                                @yield('content')
+                            </div>
                         </div>
-
                         <!-- / content -->
 
 

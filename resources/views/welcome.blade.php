@@ -536,7 +536,6 @@
 
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <div class="row">
-
                             <div class="col-lg-12 col-md-4 order-1">
                                 <div class="row">
                                     <div class="col-lg-4 r-0 col-md-12 col-6 mb-4">

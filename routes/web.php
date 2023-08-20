@@ -19,8 +19,12 @@ Route::get('/scrapper/home', [App\Http\Controllers\ScraperController::class, 'ho
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.dashboard');
 });
+
+Route::get('/admin/dashboard', function () {
+    return view('admin.scraper');
+})->name('scrapper');
 
 Auth::routes();
 
