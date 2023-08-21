@@ -20,11 +20,15 @@ Route::get('/scrapper/home', [App\Http\Controllers\ScraperController::class, 'ho
 
 Route::get('/', function () {
     return view('admin.dashboard');
+})->name('admin.dashboard');
+
+Route::prefix('admin')->group(function () {
+
+    Route::get('/dashboard', function () {
+        return view('admin.scraper');
+    })->name('admin.scrapper');
 });
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.scraper');
-})->name('scrapper');
 
 Auth::routes();
 

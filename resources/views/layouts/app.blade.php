@@ -120,7 +120,7 @@
 
                     <ul class="menu-inner py-1">
                         <!-- Dashboard -->
-                        <li class="menu-item active">
+                        <li class="menu-item  {{ request()->routeIs('admin.dashboard') ? 'active' : '' }} ">
                             <a href="/" class="menu-link">
                                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                                 <div data-i18n="Analytics">Dashboard</div>
@@ -128,8 +128,9 @@
                         </li>
 
                         <!-- Scarping -->
-                        <li class="menu-item ">
-                            <a href="{{ route('scrapper') }}" class="menu-link">
+                        <li class="menu-item  {{ request()->routeIs('admin.scrapper') ? 'active' : '' }}">
+                            <a href="{{ route('admin.scrapper') }}"
+                                class=" menu-link ">
                                 <i class="menu-icon tf-icons bx bx-cube-alt"></i>
                                 <div data-i18n="Analytics">Scrapping</div>
                             </a>
