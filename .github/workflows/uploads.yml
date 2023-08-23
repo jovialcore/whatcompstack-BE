@@ -1,0 +1,23 @@
+on: 
+  push:
+    branches:
+      - main
+name: 🚀 Deploy website on push
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2.3.2
+
+    - name: Install Composer Dependencies
+      run: composer install -q --no-ansi --no-interactions --no-scripts --no-progress --prefer-dist
+    
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        server: ftp.jovialcore.tech
+        username: Dev@api.jovialcore.tech
+        password: ${{ secrets.ftp_password }}
+        server_dir: /api.jovialcore.tech/

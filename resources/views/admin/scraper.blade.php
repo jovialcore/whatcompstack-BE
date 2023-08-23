@@ -2,14 +2,14 @@
 @section('content')
     <div class="col-md-10 mx-auto">
         <div class="card mb-4">
-            <h5 class="card-header">Scrapper 🪚</h5>
+            <h5 class="card-header">Reinitiate Data 🪚</h5>
             <div class="card-body">
                 <div class="mb-3">
                     <label for="exampleFormControlSelect1" class="form-label">Company </label>
                     <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-                        <option selected>Choose a source </option>
-                        <option value="1">Source one </option>
-                        <option value="2">Source two</option>
+                        <option selected>Choose company </option>
+                        <option value="1">Company One </option>
+                        <option value="2">Company two </option>
                     </select>
                 </div>
 
@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="exampleFormControlSelect1" class="form-label">scrapper source </label>
+                    <label for="exampleFormControlSelect1" class="form-label">Data source </label>
                     <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
                         <option selected>Choose a source </option>
                         <option value="1">Source one </option>

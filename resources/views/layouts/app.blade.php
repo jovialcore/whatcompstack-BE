@@ -132,7 +132,7 @@
                             <a href="{{ route('admin.scrapper') }}"
                                 class=" menu-link ">
                                 <i class="menu-icon tf-icons bx bx-cube-alt"></i>
-                                <div data-i18n="Analytics">Scrapping</div>
+                                <div data-i18n="Analytics">Data Control</div>
                             </a>
                         </li>
                         <!-- / Scarping -->
