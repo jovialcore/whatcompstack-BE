@@ -24,9 +24,9 @@ Route::get('/', function () {
 
 Route::prefix('admin')->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('admin.scraper');
-    })->name('admin.scrapper');
+    Route::get('/dashboard',  [App\Http\Controllers\DataControlController::class, 'index'])->name('admin.scrapper');
+
+    
 });
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Services;
 
 use Goutte\Client;
 use Illuminate\Http\Request;
@@ -11,14 +11,16 @@ use App\Models\Framework;
 use App\Models\Plang;
 use DonatelloZa\RakePlus\RakePlus;
 
-class ScraperController extends Controller
+class ScraperService
 {
 
     public function callerForScarping()
     {
     }
-    public function homepageScrape(Company $company)
+    public function homepageScrape()
     {
+
+        $company = new  Company();
 
         $client = new Client();
 
@@ -89,7 +91,7 @@ class ScraperController extends Controller
                     $pagination =  $pagination - 2;
                     dump($keyword);
 
-                    dump('We have reached the maximun no of pages which is ' . $pagination );
+                    dump('We have reached the maximun no of pages which is ' . $pagination);
 
                     return $cc;
 
@@ -266,7 +268,7 @@ class ScraperController extends Controller
 
                     if (isset($k[$plang->name]) && $k[$plang->name] != "" && !is_null($k[$plang->name])) {
 
-                        
+
                         foreach ($k[$plang->name]  as $frameworkName) {
 
                             // get the id of the framework that matched
