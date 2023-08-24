@@ -33,12 +33,11 @@ class ScraperService
         while (true) { // controls moving to next page asin controls flow of pagination
 
             // use paystack to test for nodejs cases ..flutterwave to test for getting frameworks too
-            $homepage = $client->request('GET', "https://www.myjobmag.com/jobs-at/flutterwave/{$pagination}");
+            $homepage = $client->request('GET', "https://www.myjobmag.com/jobs-at/thrillers-travels/{$pagination}");
 
             $isItEndOfPaginationResult = $homepage->filter('.job-list > .job-list-li')->first()->count();
 
             if ($noOfResultsTracker < $noOfResultsPerPage) { /// controls no of sections per page 
-
 
                 dump($noOfResultsTracker . ' new ');
                 $homepage->filter('.job-info > ul > .mag-b ')->each(function ($node, $key) use ($client, $company, &$keyword, &$cc, &$noOfResultsTracker) {
