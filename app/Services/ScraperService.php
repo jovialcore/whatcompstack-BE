@@ -32,7 +32,8 @@ class ScraperService
 
         while (true) { // controls moving to next page asin controls flow of pagination
 
-            $homepage = $client->request('GET', "https://www.myjobmag.com/jobs-at/paystack/{$pagination}");
+            // use paystack to test for nodejs cases ..flutterwave to test for getting frameworks too
+            $homepage = $client->request('GET', "https://www.myjobmag.com/jobs-at/flutterwave/{$pagination}");
 
             $isItEndOfPaginationResult = $homepage->filter('.job-list > .job-list-li')->first()->count();
 
@@ -144,8 +145,8 @@ class ScraperService
 
         /** ######    This section is used to select all stacks possible  #######  */
 
-       // loop throuh keyword extracted
-     
+        // loop throuh keyword extracted
+
         // dd($keywords);
         foreach ($keywords as $keyword) {
 
@@ -251,10 +252,12 @@ class ScraperService
                     }
                 } else {
                     // this is not doing anything
-                    $company->plangs()->attach($progrLang->id, ['rating' => 1]);
+                    dd(' I wanted to add rating');
+                    $company->plangs()->attach($progrLang->id, ['rating' => 0]);
                 }
             }
         } else {
+            // if the language does not exist in the database ?
             $allPlangs = Plang::with('frameworks')->get();
             foreach ($allPlangs as $plang) {
 
@@ -263,7 +266,7 @@ class ScraperService
                 if (array_key_exists($plang->name, $k)) {
                     // attach a programming language with the company
 
-                    $company->plangs()->attach($plang->id, ['rating' => 0]);
+                    $company->plangs()->attach($plang->id, ['rating' => 1]);
 
                     // attach the  framework under the programmming language
 
