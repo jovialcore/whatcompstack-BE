@@ -32,7 +32,7 @@ class ScraperService
 
         while (true) { // controls moving to next page asin controls flow of pagination
 
-            $homepage = $client->request('GET', "https://www.myjobmag.com/jobs-at/cowrywise/{$pagination}");
+            $homepage = $client->request('GET', "https://www.myjobmag.com/jobs-at/paystack/{$pagination}");
 
             $isItEndOfPaginationResult = $homepage->filter('.job-list > .job-list-li')->first()->count();
 
@@ -83,14 +83,13 @@ class ScraperService
             if ($noOfResultsTracker   <=  18) {
 
                 $pagination = $pagination + 1;
-                //  dd($noOfResultsTracker,  $pagination);
 
                 dump('Page ' . $pagination . ' initiated.  and this is the value of tracker ' . $noOfResultsTracker);
 
                 if ($isItEndOfPaginationResult === 0) {
-                    dump('i was hit');
+
                     $pagination =  $pagination - 2;
-                    dump($keyword);
+                    dump('this is key word at the end of page ' . $keyword);
 
                     dump('We have reached the maximun no of pages which is ' . $pagination);
 
@@ -103,7 +102,6 @@ class ScraperService
                 }
             } else {
                 dd($noOfResultsTracker);
-                dd('not equals to 17');
             }
         }
     }
@@ -118,7 +116,7 @@ class ScraperService
         // get the second link that matches the nodes specified 
         $website->filter('p > strong')->each(function ($node) use (&$text, $website) {
 
-            $pattern = '/\b(requirements|nice to haves|requirement|Required competency and skillset to be a Waver|What Your Day to Day Activities Will Be Like:|required|Qualifications|Characteristics | Qualifications Characteristics)\b/i';
+            $pattern = '/\b(requirements|nice to haves|requirement|Required competency and skillset to be a Waver|What Your Day to Day Activities Will Be Like:|required|Qualifications|Characteristics | Qualifications Characteristics|What We Look For in You)\b/i';
 
 
             $r =  strtolower($node->text());
@@ -146,8 +144,9 @@ class ScraperService
 
         /** ######    This section is used to select all stacks possible  #######  */
 
-        // loop throuh keyword extracted
-        // dd( $keywords);
+       // loop throuh keyword extracted
+     
+        // dd($keywords);
         foreach ($keywords as $keyword) {
 
             // convert to small case
@@ -155,7 +154,8 @@ class ScraperService
 
             //check if keywords exist in $backend stacks and retrieve the matched keys
             // using the $keyword as filter, we now return keys of $backendArr that represent which represent perfect name we want tosave in the db
-            if ($keyword == 'javascript') {
+
+            if (in_array($keyword, ['javascript', 'node'])) {
                 $keyword = 'node.js'; // converted to the small form so we can use array_keys to get the properdb formate name, see below 👇👇👇
             }
 
@@ -251,7 +251,7 @@ class ScraperService
                     }
                 } else {
                     // this is not doing anything
-                    $company->plangs()->attach($progrLang->id, ['rating' => 0]);
+                    $company->plangs()->attach($progrLang->id, ['rating' => 1]);
                 }
             }
         } else {
