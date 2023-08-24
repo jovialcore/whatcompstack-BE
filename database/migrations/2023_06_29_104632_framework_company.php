@@ -15,7 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('framework_id');
             $table->unsignedBigInteger('company_id'); //should incase we revert to using uuids
             $table->integer('rating')->default('0');
-            $table->integer('drfat_rating')->nullable();
+            $table->integer('draft_rating')->nullable();
             $table->integer('status');
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
