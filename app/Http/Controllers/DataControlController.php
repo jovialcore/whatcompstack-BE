@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
+use App\Models\DataSource;
+use App\Models\Stack;
 use Illuminate\Http\Request;
 use App\Services\ScraperService;
 
@@ -15,13 +18,16 @@ class DataControlController extends Controller
     public function index()
     {
 
-        $this->scraper->homepageScrape();
-        return view('admin.scraper');
+        $companies = Company::get(['id', 'name']);
+        $stacks = Stack::all();
+        $dataSources = DataSource::all();
+
+        return view('admin.scraper', compact('companies', 'stacks', 'dataSources'));
     }
 
     public function initiateDataSourcing(Request  $request)
     {
-
+        // $this->scraper->homepageScrape();
 
         // upload cv
         // we list companies based on your profile
@@ -31,14 +37,14 @@ class DataControlController extends Controller
 
         // then this where whatcompanystack comes in !
 
-      
+
         $request->validate([
             'company' => 'required',
             'stack' => 'required',
             'source' => 'required',
         ]);
 
- 
+
         return view('admin.scrapperResult');
     }
 }
