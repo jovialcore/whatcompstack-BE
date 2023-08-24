@@ -29,9 +29,10 @@ class ScraperService
         $cc = '';
         $pagination = 1;
         $keyword = "";
+
         while (true) { // controls moving to next page asin controls flow of pagination
 
-            $homepage = $client->request('GET', "https://www.myjobmag.com/jobs-at/interswitch/{$pagination}");
+            $homepage = $client->request('GET', "https://www.myjobmag.com/jobs-at/flutterwave/{$pagination}");
 
             $isItEndOfPaginationResult = $homepage->filter('.job-list > .job-list-li')->first()->count();
 
@@ -117,7 +118,7 @@ class ScraperService
         // get the second link that matches the nodes specified 
         $website->filter('p > strong')->each(function ($node) use (&$text, $website) {
 
-            $pattern = '/\b(requirements|nice to haves|requirement|Required competency and skillset to be a Waver|What Your Day to Day Activities Will Be Like:|required)\b/i';
+            $pattern = '/\b(requirements|nice to haves|requirement|Required competency and skillset to be a Waver|What Your Day to Day Activities Will Be Like:|required|Qualifications|Characteristics | Qualifications Characteristics)\b/i';
 
 
             $r =  strtolower($node->text());

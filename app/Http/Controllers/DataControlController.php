@@ -14,7 +14,7 @@ class DataControlController extends Controller
     }
     public function index()
     {
-        
+
         $this->scraper->homepageScrape();
         return view('admin.scraper');
     }
@@ -38,7 +38,7 @@ class DataControlController extends Controller
             'source' => 'required',
         ]);
 
-
+ 
         return view('admin.scrapperResult');
     }
 }
