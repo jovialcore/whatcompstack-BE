@@ -51,10 +51,7 @@ class FrameworkAndProgrammingLangSeeder extends Seeder
                 'name' => 'Tornado',
                 'plang_id' => 2, // Python
             ],
-            [
-                'name' => 'Nginx',
-                'plang_id' => 2, // Python
-            ],
+       
             [
                 'name' => 'Express.js',
                 'plang_id' => 8, // Node.js

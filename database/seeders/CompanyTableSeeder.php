@@ -26,7 +26,6 @@ class CompanyTableSeeder extends Seeder
                 'nodejs' => ['express'],
                 'ruby' => ['ruby-on-rails'],
                 'java' => ['springboot', 'spark', 'grails'],
-
                 'go' => ['Gin', 'Beego', 'Echo']
 
             ],
