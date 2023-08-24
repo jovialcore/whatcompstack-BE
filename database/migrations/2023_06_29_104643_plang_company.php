@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('rating')->default('0');
             $table->integer('draft_rating')->nullable();
             $table->integer('status');
+            $table->timestamps();
 
             // $table->foreign('plang_id')->references('id')->on('plangs')->onDelete('cascade');
             // $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
