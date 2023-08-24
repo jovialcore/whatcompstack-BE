@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('framework_company', function (Blueprint $table) {
             $table->unsignedBigInteger('framework_id');
             $table->unsignedBigInteger('company_id'); //should incase we revert to using uuids
-            $table->integer('rating');
+            $table->integer('rating')->default('0');
+            $table->integer('drfat_rating')->nullable();
+            $table->integer('status');
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
         });

@@ -15,7 +15,9 @@ return new class extends Migration
 
             $table->unsignedBigInteger('plang_id');
             $table->unsignedBigInteger('company_id');
-            $table->integer('rating');
+            $table->integer('rating')->default('0');
+            $table->integer('drfat_rating')->nullable();
+            $table->integer('status');
 
             // $table->foreign('plang_id')->references('id')->on('plangs')->onDelete('cascade');
             // $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
