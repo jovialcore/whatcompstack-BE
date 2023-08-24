@@ -24,5 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CompanyTableSeeder::class);
         $this->call(PlangSeeder::class);
         $this->call(FrameworkAndProgrammingLangSeeder::class);
+        $this->call(DataSourceSeeder::class);
+        $this->call(StackSeeder::class);
     }
 }
