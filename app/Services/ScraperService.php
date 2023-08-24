@@ -32,7 +32,7 @@ class ScraperService
 
         while (true) { // controls moving to next page asin controls flow of pagination
 
-            $homepage = $client->request('GET', "https://www.myjobmag.com/jobs-at/flutterwave/{$pagination}");
+            $homepage = $client->request('GET', "https://www.myjobmag.com/jobs-at/cowrywise/{$pagination}");
 
             $isItEndOfPaginationResult = $homepage->filter('.job-list > .job-list-li')->first()->count();
 
