@@ -241,9 +241,9 @@ class ScraperService
 
                 if (array_key_exists($progrLang->name, $k)) {
 
-                    
+
                     // just update the rating coulmn on pivot table                       // add plus one to the rating  column
-                  
+
 
                     $company->plangs()->updateExistingPivot($progrLang->id, ['draft_rating' => $progrLang->pivot->draft_rating + 1, 'status' => 1]);
 
@@ -256,7 +256,7 @@ class ScraperService
                             $frameworkId = $progrLang->frameworks->where('name', $frameworkName)->first()->id;
                             // loop through company frameworks and update the pivot table of ids that match 
                             foreach ($company->frameworks as $fw) {
-                                $company->frameworks()->updateExistingPivot($frameworkId, ['draft_rating' => $fw->pivot->draft_rating + 1, 'status' => 1]);
+                                $company->frameworks()->updateExistingPivot($frameworkId, ['draft_rating' => $fw->pivot->draft_rating + 1, 'status' => 1, 'plang_id' => $progrLang->id]);
                             }
                         }
                     }
@@ -292,7 +292,7 @@ class ScraperService
                             if ($framework_id) {
                                 // dd($framework_id);
                                 // attach to compnay_framework table 
-                                $company->frameworks()->attach($framework_id->id, ['draft_rating' => 1, 'status' => 1]);
+                                $company->frameworks()->attach($framework_id->id, ['draft_rating' => 1, 'status' => 1, 'plang_id' => $plang->id]);
                             } else {
                                 // dump($plang->frameworks);
                                 dd('cant find ' . $frameworkName . ' cos it is related to ' . $plang->name);

@@ -34,27 +34,28 @@ class DataControlController extends Controller
 
 
         $request->validate([
-            'company' => 'required|integer', // actuallly the company id
-            'stack' => 'required|string',
-            'data_source' => 'required|url',
+            'company' => 'required', // actuallly the company id
+            'stack' => 'required',
+            'data_source' => 'required',
 
         ]);
 
 
-       
+
         $scraper = new ScraperService($request->input('company'), $request->input('data_source'), $request->input('stack'));
 
+        // dd($request->all());
         $scraper->dataSource();
 
         // for prgramming language
 
         $newResult = Company::with(['plangs' => function ($query) {
-            $query->where('status', 1);
+            $query->where('status', 1)->with('frameworks', function ($query) {
+                $query->whereHas('companies');
+            });
         }, 'frameworks' => function ($query) {
             $query->where('status', 1);
-        }])
-            ->where('name', $request->input('company'))
-            ->first();
+        }])->first();
         dd($newResult);
         return view('admin.scrapperResultPreview', compact('newResult'));
     }
