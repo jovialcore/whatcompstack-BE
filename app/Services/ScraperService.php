@@ -13,7 +13,6 @@ use DonatelloZa\RakePlus\RakePlus;
 
 class ScraperService
 {
-
     const published = 2;
     const draft = 1;
 
@@ -27,7 +26,7 @@ class ScraperService
         $this->dataSource = $dataSource;
         $this->stack = $stack;
     }
-    public function homepageScrape()
+    public function dataSource()
     {
 
         // dd( $this->company );
@@ -41,7 +40,7 @@ class ScraperService
         $pagination = 1;
         $keyword = "";
         $companyToSourceFor = strtolower($this->company);
-       
+
 
         while (true) { // controls moving to next page asin controls flow of pagination
 
@@ -69,7 +68,7 @@ class ScraperService
                     $keyword = preg_replace("/\s.*/", '', ltrim($keyword));
 
                     // click on the job description wit backend 
-                    if ($keyword == 'backend') {
+                    if ($keyword == $this->stack) {
 
 
                         // find the link
