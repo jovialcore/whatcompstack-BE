@@ -178,8 +178,8 @@ class ScraperService
         //array_splice($result, 0); // assuming there is no programming language 
         //lets get frameworks 
 
-        // $result[] = 'Spring Boot';
-        // $result[] = 'Laravel';
+        $result[] = 'Spring Boot';
+        $result[] = 'Laravel';
 
         // $result[] = 'Ruby on Rails';
         // $result[] = 'Django';

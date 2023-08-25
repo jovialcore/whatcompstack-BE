@@ -13,4 +13,6 @@ class Framework extends Model
     {
         return $this->belongsToMany(Company::class, 'framework_company');
     }
+
+
 }

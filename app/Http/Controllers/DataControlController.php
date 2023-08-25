@@ -37,21 +37,25 @@ class DataControlController extends Controller
             'company' => 'required', // actuallly the company id
             'stack' => 'required',
             'data_source' => 'required',
+
         ]);
 
 
+       
         $scraper = new ScraperService($request->input('company'), $request->input('data_source'), $request->input('stack'));
 
-        // $scraper->dataSource();
+        $scraper->dataSource();
 
         // for prgramming language
 
         $newResult = Company::with(['plangs' => function ($query) {
             $query->where('status', 1);
+        }, 'frameworks' => function ($query) {
+            $query->where('status', 1);
         }])
             ->where('name', $request->input('company'))
             ->first();
-        // dd($newResult);
+        dd($newResult);
         return view('admin.scrapperResultPreview', compact('newResult'));
     }
 }

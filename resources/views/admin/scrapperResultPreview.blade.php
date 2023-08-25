@@ -39,20 +39,25 @@
                             <table class="table table-borderless table-sm table-hover table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Programming Language</th>    
+                                        <th>Programming Language</th>
                                         <th>Framework</th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
-                                    <tr >
-                                        <td class="py-2"><i class="fab fa-angular fa-lg text-danger "></i>
-                                             Angular
-                                            Project
-                                            <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger">3</span>
-                                        </td>
-                                        <td>Albert Cook  <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger">3</span></td>
-                                     
-                                       
+                                    @foreach ($newResult->plangs as $result)
+                                        <tr>
+                                            <td class="py-2"><i class="fab fa-angular fa-lg text-danger "></i>
+                                                {{ $result->name }}
+                                                <span
+                                                    class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger"> {{ $result->pivot->draft_rating }}</span>
+                                            </td>
+                                            <td>Albert Cook <span
+                                                    class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger">3</span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+
                                 </tbody>
                             </table>
                         </div>
