@@ -43,18 +43,18 @@ class DataControlController extends Controller
 
         $scraper = new ScraperService($request->input('company'), $request->input('data_source'), $request->input('stack'));
 
-
         $scraper->dataSource();
 
         $newResult = Company::with(['plangs' => function ($query) {
-            $query->where('status', 1)->with('frameworks', function ($query) {
-                $query->whereHas('companies', function ($query) {
-                    $query->where('status', 1);
+            $query->where('is_draft', 1)->where('is_published', 0)->with('frameworks', function ($query) {
+                $query->withWhereHas('companies', function ($query) {
+                    // I don't now why I can't access the pivot of frameworks directly on frameworks collection exceptI use withWhereHas on Companies -- should look into it some time in future but for now, lets make do with how it is working now
+                    $query->where('is_draft', 1)->where('is_published', 0);
                 });
             });
         }])->where('name', request('company'))->first();
 
-        dd($newResult);
+        // dd($newResult);
         return view('admin.scrapperResultPreview', compact('newResult'));
     }
 }

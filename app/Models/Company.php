@@ -40,14 +40,11 @@ class Company extends Model
 
     public function plangs() // plangs via company
     {
-        return $this->belongsToMany(Plang::class, 'plang_company')->withPivot(['draft_rating', 'status', 'rating']);
+        return $this->belongsToMany(Plang::class, 'plang_company')->withPivot(['draft_rating', 'is_draft', 'is_published',  'rating']);
     }
 
     public function frameworks() // frameworks via company
     {
-        return $this->belongsToMany(Framework::class, 'framework_company')->withPivot(['draft_rating', 'status', 'rating']);
+        return $this->belongsToMany(Framework::class, 'framework_company')->withPivot(['draft_rating', 'is_draft', 'is_published', 'rating']);
     }
-
-
-
 }

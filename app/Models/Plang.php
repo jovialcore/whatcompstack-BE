@@ -20,10 +20,4 @@ class Plang extends Model
     {
         return $this->belongsToMany(Company::class, 'plang_company')->withPivot('rating');
     }
-
-
-    public function plangsViaFrameworkCompany() // plangs via the framework_company
-    {
-        return $this->belongsToMany(Plang::class, 'framework_company')->withPivot(['draft_rating', 'status', 'rating']);
-    }
 }

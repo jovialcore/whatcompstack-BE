@@ -11,8 +11,6 @@ class Framework extends Model
 
     function companies()
     {
-        return $this->belongsToMany(Company::class, 'framework_company');
+        return $this->belongsToMany(Company::class, 'framework_company')->withPivot(['draft_rating', 'is_draft', 'is_published', 'rating']);
     }
-
-
 }
