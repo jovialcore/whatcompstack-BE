@@ -44,6 +44,14 @@ class DataControlController extends Controller
 
         $scraper->dataSource();
 
-        return view('admin.scrapperResultPreview');
+        // for prgramming language
+
+        $newResult = Company::with(['plangs' => function ($query) {
+            $query->where('status', 1);
+        }])
+            ->where('name', $request->input('company'))
+            ->first();
+        // dd($newResult);
+        return view('admin.scrapperResultPreview', compact('newResult'));
     }
 }

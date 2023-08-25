@@ -33,9 +33,9 @@
                 <div id="accordionTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        Frontend:
+                        Frontend: {{ $newResult->plangs->implode('name', ',') }}
                         <br>
-                        Backend:
+                        Rating : {{ $newResult->plangs->implode('pivot_draft_rating', ',') }}
                         <br>
                         Design
                         <br>
