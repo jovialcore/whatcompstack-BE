@@ -42,7 +42,7 @@ class DataControlController extends Controller
 
         $scraper = new ScraperService($request->input('company'), $request->input('data_source'), $request->input('stack'));
 
-        $scraper->dataSource();
+        // $scraper->dataSource();
 
         // for prgramming language
 
