@@ -43,7 +43,9 @@
                         <br>
                     </div>
                 </div>
+                <button type="submit" class="btn btn-primary">Confirm results</button>
             </div>
+           
 
         </div>
     </div>
