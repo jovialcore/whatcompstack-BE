@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('framework_id');
             $table->unsignedBigInteger('company_id'); //should incase we revert to using uuids
+            $table->unsignedBigInteger('plang_id');
             $table->integer('rating')->default('0');
             $table->integer('draft_rating')->nullable();
             $table->integer('status');

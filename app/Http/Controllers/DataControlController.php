@@ -34,9 +34,9 @@ class DataControlController extends Controller
 
 
         $request->validate([
-            'company' => 'required', // actuallly the company id
-            'stack' => 'required',
-            'data_source' => 'required',
+            'company' => 'required|integer', // actuallly the company id
+            'stack' => 'required|string',
+            'data_source' => 'required|url',
 
         ]);
 
