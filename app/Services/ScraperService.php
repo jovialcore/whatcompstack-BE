@@ -17,11 +17,20 @@ class ScraperService
     const published = 2;
     const draft = 1;
 
-    public function callerForScarping()
+    protected $company;
+    protected $dataSource;
+    protected $stack;
+
+    public function __construct($company, $dataSource, $stack)
     {
+        $this->company = $company;
+        $this->dataSource = $dataSource;
+        $this->stack = $stack;
     }
     public function homepageScrape()
     {
+
+        // dd( $this->company );
         $company = new  Company();
 
         $client = new Client();
@@ -31,11 +40,13 @@ class ScraperService
         $cc = '';
         $pagination = 1;
         $keyword = "";
+        $companyToSourceFor = strtolower($this->company);
+       
 
         while (true) { // controls moving to next page asin controls flow of pagination
 
             // use paystack to test for nodejs cases ..flutterwave to test for getting frameworks too
-            $homepage = $client->request('GET', "https://www.myjobmag.com/jobs-at/thrillers-travels/{$pagination}");
+            $homepage = $client->request('GET', "{$this->dataSource}{$companyToSourceFor}/{$pagination}");
 
             $isItEndOfPaginationResult = $homepage->filter('.job-list > .job-list-li')->first()->count();
 
@@ -221,8 +232,8 @@ class ScraperService
         dump($k);
 
         // lets assume we have the Id of the company we want to save
-        $company = $company->with('plangs.frameworks.companies', 'frameworks')->find(3);
-       
+        $company = $company->with('plangs.frameworks.companies', 'frameworks')->where('name', $this->company)->first();
+
 
 
         // dd( $company );

@@ -10,11 +10,6 @@ use App\Services\ScraperService;
 
 class DataControlController extends Controller
 {
-    protected $scraper;
-    public function __construct()
-    {
-        $this->scraper = new ScraperService();
-    }
     public function index()
     {
 
@@ -27,7 +22,7 @@ class DataControlController extends Controller
 
     public function initiateDataSourcing(Request  $request)
     {
-        // $this->scraper->homepageScrape();
+
 
         // upload cv
         // we list companies based on your profile
@@ -39,12 +34,16 @@ class DataControlController extends Controller
 
 
         $request->validate([
-            'company' => 'required',
+            'company' => 'required', // actuallly the company id
             'stack' => 'required',
-            'source' => 'required',
+            'data_source' => 'required',
         ]);
 
 
-        return view('admin.scrapperResult');
+        $scraper = new ScraperService($request->input('company'), $request->input('data_source'), $request->input('stack'));
+
+        $scraper->homepageScrape();
+
+        return view('admin.scrapperResultPreview');
     }
 }
