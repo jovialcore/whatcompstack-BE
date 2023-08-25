@@ -27,7 +27,7 @@
                 <h2 class="accordion-header" id="headingTwo">
                     <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
                         data-bs-target="#accordionTwo" aria-expanded="false" aria-controls="accordionTwo">
-                        New Stack Preview 🍖
+                        Newly Sourced Stack 🍖
                     </button>
                 </h2>
                 <div id="accordionTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo"

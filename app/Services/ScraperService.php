@@ -51,7 +51,7 @@ class ScraperService
 
             if ($noOfResultsTracker < $noOfResultsPerPage) { /// controls no of sections per page 
 
-                dump($noOfResultsTracker . ' new ');
+
                 $homepage->filter('.job-info > ul > .mag-b ')->each(function ($node, $key) use ($client, $company, &$keyword, &$cc, &$noOfResultsTracker) {
 
                     $jobTitles =   $node->text();
@@ -88,22 +88,19 @@ class ScraperService
                 });
             }
 
-            // if ($isItEndOfPaginationResult === 0) {
-            //     $pagination =  $pagination - 1;
-            //     return "Sorry wise one. We have reached the end of the pagination. this page ends at {$pagination}";
-            // }
+
             if ($noOfResultsTracker   <=  18) {
 
                 $pagination = $pagination + 1;
 
-                dump('Page ' . $pagination . ' initiated.  and this is the value of tracker ' . $noOfResultsTracker);
+                // dump( 'Page ' . $pagination . ' initiated.  and this is the value of tracker ' . $noOfResultsTracker );
 
                 if ($isItEndOfPaginationResult === 0) {
 
                     $pagination =  $pagination - 2;
-                    dump('this is key word at the end of page ' . $keyword);
+                    // echo 'this is key word at the end of page ' . $keyword;
 
-                    dump('We have reached the maximun no of pages which is ' . $pagination);
+                    //echo 'We have reached the maximun no of pages which is ' . $pagination;
 
                     return $cc;
 
@@ -228,7 +225,7 @@ class ScraperService
             }
         }
 
-        dump($k);
+        // dump($k);
 
         // lets assume we have the Id of the company we want to save
         $company = $company->with('plangs.frameworks.companies', 'frameworks')->where('name', $this->company)->first();
@@ -244,10 +241,11 @@ class ScraperService
 
                 if (array_key_exists($progrLang->name, $k)) {
 
-
+                    
                     // just update the rating coulmn on pivot table                       // add plus one to the rating  column
+                  
 
-                    $company->plangs()->updateExistingPivot($progrLang->id, ['draft_rating' => $progrLang->pivot->rating + 1, 'status' => 1]);
+                    $company->plangs()->updateExistingPivot($progrLang->id, ['draft_rating' => $progrLang->pivot->draft_rating + 1, 'status' => 1]);
 
                     // if there are any frameworks and they are what we had before ? do the following
                     if (!empty($k[$progrLang->name])) {
@@ -258,13 +256,13 @@ class ScraperService
                             $frameworkId = $progrLang->frameworks->where('name', $frameworkName)->first()->id;
                             // loop through company frameworks and update the pivot table of ids that match 
                             foreach ($company->frameworks as $fw) {
-                                $company->frameworks()->updateExistingPivot($frameworkId, ['draft_rating' => $fw->pivot->rating + 1, 'status' => 1]);
+                                $company->frameworks()->updateExistingPivot($frameworkId, ['draft_rating' => $fw->pivot->draft_rating + 1, 'status' => 1]);
                             }
                         }
                     }
                 } else {
                     // this is not doing anything
-                    dd(' I wanted to add rating');
+
                     $company->plangs()->attach($progrLang->id, ['rating' => 0]);
                 }
             }
@@ -296,7 +294,7 @@ class ScraperService
                                 // attach to compnay_framework table 
                                 $company->frameworks()->attach($framework_id->id, ['draft_rating' => 1, 'status' => 1]);
                             } else {
-                                dump($plang->frameworks);
+                                // dump($plang->frameworks);
                                 dd('cant find ' . $frameworkName . ' cos it is related to ' . $plang->name);
                             }
                         }
