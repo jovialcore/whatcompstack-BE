@@ -42,7 +42,6 @@ class DataControlController extends Controller
 
 
         $scraper = new ScraperService($request->input('company'), $request->input('data_source'), $request->input('stack'));
-
         $scraper->dataSource();
 
         $newResult = Company::with(['plangs' => function ($query) {
