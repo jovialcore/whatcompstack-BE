@@ -20,15 +20,7 @@ class CompanyTableSeeder extends Seeder
         Company::create([
             'name' => 'PayStack',
             'company_url' => "https://paystack.com/",
-            'stack_be' => [
-
-                'php' => ['laravel', 'cakephp', 'symphony'],
-                'nodejs' => ['express'],
-                'ruby' => ['ruby-on-rails'],
-                'java' => ['springboot', 'spark', 'grails'],
-                'go' => ['Gin', 'Beego', 'Echo']
-
-            ],
+            'stack_be' => ['php', 'nodejs', 'java', 'rubyonrails'],
             'stack_fe' => ['javascript', 'react', 'vuejs', 'svelte'],
             'devops' =>  ['azure', 'digitalOcean', 'heroku'],
             'database_driver' => ['mariadb'],
@@ -83,14 +75,14 @@ class CompanyTableSeeder extends Seeder
             'logo' => "https://res.cloudinary.com/chidiebere/image/upload/v1679843515/paysatack.png"
 
         ]);
-
+     
 
         Company::create([
             'name' => 'FlutterWave',
             'company_url' => "https://www.flutterwave.com/",
-            'stack_be' => ['java', 'rubyonrails'],
-            'stack_fe' => ['vuejs', 'svelte'],
-            'devops' => ['digitalOcean'],
+            'stack_be' => [ 'java', 'rubyonrails'],
+            'stack_fe' => [ 'vuejs', 'svelte'],
+            'devops' =>['digitalOcean'],
             'database_driver' => ['mysql'],
             'ceo' => 'Olugbenga Agboola ',
             'ceo_contact' => 'https://www.linkedin.com/in/gbagboola',
@@ -102,7 +94,7 @@ class CompanyTableSeeder extends Seeder
             'salary_range' => NULL,
             'about' => "Sell anything online without a website. Create a secure checkout page in a few clicks. Create a free account to generate secure payment links and get paid in any currency.",
             'logo' => "https://res.cloudinary.com/chidiebere/image/upload/v1679843619/flutterwave.png"
-
+        
 
         ]);
     }
