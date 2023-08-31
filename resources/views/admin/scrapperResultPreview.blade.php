@@ -55,7 +55,7 @@
                                             <td> {{ $result->frameworks[0]->name ?? ' -- ' }}
                                                 @if(isset($result->frameworks[0]->companies[0]->pivot->draft_rating))
                                                     <span
-                                                        class="  badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger">{{ $result->frameworks[0]->companies[0]->pivot->draft_rating ?? 'None ' }}</span>
+                                                        class="  badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger">{{ 'x' .$result->frameworks[0]->companies[0]->pivot->draft_rating ?? 'None ' }}</span>
                                                 @endif
                                             </td>
                                         </tr>
