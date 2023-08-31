@@ -110,7 +110,8 @@ class ScraperService
                     $noOfResultsTracker = 0;
                 }
             } else {
-                dd($noOfResultsTracker);
+                // I will use this to check if keyword exist and if we have scraped this site before
+                dd('looks like key word does not exist in this source ');
             }
         }
     }
