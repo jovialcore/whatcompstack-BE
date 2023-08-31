@@ -10,6 +10,7 @@ use App\Services\ScraperService;
 
 class DataControlController extends Controller
 {
+    
     public function index()
     {
 
