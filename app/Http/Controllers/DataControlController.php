@@ -11,6 +11,8 @@ use App\Services\ScraperService;
 class DataControlController extends Controller
 {
 
+    private $companySourced = '';
+
     public function index()
     {
 
@@ -44,6 +46,12 @@ class DataControlController extends Controller
         $scraper = new ScraperService($request->input('company'), $request->input('data_source'), $request->input('stack'));
         $scraper->dataSource();
 
+        return to_route('admin.preview.results', ['company' => request('company')]);
+    }
+
+    public function preview(Request $request)
+    {
+       
         $newResult = Company::with(['plangs' => function ($query) {
             $query->where('is_draft', 1)->where('is_published', 0)->with('frameworks', function ($query) {
                 $query->withWhereHas('companies', function ($query) {
@@ -51,14 +59,8 @@ class DataControlController extends Controller
                     $query->where('is_draft', 1)->where('is_published', 0);
                 });
             });
-        }])->where('name', request('company'))->first();
+        }])->where('name', $this->companySourced)->first();
 
-        // dd($newResult);
-        return to_route('admin.preview.results');
-    }
-
-    public function preview()
-    {
         return view('admin.scrapperResultPreview', compact('newResult'));
     }
 }
