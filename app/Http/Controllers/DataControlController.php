@@ -7,12 +7,12 @@ use App\Models\DataSource;
 use App\Models\Stack;
 use Illuminate\Http\Request;
 use App\Services\ScraperService;
-use App\Trats\previewCompany;
+use App\Traits\companyPreviewTrait;
 
 class DataControlController extends Controller
 {
 
-    use previewCompany;
+    use companyPreviewTrait;
 
     private $companySourced = '';
 

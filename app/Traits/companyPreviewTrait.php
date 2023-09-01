@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Trats;
+namespace App\Traits;
 
 use App\Models\Company;
 
-trait previewCompany
+trait companyPreviewTrait
 {
-
-
     public  function newlySourced($company)
     {
         return  Company::with(['plangs' => function ($query) {
