@@ -7,9 +7,12 @@ use App\Models\DataSource;
 use App\Models\Stack;
 use Illuminate\Http\Request;
 use App\Services\ScraperService;
+use App\Trats\previewCompany;
 
 class DataControlController extends Controller
 {
+
+    use previewCompany;
 
     private $companySourced = '';
 
@@ -51,15 +54,10 @@ class DataControlController extends Controller
 
     public function preview(Request $request, $company)
     {
-        $newResult = Company::with(['plangs' => function ($query) {
-            $query->where('is_draft', 1)->where('is_published', 0)->with('frameworks', function ($query) {
-                $query->withWhereHas('companies', function ($query) {
-                    // I don't now why I can't access the pivot of frameworks directly on frameworks collection exceptI use withWhereHas on Companies -- should look into it some time in future but for now, lets make do with how it is working now
-                    $query->where('is_draft', 1)->where('is_published', 0);
-                });
-            });
-        }])->where('name', $company)->first();
 
+        $newResult = $this->newlySourced($company);
+
+        $oldResult  = $this->oldSourcedData($company);
 
         return view('admin.scrapperResultPreview', compact('newResult'));
     }
