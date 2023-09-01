@@ -46,12 +46,11 @@ class DataControlController extends Controller
         $scraper = new ScraperService($request->input('company'), $request->input('data_source'), $request->input('stack'));
         $scraper->dataSource();
 
-        return to_route('admin.preview.results', ['company' => request('company')]);
+        return to_route('admin.preview.results', ['company' => $request->input('company')]);
     }
 
-    public function preview(Request $request)
+    public function preview(Request $request, $company)
     {
-       
         $newResult = Company::with(['plangs' => function ($query) {
             $query->where('is_draft', 1)->where('is_published', 0)->with('frameworks', function ($query) {
                 $query->withWhereHas('companies', function ($query) {
@@ -59,7 +58,8 @@ class DataControlController extends Controller
                     $query->where('is_draft', 1)->where('is_published', 0);
                 });
             });
-        }])->where('name', $this->companySourced)->first();
+        }])->where('name', $company)->first();
+
 
         return view('admin.scrapperResultPreview', compact('newResult'));
     }
