@@ -10,7 +10,7 @@ use App\Services\ScraperService;
 
 class DataControlController extends Controller
 {
-    
+
     public function index()
     {
 
@@ -41,7 +41,6 @@ class DataControlController extends Controller
         ]);
 
 
-
         $scraper = new ScraperService($request->input('company'), $request->input('data_source'), $request->input('stack'));
         $scraper->dataSource();
 
@@ -55,6 +54,11 @@ class DataControlController extends Controller
         }])->where('name', request('company'))->first();
 
         // dd($newResult);
+        return to_route('admin.preview.results');
+    }
+
+    public function preview()
+    {
         return view('admin.scrapperResultPreview', compact('newResult'));
     }
 }
