@@ -23,11 +23,13 @@ Route::get('/',  [App\Http\Controllers\DashboardController::class, 'index'])->na
 
 Route::prefix('/dashboard')->group(function () {
 
-    Route::post('/dashboard/intialize',  [App\Http\Controllers\DataControlController::class, 'initiateDataSourcing'])->name('admin.datasource.initialize');
+    Route::get('/preview/data-control',  [App\Http\Controllers\DashboardController::class, 'dataControlPage'])->name('admin.dataControl');
 
-    Route::get('/dashboard/preview/soruced-results/{company}',  [App\Http\Controllers\DataControlController::class, 'preview'])->name('admin.preview.results');
+    Route::post('/intialize',  [App\Http\Controllers\DataControlController::class, 'initiateDataSourcing'])->name('admin.datasource.initialize');
 
-    Route::post('/dashboard/preview/confirm/results/{company}',  [App\Http\Controllers\DataControlController::class, 'confirmResults'])->name('admin.preview.result.confirm');
+    Route::get('/preview/soruced-results/{company}',  [App\Http\Controllers\DataControlController::class, 'preview'])->name('admin.preview.results');
+
+    Route::post('/preview/confirm/results/{company}',  [App\Http\Controllers\DataControlController::class, 'confirmResults'])->name('admin.preview.result.confirm');
 });
 
 
