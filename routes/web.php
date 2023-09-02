@@ -31,6 +31,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/dashboard/intialize',  [App\Http\Controllers\DataControlController::class, 'initiateDataSourcing'])->name('admin.datasource.initialize');
 
     Route::get('/dashboard/preview/soruced-results/{company}',  [App\Http\Controllers\DataControlController::class, 'preview'])->name('admin.preview.results');
+
+    Route::post('/dashboard/preview/confirm/results',  [App\Http\Controllers\DataControlController::class, 'confirmResult'])->name('admin.preview.result.confirm');
 });
 
 

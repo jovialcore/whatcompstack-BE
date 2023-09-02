@@ -6,7 +6,7 @@ use App\Models\Company;
 
 trait companyPreviewTrait
 {
-    public  function newlySourced($company)
+    public function newlySourced($company)
     {
         return  Company::with(['plangs' => function ($query) {
             $query->where('is_draft', 1)->where('is_published', 0)->with('frameworks', function ($query) {
@@ -18,7 +18,7 @@ trait companyPreviewTrait
         }])->where('name', $company)->first();
     }
 
-    public  function oldSourcedData($company)
+    public function oldSourcedData($company)
     {
         return  Company::with(['plangs' => function ($query) {
             $query->where('is_draft', 0)->where('is_published', 1)->with('frameworks', function ($query) {

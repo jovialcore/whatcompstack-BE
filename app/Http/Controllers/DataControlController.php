@@ -5,20 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\DataSource;
 use App\Models\Stack;
+use App\Services\DataControlService;
 use Illuminate\Http\Request;
 use App\Services\ScraperService;
 use App\Traits\companyPreviewTrait;
+use  Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 
 class DataControlController extends Controller
 {
 
     use companyPreviewTrait;
 
-    private $companySourced = '';
+    protected $dataControlService;
+
+
+    public function __construct()
+    {
+        $this->dataControlService = new DataControlService;
+    }
 
     public function index()
     {
-
         $companies = Company::get(['id', 'name']);
         $stacks = Stack::all();
         $dataSources = DataSource::all();
@@ -26,7 +35,7 @@ class DataControlController extends Controller
         return view('admin.scraper', compact('companies', 'stacks', 'dataSources'));
     }
 
-    public function initiateDataSourcing(Request  $request)
+    public function initiateDataSourcing(Request  $request): RedirectResponse
     {
 
 
@@ -52,13 +61,21 @@ class DataControlController extends Controller
         return to_route('admin.preview.results', ['company' => $request->input('company')]);
     }
 
-    public function preview(Request $request, $company)
+    public function preview(Request $request, $company): View
     {
 
         $newResult = $this->newlySourced($company);
 
         $oldResult  = $this->oldSourcedData($company);
 
-        return view('admin.scrapperResultPreview', compact('newResult'));
+        return view('admin.scrapperResultPreview', compact('newResult', 'oldResult'));
+    }
+
+
+    public function confirmResults(Request $request, $company): View
+    {
+        $this->dataControlService->confirmResult();
+        
+        return view('admin.scrapperResultPreview', compact('newResult', 'oldResult'));
     }
 }
