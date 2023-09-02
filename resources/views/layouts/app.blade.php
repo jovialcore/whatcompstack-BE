@@ -631,6 +631,8 @@
     <!-- Main JS -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
+    <!-- Alert js ui  -->
+    <script src="{{ asset('assets/js/ui-alert.js') }}"></script>
     <!-- Page JS -->
     <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
 

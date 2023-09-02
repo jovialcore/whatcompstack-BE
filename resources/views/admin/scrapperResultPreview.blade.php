@@ -1,14 +1,20 @@
 @extends('layouts.app')
 @section('content')
     <div class="col-md-12 ">
-
+        this page is the preview for what ever you have confirmed and tells you it's successfulfor that particular stack
+        (e.g backened) you just sourced
         <!--- if there are no new result -->
         @if ($oldResult->plangs->count() > 0)
             <div class="accordion mt-3" id="accordionExample">
                 <div class="card accordion-item ">
+                    <div class="alert alert-success alert-dismissible alertFlash" role="alert">
+                        Confirmed successfully
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                     <h2 class="accordion-header" id="headingOne">
-                        <button type="button" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordionOne"
-                            aria-expanded="true" aria-controls="accordionOne">
+
+                        <button type="button" class="accordion-button" data-bs-toggle="collapse"
+                            data-bs-target="#accordionOne" aria-expanded="true" aria-controls="accordionOne">
                             Updated Stack 🕵️‍♀️
                         </button>
                     </h2>
