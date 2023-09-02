@@ -6,7 +6,7 @@
             <h5 class="card-header">Initiate Data Sourcing🪚</h5>
             <div class="card-body">
                 <form method="POST" action="{{ route('admin.datasource.initialize') }}">
-                    @csrf();
+                    @csrf()
                     <div class="mb-3">
                         <label for="exampleFormControlSelect1" class="form-label">Company </label>
                         <select name="company" class="form-select" id="exampleFormControlSelect1"
