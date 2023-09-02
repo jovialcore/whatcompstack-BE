@@ -32,7 +32,7 @@ Route::prefix('admin')->group(function () {
 
     Route::get('/dashboard/preview/soruced-results/{company}',  [App\Http\Controllers\DataControlController::class, 'preview'])->name('admin.preview.results');
 
-    Route::post('/dashboard/preview/confirm/results',  [App\Http\Controllers\DataControlController::class, 'confirmResult'])->name('admin.preview.result.confirm');
+    Route::post('/dashboard/preview/confirm/results/{company}',  [App\Http\Controllers\DataControlController::class, 'confirmResults'])->name('admin.preview.result.confirm');
 });
 
 
