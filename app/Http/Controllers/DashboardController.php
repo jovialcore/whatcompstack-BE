@@ -22,7 +22,7 @@ class DashboardController extends Controller
     public function index(): View
     {
         $data = $this->dashboardService->getAppStats();
-
+       
         return view('admin.dashboard', $data);
     }
 }

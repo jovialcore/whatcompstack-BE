@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         <span class="fw-semibold d-block mb-1">Companies</span>
-                        <h3 class="card-title mb-2">20</h3>
+                        <h3 class="card-title mb-2">{{ $noOfCompanies }}</h3>
                         {{-- <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +7%</small> --}}
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <span>Programming Languages</span>
-                        <h3 class="card-title text-nowrap mb-1">22</h3>
+                        <h3 class="card-title text-nowrap mb-1">{{ $noOfPlangs }}</h3>
                         {{-- <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +2%</small> --}}
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                             </div>
                         </div>
                         <span>Frameworks</span>
-                        <h3 class="card-title text-nowrap mb-1">250</h3>
+                        <h3 class="card-title text-nowrap mb-1">{{ $noOfFrameworks }}</h3>
                         {{-- <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small> --}}
                     </div>
                 </div>
