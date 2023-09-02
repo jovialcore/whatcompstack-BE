@@ -70,16 +70,12 @@ class DataControlController extends Controller
         return view('admin.scrapperResultPreview', compact('newResult', 'oldResult', 'company'));
     }
 
-
-    public function confirmResults($company): View
+    public function confirmResults($company): RedirectResponse
     {
-        
-        $confirmedResult = $this->dataControlService->confirmResult($company);
+        $this->dataControlService->confirmResult($company);
 
-        // dd($confirmedResult);
+        $oldResult = $this->oldSourcedData($company);
 
-        $newResult = $this->oldSourcedData($company);
-      
-        return view('admin.scrapperResultPreview', compact('newResult'));
+        return to_route('admin.preview.results', ['oldResult' =>  $oldResult, 'company' => $company]);
     }
 }
