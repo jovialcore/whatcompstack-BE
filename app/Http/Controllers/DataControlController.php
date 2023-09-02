@@ -67,16 +67,19 @@ class DataControlController extends Controller
         $newResult = $this->newlySourced($company);
 
         $oldResult  = $this->oldSourcedData($company);
-
         return view('admin.scrapperResultPreview', compact('newResult', 'oldResult', 'company'));
     }
 
 
-    public function confirmResults(Request $request, $company): View
+    public function confirmResults($company): View
     {
-       $confirmedResult = $this->dataControlService->confirmResult($request, $company);
+        
+        $confirmedResult = $this->dataControlService->confirmResult($company);
 
-       $newResult = $this->newlySourced($company);
+        // dd($confirmedResult);
+
+        $newResult = $this->oldSourcedData($company);
+      
         return view('admin.scrapperResultPreview', compact('newResult'));
     }
 }

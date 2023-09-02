@@ -7,14 +7,41 @@ use App\Models\Company;
 class DataControlService
 {
 
-
-    public function confirmResult($request, $company): bool
+    public function confirmResult($company): bool
     {
-        $company  = Company::where('name', $company)->first();
+        $plang = $this->confirmResultForPlang($company);
+        $framework =  $this->confirmResultForFramework($company);
+
+        if ($plang && $framework) {
+            return true;
+        } else {
+            return false; // something strange happened ---should be abe to reverse transaction 👀 ??
+        }
+    }
+
+    private function confirmResultForFramework($company): bool
+    {
+        $company  = Company::where('name', $company)->with('frameworks')->first();
+
         foreach ($company->frameworks as $framework) {
-            $update = $company->frameworks()->updateExistingPivot($framework->id, ['rating' => $framework->pivot->draft_rating, 'draft_rating' => 0, 'is_draft' => 0, 'is_published' => 1]);
+            $updateForFramework = $company->frameworks()->updateExistingPivot($framework->id, ['rating' => $framework->pivot->draft_rating + $framework->pivot->rating, 'draft_rating' => 0, 'is_draft' => 0, 'is_published' => 1]);
         }
 
-        return $update ?? false;
+        return $updateForFramework ?? false;
+    }
+
+    private function confirmResultForPlang($company): bool
+    {
+
+
+        $company  = Company::where('name', $company)->with('plangs')->first();
+        foreach ($company->plangs as $plang) {
+
+            $updateForPlang = $company->plangs()->updateExistingPivot($plang->id, ['rating' => $plang->pivot->draft_rating + $plang->pivot->rating, 'draft_rating' => 0, 'is_draft' => 0, 'is_published' => 1]);
+        }
+
+        // suprisingly, this saving approach can track if a record has been updted before--even if you run this function before,it has an update it will return 0 ( reason being that it has been updated before)---nicee 
+
+        return  $updateForPlang ?? false;
     }
 }
