@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\Company;
+use App\Models\Framework;
+use App\Models\Plang;
 
 class DataControlService
 {
@@ -19,6 +21,8 @@ class DataControlService
         }
     }
 
+
+
     private function confirmResultForFramework($company): bool
     {
         $company  = Company::where('name', $company)->with('frameworks')->first();
@@ -32,8 +36,6 @@ class DataControlService
 
     private function confirmResultForPlang($company): bool
     {
-
-
         $company  = Company::where('name', $company)->with('plangs')->first();
         foreach ($company->plangs as $plang) {
 

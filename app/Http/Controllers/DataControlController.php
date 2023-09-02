@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Company;
-use App\Models\DataSource;
-use App\Models\Stack;
+
 use App\Services\DataControlService;
 use Illuminate\Http\Request;
 use App\Services\ScraperService;
 use App\Traits\companyPreviewTrait;
 use  Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Redirect;
+
 
 class DataControlController extends Controller
 {
@@ -19,21 +17,19 @@ class DataControlController extends Controller
     use companyPreviewTrait;
 
     protected $dataControlService;
+    protected $dashBoardService;
 
 
     public function __construct()
     {
         $this->dataControlService = new DataControlService;
+
+        // unforseen rules, if you are fetching result, your return type should be redirect response
+        //if you are fetching results, your return type should as views
     }
 
-    public function index()
-    {
-        $companies = Company::get(['id', 'name']);
-        $stacks = Stack::all();
-        $dataSources = DataSource::all();
 
-        return view('admin.scraper', compact('companies', 'stacks', 'dataSources'));
-    }
+
 
     public function initiateDataSourcing(Request  $request): RedirectResponse
     {
