@@ -29,7 +29,12 @@ class DataControlController extends Controller
     }
 
 
+    public function index()
+    {
+        $data = $this->dataControlService->index();
 
+        return  view('admin.scraper', $data);
+    }
 
     public function initiateDataSourcing(Request  $request): RedirectResponse
     {

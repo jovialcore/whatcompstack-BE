@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\DataSource;
 use App\Models\Stack;
 use App\Services\DashboardService;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -18,20 +19,10 @@ class DashboardController extends Controller
     }
 
 
-    public function index()
+    public function index(): View
     {
-        $this->dashboardService->getAppStats();
+        $data = $this->dashboardService->getAppStats();
 
-        return view('admin.dashboard');
-    }
-
-    public function dataControlPage()
-    {
-
-        $companies = Company::get(['id', 'name']);
-        $stacks = Stack::all();
-        $dataSources = DataSource::all();
-
-        return view('admin.scraper', compact('companies', 'stacks', 'dataSources'));
+        return view('admin.dashboard', $data);
     }
 }

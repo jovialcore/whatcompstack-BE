@@ -3,11 +3,22 @@
 namespace App\Services;
 
 use App\Models\Company;
+use App\Models\DataSource;
 use App\Models\Framework;
 use App\Models\Plang;
+use App\Models\Stack;
 
 class DataControlService
 {
+
+    public function index(): array
+    {
+        $companies = Company::get(['id', 'name']);
+        $stacks = Stack::all();
+        $dataSources = DataSource::all();
+
+        return  compact('companies', 'stacks', 'dataSources');
+    }
 
     public function confirmResult($company): bool
     {

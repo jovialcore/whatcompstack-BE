@@ -18,12 +18,11 @@ Route::get('/scrapper/company', [App\Http\Controllers\ScraperController::class, 
 Route::get('/scrapper/home', [App\Http\Controllers\ScraperController::class, 'homepageScrape']);
 
 
-
-Route::get('/',  [App\Http\Controllers\DashboardController::class, 'index'])->name('admin.scrapper');
+Route::get('/',  [App\Http\Controllers\DashboardController::class, 'index'])->name('admin.dashboard.index');
 
 Route::prefix('/dashboard')->group(function () {
 
-    Route::get('/preview/data-control',  [App\Http\Controllers\DashboardController::class, 'dataControlPage'])->name('admin.dataControl');
+    Route::get('/preview/data-control',  [App\Http\Controllers\DataControlController::class, 'index'])->name('admin.dataControl.index');
 
     Route::post('/intialize',  [App\Http\Controllers\DataControlController::class, 'initiateDataSourcing'])->name('admin.datasource.initialize');
 

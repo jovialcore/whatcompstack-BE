@@ -123,7 +123,7 @@
 
                     <ul class="menu-inner py-1">
                         <!-- Dashboard -->
-                        <li class="menu-item  {{ request()->routeIs('admin.scrapper') ? 'active' : '' }} ">
+                        <li class="menu-item  {{ request()->routeIs('admin.dashboard.index') ? 'active' : '' }} ">
                             <a href="/" class="menu-link">
                                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                                 <div data-i18n="Analytics">Dashboard</div>
@@ -132,8 +132,8 @@
 
                         <!-- Scarping -->
                         <li
-                            class="menu-item  {{request()->routeIs('admin.dataControl') ? 'active' : '' }}">
-                            <a href="{{ route('admin.dataControl') }}" class=" menu-link ">
+                            class="menu-item  {{request()->routeIs('admin.dataControl.index') ? 'active' : '' }}">
+                            <a href="{{ route('admin.dataControl.index') }}" class=" menu-link ">
                                 <i class="menu-icon tf-icons bx bx-cube-alt"></i>
                                 <div data-i18n="Analytics">Data Control</div>
                             </a>
