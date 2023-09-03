@@ -14,6 +14,23 @@ class CompanyResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return  [
+            'id' => $this->id,
+            'company' => $this->name,
+            'about' => $this->about,
+            'company_url' => $this->company_url,
+            'ceo' => $this->ceo,
+            'ceo_contact' => $this->ceo_contact,
+            'cto_contact' => $this->cto_contact,
+            'hr' => $this->hr,
+            'logo' => $this->logo,
+
+            'stack_be_plang' => $this->plangs->map(function ($item) {
+                return [$item->name => ['rating' => $item->pivot->rating]];
+            }),
+            'stack_be_framework' => $this->frameworks->map(function ($item) {
+                return [$item->name => ['rating' => $item->pivot->rating]];
+            }),
+        ];
     }
 }

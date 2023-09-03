@@ -23,7 +23,6 @@ Route::get('/company/stack/details/{id}', [App\Http\Controllers\Api\CompanyStack
 
 
 
-
 //for explain ai 
 
 Route::post('/extract/imagetext', [App\Http\Controllers\Api\AiController::class, 'upload']);
