@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CrudController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/company/stack/all', [App\Http\Controllers\Api\CompanyStackController::class, 'index']);
 
+
+Route::apiResource('crud',  CrudController::class);
 
 Route::get('/company/stack/details/{id}', [App\Http\Controllers\Api\CompanyStackController::class, 'show']);
 
