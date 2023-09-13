@@ -40,7 +40,7 @@ class CrudController extends Controller
                 'name' => $request->name
             ]);
 
-            return response()->json(['message' => 'update was successfull', 'status' => 200], 200);
+            return response()->json(['message' => 'update was successfull'], 200);
         } catch (\Throwable $th) {
             return  response()->json(['error' => $th], 500);
         }
@@ -72,7 +72,7 @@ class CrudController extends Controller
 
         try {
             $data =  DB::table('cruds')->where('id', $id)->update(['name' => $request->name]);
-            return response()->json(['message' => 'update was successfull', 'status' => 200], 200);
+            return response()->json(['message' => 'update was successfull'], 200);
         } catch (\Throwable $th) {
             return  response()->json(['error' => $th], 500);
         }
@@ -86,7 +86,7 @@ class CrudController extends Controller
 
         try {
             $data =  DB::table('cruds')->where('id', $id)->delete();
-            return response()->json(['message' => 'delete was successfull', 'status' => 200], 200);
+            return response()->json(['message' => 'delete was successfull'], 200);
         } catch (\Throwable $th) {
 
             return  response()->json(['error' => $th], 500);

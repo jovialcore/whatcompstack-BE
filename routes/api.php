@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CrudController;
+use App\Http\Controllers\HngController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,11 @@ Route::get('/company/stack/details/{id}', [App\Http\Controllers\Api\CompanyStack
 //for explain ai 
 
 Route::post('/extract/imagetext', [App\Http\Controllers\Api\AiController::class, 'upload']);
+
+
+
+// x
+Route::apiResource('/slackbot', HngController::class);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
