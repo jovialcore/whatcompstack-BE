@@ -52,7 +52,7 @@ class CrudController extends Controller
     public function show(string $id)
     {
 
-        $data = DB::table('cruds')->select()->where('id', $id)->get();
+        $data = DB::table('cruds')->select()->where('id', $id)->orWhere('name', $id)->get();
 
         return response()->json($data);
     }
@@ -71,7 +71,7 @@ class CrudController extends Controller
     {
 
         try {
-            $data =  DB::table('cruds')->where('id', $id)->update(['name' => $request->name]);
+            $data =  DB::table('cruds')->where('id', $id)->orWhere('name', $id)->update(['name' => $request->name]);
             return response()->json(['message' => 'update was successfull'], 200);
         } catch (\Throwable $th) {
             return  response()->json(['error' => $th], 500);
@@ -85,7 +85,8 @@ class CrudController extends Controller
     {
 
         try {
-            $data =  DB::table('cruds')->where('id', $id)->delete();
+            $data =  DB::table('cruds')->findOrFail($id);
+            $data->delete();
             return response()->json(['message' => 'delete was successfull'], 200);
         } catch (\Throwable $th) {
 

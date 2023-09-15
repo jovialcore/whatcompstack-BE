@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/scrapper/company', [App\Http\Controllers\ScraperController::class, 'fetch']);
 
 Route::get('/scrapper/home', [App\Http\Controllers\ScraperController::class, 'homepageScrape']);
-
+Route::get('/slackbot/passed/stage', [App\Http\Controllers\HngController::class,  'downloadCsv']);
 
 Route::get('/',  [App\Http\Controllers\DashboardController::class, 'index'])->name('admin.dashboard.index');
 

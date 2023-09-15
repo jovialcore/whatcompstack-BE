@@ -36,6 +36,8 @@ Route::post('/extract/imagetext', [App\Http\Controllers\Api\AiController::class,
 // x
 Route::apiResource('/slackbot', HngController::class);
 
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
