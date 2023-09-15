@@ -6,6 +6,7 @@ use App\Exports\XcrudExcel;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
@@ -257,7 +258,7 @@ class HngController extends Controller
      */
     public function downloadCsv()
     {
-        return $this->getCSVFile() ?? 'it is null';
+        return Storage::download('passedStage3.csv');
     }
 
     /**
