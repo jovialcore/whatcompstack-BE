@@ -23,8 +23,8 @@ class CompanyResource extends JsonResource
             'ceo_contact' => $this->ceo_contact,
             'cto_contact' => $this->cto_contact,
             'cto_name' => $this->cto_name,
-            'hr' => $this->hr,
-            'hr' => $this->hr_contact,
+            'hr_name' => $this->hr,
+            'hr_contact' => $this->hr_contact,
             'logo' => $this->logo,
 
             'stack_be_plang' => $this->plangs->map(function ($item) {
