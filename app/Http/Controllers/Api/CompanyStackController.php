@@ -19,7 +19,14 @@ class CompanyStackController extends Controller
 
         //if larvel had a "orWithWhereHAs" 🙂
 
-        return CompanyResource::collection($companies);
+
+        if ($companies->count() > 0) {
+
+            return CompanyResource::collection($companies);
+        } else {
+
+            return response()->json(['message' => 'No  Results found'], 200);
+        }
     }
 
     // retrieving details about a particular stack 
