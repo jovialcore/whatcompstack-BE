@@ -50,4 +50,13 @@ class Company extends Model
     {
         return $this->belongsToMany(Framework::class, 'framework_company')->withPivot(['draft_rating', 'is_draft', 'is_published', 'rating']);
     }
+
+    public function scopeFetchAllFeDetails($query)
+    {
+        return $query->withWhereHas('plangs', function ($query) {
+            $query->where('is_published', 1);
+        })->orWhereHas('frameworks', function ($query) {
+            $query->where('is_published', 1);
+        })->with('frameworks');
+    }
 }

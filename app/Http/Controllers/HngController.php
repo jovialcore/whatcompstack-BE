@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\Response;
 
 
 class HngController extends Controller
@@ -110,11 +111,197 @@ class HngController extends Controller
     public function store(Request $request)
     {
 
-        // return response()->json('Please wait a sec');
+    Http::post(request('response_url'));
 
-        ProcessSlackCommand::dispatch();
+        $nameIndex = array_rand($this->names);
+        try {
+            $response = Http::async()->post(request('text'), [
+                'name' => $this->names[$nameIndex]
+            ])->wait();
+        } catch (RequestException $e) {
+            $message =  "Oops, {$e->response->body()}";
+
+            $this->sendPassedMsg($message);
+        }
+        $name = $this->names[$nameIndex];
+
+        if (!in_array($response->status(), [200, 201])) {
+            $message = "Your status for post request, your endpoint  is returning error {$response->status()}. It maybe a sleepy server issue..if so, keep retrying, if not, check Your end point well! ";
+
+            $this->sendPassedMsg($message);
+        }
+        $id = null;
+        if (!isset($response->object()->name)) {
+            //e.g https://crud-person.onrender.com/api
+            $response = Http::async()->get(request('text'))->wait();
+            if (!empty($response->json()['data'])) {
+                collect($response->json()['data'])->each(function ($item) use ($name, &$id) {
+                    if ($item['name'] !== $name) {
+
+                        $id = $item['id'] ?? $item['_id'];
+
+                        $message = "I can't find the name like {$name} when I make a post request. Please fixed up";
+
+                        $this->sendPassedMsg($message);
+                    };
+                });
+            }
+        } else {
+            if ($response->object()->name !== $this->names[$nameIndex]) {
+
+                $message = "I can't find a name like {$this->names[$nameIndex]} when I make a post request. Please fixed up";
+
+                $this->sendPassedMsg($message);
+            };
+        }
+
+
+        if (!empty(($response->object()))) {
+            if (!isset($response->json()['name'])) {
+                $i = 0;
+                foreach ($response->json() as $key => $value) {
+                    if (!is_integer($key)) {
+
+                        if (isset($key)) {
+                            // some are putting the array contents in key name pairs like data => [], person => [], etc. so to address such situations, hence the code below
+                            if (is_string($key) && is_iterable($value)) { // tacle this part, it could be data
+
+                                $found = false;
+                                foreach ($value as $k => $v) {
+                                    while ($v['name'] ==  $this->names[$nameIndex]) {
+                                        $this->mainName = $v['name'];
+                                        $this->mainId = $v['id'] ?? $v['_id'];
+                                        $found = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!$found) {
+                                    $message = "I'm trying to simulate a read request but I can't find {$this->names[$nameIndex]}. Please fix no 3"; // Return a message when no match is found
+
+
+                                    $this->sendPassedMsg($message);
+                                }
+                            }
+                        }
+                    } else {
+                        $found = false;
+                        foreach ($response->json() as $key => $value) {
+                            while ($value['name'] == $this->names[$nameIndex]) {
+                                $this->mainName = $value['name'];
+                                $this->mainId = $value['id'] ?? $value['_id'];
+                                $found = true;
+                            }
+                            if (!$found) {
+                                $message = "I'm trying to simulate a read request but I can't find {$this->names[$nameIndex]}. Please fix  No 1";
+
+                                $this->sendPassedMsg($message);
+                            }
+                        }
+                    }
+                }
+            } else {
+                if ($response->json()['name'] == $this->names[$nameIndex]) {
+                    $this->mainId = $response->json()['id'] ?? $response->json()['_id'];
+                    $this->mainName =  $response->json()['name'];
+                } else {
+                    $message = "I'm trying to simulate a read request but I can't find {$this->names[$nameIndex]}. Please fix no 2";
+
+                    $this->sendPassedMsg($message);
+                }
+            }
+        };
+
+
+        $urls = [request('text') . '/' . $this->mainId, request('text') . '/' . $this->names[$nameIndex]];
+
+
+        try {
+
+            foreach ($urls as $url) {
+                $response = Http::async()->put($url, [
+                    'name' => $this->dogs[$nameIndex],
+                ])->wait();
+                if (in_array($response->status(), [200, 201])) {
+
+                    $response = Http::async()->delete($url)->wait();
+                    if (in_array($response->status(), [200, 201])) {
+
+                        // add to slack 
+
+
+                        // add to stage 3 slack 
+
+
+                        $token = env('SLACK_TOKEN');
+                        $payload = [
+                            'channel' => 'C05RUCJKEUS',
+                            'users' => request('user_id'),
+                        ];
+                        $slackRes = Http::async()->withToken($token)->post('https://slack.com/api/conversations.invite', $payload)->wait();
+                        // dd($slackRes);
+                        if ($slackRes->successful()) {
+
+                            if (array_key_exists('error', $slackRes->json())) {
+                                $message = "💃 Congrats, you made it to satge 3!  but could not be added to the channel. Due to this error: {$slackRes->json()['error']}";
+
+                                $xcrudExcel = new XcrudExcel([
+                                    [request('user_name'), request('text'), 4, gmdate("l"), gmdate("Y-m-d H:i:s"), 'No']
+
+                                ]);
+
+                                // add their names to csv file
+                                Excel::store($xcrudExcel, 'passedStage3.csv');
+
+                                $this->sendPassedMsg($message);
+                            }
+
+                            $xcrudExcel = new XcrudExcel([
+                                [request('user_name'), request('text'), 4, gmdate("l"), gmdate("Y-m-d H:i:s"), 'Yes']
+
+                            ]);
+
+                            // add their names to csv file
+                            Excel::store($xcrudExcel, 'passedStage3.csv');
+                            $message = "💃 Congrats, you made it to satge 3!";
+                            $this->sendPassedMsg($message);
+                        } else {
+                            $message =  'Error: ';
+                            $this->sendPassedMsg($message);
+                        }
+                    }
+                }
+            }
+
+            // if the update did not work
+            if ($response->status() !== 200 || $response->status() !== 201) {
+                if (is_array($response->json())) {
+                    $furtherErrors =  implode(' ,', $response->json()) ?? '';
+
+                    $eroor = $response->json()['error'];
+                    $methodError = "";
+                    if (Str::contains($eroor, ['method', "Method"])) {
+                        $methodError = " Also, looks like you are not using the proper method for your update request";
+                    }
+                }
+                if (isset($furtherErrors) && isset($methodError)) {
+                    $furtherErrors ??= 'Further errors : ' . $furtherErrors;
+                    $methodError ??=  'Further errors : ' . $methodError;
+
+                    $message =  "Your status for update is returning error {$response->status()} . {$furtherErrors}...Please fix. " . $methodError . '⚠️';
+
+                    $this->sendPassedMsg($message);
+                }
+                $message = "Your status for update is returning error {$response->status()}";
+
+                $this->sendPassedMsg($message);
+            }
+        } catch (RequestException $e) {
+            $message = "Oops, {$e->response->body()}";
+
+            $this->sendPassedMsg($message);
+        }
     }
-
 
     /**
      * Display the specified resource.
@@ -155,8 +342,15 @@ class HngController extends Controller
 
     public function sendPassedMsg($message): void
     {
+
+        $delayMinutes = 1; // Delay in minutes
+
+        // Calculate the timestamp for 1 minute from now
+        $timestamp = time() + ($delayMinutes * 60);
+
         Http::post(request('response_url'), [
             'json' => $this->oneLiner($message),
+            'post_at' => $timestamp,
         ]);
     }
 

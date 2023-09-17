@@ -14,7 +14,9 @@ class CompanyStackController extends Controller
 
     public function index(Request $req, Company $company)
     {
-        $companies  = $company::withWhereHas('plangs')->orWhereHas('frameworks')->with('frameworks')->paginate(10);
+        $companies  = $company::FetchAllFeDetails()->paginate(10);
+
+
         //if larvel had a "orWithWhereHAs" 🙂
 
         return CompanyResource::collection($companies);
@@ -25,11 +27,11 @@ class CompanyStackController extends Controller
     {
         $company = new Company();
 
-        $companyStack = $company->where('id', $id)->first();
+        $companyStack = $company->FetchAllFeDetails()->find($id);
 
         if ($companyStack) {
 
-            return response()->json(['company_details' =>  $companyStack]);
+            return new CompanyResource($companyStack);
         } else {
 
             return response()->json(['message' => 'No  details for this company yet'], 200);
