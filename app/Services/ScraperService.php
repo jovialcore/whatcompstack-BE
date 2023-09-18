@@ -245,7 +245,6 @@ class ScraperService
 
                     // just update the rating coulmn on pivot table                       // add plus one to the rating  column
 
-
                     $company->plangs()->updateExistingPivot($progrLang->id, ['draft_rating' => $progrLang->pivot->draft_rating + 1, 'is_draft' => 1, 'is_published' => 0]);
 
                     // if there are any frameworks and they are what we had before ? do the following
@@ -263,8 +262,7 @@ class ScraperService
                     }
                 } else {
                     // this is not doing anything
-
-                    $company->plangs()->attach($progrLang->id, ['rating' => 0]);
+                    $company->plangs()->attach($progrLang->id, ['draft_rating' => 1, 'is_draft' => 1, 'is_published' => 0]);
                 }
             }
         } else {

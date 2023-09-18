@@ -21,7 +21,7 @@ class CompanyTableSeeder extends Seeder
             'name' => 'PayStack',
             'company_url' => "https://paystack.com/",
             'stack_be' => ['php', 'nodejs', 'java', 'rubyonrails'],
-            'stack_fe' => ['javascript', 'react', 'vuejs', 'svelte'],
+            'stack_fe' => ['React', 'Vuejs', 'svelte'],
             'devops' =>  ['azure', 'digitalOcean', 'heroku'],
             'database_driver' => ['mariadb'],
             'ceo' => 'Ox',
