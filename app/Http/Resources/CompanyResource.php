@@ -33,6 +33,15 @@ class CompanyResource extends JsonResource
             'stack_be_framework' => $this->frameworks->map(function ($item) {
                 return ['php' => [$item->name => ['rating' => $item->pivot->rating]]];
             }),
+            'stack_fe_plang' => [
+                'React.js' => ['rating' => 2],
+                'Vue.js' => ['rating' => 3],
+                'Svelete' => ['rating' =>4],
+                'Angular' => ['rating' => 6],
+                'Jquery' => ['rating' => 2],
+                'Next.js' => ['rating' => 1],
+            ]
+
         ];
     }
 }
