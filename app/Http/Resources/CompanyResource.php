@@ -32,7 +32,7 @@ class CompanyResource extends JsonResource
                 return [$item->name => ['rating' => $item->pivot->rating]];
             }),
             'stack_be_framework' => $this->frameworks->map(function ($item) {
-                return ['php' => [$item->name => ['rating' => $item->pivot->rating]]];
+                return [$item->name => ['rating' => $item->pivot->rating]];
             }),
             // 'stack_fe_plang' =>  response()->json(
             //     [
