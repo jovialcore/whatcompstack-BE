@@ -29,6 +29,9 @@ Route::prefix('/dashboard')->group(function () {
 
     Route::get('/preview/soruced-results/{company}',  [App\Http\Controllers\DataControlController::class, 'preview'])->name('admin.preview.results');
 
+
+    Route::get('/companies/add',  [App\Http\Controllers\DataControlController::class, 'index'])->name('admin.company.add');
+
     Route::post('/preview/confirm/results/{company}',  [App\Http\Controllers\DataControlController::class, 'confirmResults'])->name('admin.preview.result.confirm');
 });
 

@@ -11,6 +11,8 @@ use App\Models\Stack;
 class DataControlService
 {
 
+    // I return mostly arrays, bool, in the service class, anyother thing will be returned except mentioned will be in controller 
+
     public function index(): array
     {
         $companies = Company::get(['id', 'name']);
