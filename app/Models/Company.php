@@ -26,6 +26,9 @@ class Company extends Model
         'hr_contact',
         'testimonials',
         'salary_range',
+        'logo',
+        'about',
+        'url',
     ];
 
     protected $casts = [

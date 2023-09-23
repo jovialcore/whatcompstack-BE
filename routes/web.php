@@ -32,6 +32,10 @@ Route::prefix('/dashboard')->group(function () {
 
     Route::get('/companies/add',  [App\Http\Controllers\CompanyController::class, 'create'])->name('admin.company.add');
 
+    Route::get('/companies',  [App\Http\Controllers\CompanyController::class, 'index'])->name('admin.company.index');
+
+    Route::post('/companies/store',  [App\Http\Controllers\CompanyController::class, 'store'])->name('admin.company.store');
+
     Route::post('/preview/confirm/results/{company}',  [App\Http\Controllers\DataControlController::class, 'confirmResults'])->name('admin.preview.result.confirm');
 });
 

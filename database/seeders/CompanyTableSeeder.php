@@ -19,7 +19,7 @@ class CompanyTableSeeder extends Seeder
 
         Company::create([
             'name' => 'PayStack',
-            'company_url' => "https://paystack.com/",
+            'url' => "https://paystack.com/",
             'stack_be' => ['php', 'nodejs', 'java', 'rubyonrails'],
             'stack_fe' => ['React', 'Vuejs', 'svelte'],
             'devops' =>  ['azure', 'digitalOcean', 'heroku'],
@@ -38,7 +38,7 @@ class CompanyTableSeeder extends Seeder
 
         Company::create([
             'name' => 'EdenLife',
-            'company_url' => "https://ouredenlife.com/",
+            'url' => "https://ouredenlife.com/",
             'stack_be' => ['php', 'nodejs', 'java', 'rubyonrails'],
             'stack_fe' => ['javascript', 'react', 'vuejs', 'svelte'],
             'devops' =>  ['azure', 'digitalOcean', 'heroku'],
@@ -58,7 +58,7 @@ class CompanyTableSeeder extends Seeder
 
         Company::create([
             'name' => 'Chowdeck',
-            'company_url' => "https://chowdeck.com/",
+            'url' => "https://chowdeck.com/",
             'stack_be' => ['python', 'nodejs', 'java', 'rubyonrails'],
             'stack_fe' => ['javascript', 'react', 'vuejs', 'svelte'],
             'devops' => ['digitalOcean', 'heroku'],
@@ -79,7 +79,7 @@ class CompanyTableSeeder extends Seeder
 
         Company::create([
             'name' => 'FlutterWave',
-            'company_url' => "https://www.flutterwave.com/",
+            'url' => "https://www.flutterwave.com/",
             'stack_be' => [ 'java', 'rubyonrails'],
             'stack_fe' => [ 'vuejs', 'svelte'],
             'devops' =>['digitalOcean'],
