@@ -148,8 +148,8 @@
                             </a>
 
                             <ul class="menu-sub">
-                                <li class="menu-item ">
-                                    <a href="layouts-without-menu.html  " class="menu-link">
+                                <li class="menu-item {{ request()->routeIs('admin.company.index') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.company.index') }}" class="menu-link">
                                         <div data-i18n="Without menu">View Companies</div>
                                     </a>
                                 </li>
