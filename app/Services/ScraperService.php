@@ -240,7 +240,7 @@ class ScraperService
         if ($company->plangs->count() > 0) {
             foreach ($company->plangs as $progrLang) {
 
-                if (array_key_exists($progrLang->name,php $k)) {
+                if (array_key_exists($progrLang->name, $k)) {
 
 
                     // just update the rating coulmn on pivot table                       // add plus one to the rating  column

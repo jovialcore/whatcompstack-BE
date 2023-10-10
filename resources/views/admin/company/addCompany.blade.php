@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('content')
+    @push('select2style')
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    @endpush
     <div class="col-md-10 mx-auto">
 
         <div class="card mb-4">
@@ -92,4 +95,9 @@
             </div>
         </div>
     </div>
+
+
+    @push('select2style')
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    @endpush
 @endsection

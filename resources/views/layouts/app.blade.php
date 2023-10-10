@@ -54,6 +54,8 @@
     <!-- Config: Mandatory theme config file contains global vars & default theme options. Set your preferred theme option in this file. -->
     <script src="{{ asset('assets/js/config.js') }}"></script>
 
+    @stack('select2style')
+
 </head>
 
 <body>
@@ -626,6 +628,8 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    @stack('select2script')
 
 </body>
 

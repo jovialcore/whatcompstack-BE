@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="col-md-10 mx-auto">
+    <div class="col-md-11 mx-auto">
         <!-- Striped Rows -->
         <div class="card">
             <h5 class="card-header">Striped rows</h5>
@@ -8,10 +8,10 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Project</th>
-                            <th>Client</th>
-                            <th>Users</th>
-                            <th>Status</th>
+                            <th>Company</th>
+                            <th>Company url</th>
+                            <th>logo</th>
+                           
                             <th>Actions</th>
                         </tr>
                     </thead>

@@ -14,11 +14,13 @@ class CompanyController extends Controller
 
     public function index(): View
     {
+
         return  view('admin.company.index');
     }
 
     public function create(): View
     {
+
         return  view('admin.company.addCompany');
     }
 
@@ -38,10 +40,13 @@ class CompanyController extends Controller
             'logo' => 'mimes:png,jpeg',
         ]);
 
-        $filePath = $request->file('logo')->storeAs('Company logos', $request->name . '.' . $request->file('logo')->extension());
+        $companyData = $request->all();
 
-        $companyData = $request->except('logo');
-        $companyData['logo'] = $filePath;
+        if ($request->has('logo')) {
+            $filePath = $request->file('logo')->storeAs('Company logos', $request->name . '.' . $request->file('logo')->extension());
+            $companyData = $request->except('logo');
+            $companyData['logo'] = $filePath;
+        }
 
         Company::create($companyData);
 
