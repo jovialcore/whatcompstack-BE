@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Services\CompanyService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -11,11 +12,19 @@ use Illuminate\Support\Facades\Storage;
 class CompanyController extends Controller
 {
 
+    protected $companyService;
+
+
+    public function __construct()
+    {
+        $this->companyService = new CompanyService;
+    }
 
     public function index(): View
     {
-
-        return  view('admin.company.index');
+        $companies =  $this->companyService->getAllCompanies();
+     
+        return  view('admin.company.index', 'companies');
     }
 
     public function create(): View
