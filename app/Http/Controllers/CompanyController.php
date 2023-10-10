@@ -22,14 +22,14 @@ class CompanyController extends Controller
 
     public function index(): View
     {
+
         $companies =  $this->companyService->getAllCompanies();
-     
-        return  view('admin.company.index', 'companies');
+
+        return  view('admin.company.index', $companies);
     }
 
     public function create(): View
     {
-
         return  view('admin.company.addCompany');
     }
 
@@ -40,7 +40,7 @@ class CompanyController extends Controller
         $request->validate([
             'name' => 'required',
             'about' => 'required',
-            'url' => 'url',
+            'url' => 'url|unique:companies,url',
             'ceo_name' => 'string|nullable',
             'cto_contact' => 'url|nullable',
             'cto_name' => 'string|nullable',

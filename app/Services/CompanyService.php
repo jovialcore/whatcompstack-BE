@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\DB;
 class CompanyService
 {
 
-
     public function getAllCompanies(): array
     {
         $companies = Company::all();
