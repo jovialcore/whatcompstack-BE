@@ -34,44 +34,48 @@
                             Frontend
                         </button>
                     </li>
-             
+
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="navs-top-backend" role="tabpanel">
 
-                        <p>Display content from your connected accounts on your site</p>
-                        <!-- Connections -->
-                        @foreach ($company->plangs as $plang)
-                            <div class="d-flex mb-3">
-                                <div class="flex-shrink-0">
-                                    <img src="{{ asset('/assets/img/icons/brands/google.png') }}" alt="google"
-                                        class="me-3" height="30" />
-                                </div>
-                                <div class="flex-grow-1 row">
-                                    <div class="col-9 mb-sm-0 mb-2">
-                                        <h6 class="mb-0">{{ $plang->name }}</h6>
-                                        <small class="text-muted">Rated {{ $plang->pivot->rating }}</small>
+
+                        @if (count($company->plangs) > 0)
+                            @foreach ($company->plangs as $plang)
+                                <div class="d-flex mb-3">
+                                    <div class="flex-shrink-0">
+                                        <img src="{{ asset('/assets/img/icons/brands/google.png') }}" alt="google"
+                                            class="me-3" height="30" />
                                     </div>
-                                    <div class="col-3 text-end">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input float-end" type="checkbox" role="switch" />
+                                    <div class="flex-grow-1 row">
+                                        <div class="col-9 mb-sm-0 mb-2">
+                                            <h6 class="mb-0">{{ $plang->name }}</h6>
+                                            <small class="text-muted">Rated {{ $plang->pivot->rating }}</small>
+                                        </div>
+                                        <div class="col-3 text-end">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input float-end" type="checkbox" role="switch" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        @else
+                        <p>No Stack yet </p>
+                        @endif
 
-                        <!-- /Connections -->
+                      
+
 
                     </div>
 
                     <div class="tab-pane fade" id="navs-top-profile" role="tabpanel">
                         <p>
-                           No stack for frontend for now 
+                            No stack for frontend for now
                         </p>
-                      
+
                     </div>
-              
+
                 </div>
             </div>
         </div>
