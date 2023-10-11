@@ -36,6 +36,8 @@ Route::prefix('/dashboard')->group(function () {
 
     Route::post('/companies/store',  [App\Http\Controllers\CompanyController::class, 'store'])->name('admin.company.store');
 
+    Route::get('/companies/show/{id}',  [App\Http\Controllers\CompanyController::class, 'show'])->name('admin.company.show');
+
     Route::post('/preview/confirm/results/{company}',  [App\Http\Controllers\DataControlController::class, 'confirmResults'])->name('admin.preview.result.confirm');
 });
 

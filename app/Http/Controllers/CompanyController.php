@@ -42,9 +42,10 @@ class CompanyController extends Controller
         return to_route('admin.company.index');
     }
 
-    public function show(int $id): RedirectResponse
+    public function show(int $id): View
     {
+
         $company = $this->companyService->showCompany($id);
-        return to_route('admin.company.show', $company);
+        return view('admin.company.show', $company);
     }
 }
