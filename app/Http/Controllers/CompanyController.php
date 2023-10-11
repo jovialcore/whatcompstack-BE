@@ -37,27 +37,8 @@ class CompanyController extends Controller
     public function store(Request $request, Company $company): RedirectResponse
     {
 
-        $request->validate([
-            'name' => 'required',
-            'about' => 'required',
-            'url' => 'url|unique:companies,url',
-            'ceo_name' => 'string|nullable',
-            'cto_contact' => 'url|nullable',
-            'cto_name' => 'string|nullable',
-            'hr_name' => 'string',
-            'hr_contact' => 'url |nullable',
-            'logo' => 'mimes:png,jpeg',
-        ]);
+        $this->companyService->storeCompanyData($request, $company);
 
-        $companyData = $request->all();
-
-        if ($request->has('logo')) {
-            $filePath = $request->file('logo')->storeAs('Company logos', $request->name . '.' . $request->file('logo')->extension());
-            $companyData = $request->except('logo');
-            $companyData['logo'] = $filePath;
-        }
-
-        Company::create($companyData);
 
         return to_route('admin.company.index');
     }
