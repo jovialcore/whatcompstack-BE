@@ -7,6 +7,7 @@ use App\Services\CompanyService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 
 class CompanyController extends Controller
@@ -36,10 +37,14 @@ class CompanyController extends Controller
 
     public function store(Request $request, Company $company): RedirectResponse
     {
-
         $this->companyService->storeCompanyData($request, $company);
 
-
         return to_route('admin.company.index');
+    }
+
+    public function show(int $id): RedirectResponse
+    {
+        $company = $this->companyService->showCompany($id);
+        return to_route('admin.company.show', $company);
     }
 }

@@ -35,7 +35,6 @@ class DataControlService
     }
 
 
-
     private function confirmResultForFramework($company): bool
     {
         $company  = Company::where('name', $company)->with('frameworks')->first();
@@ -56,7 +55,7 @@ class DataControlService
         }
 
         // suprisingly, this saving approach can track if a record has been updted before--even if you run this function before,it has an update it will return 0 ( reason being that it has been updated before)---nicee 
-
+        
         return  $updateForPlang ?? false;
     }
 }

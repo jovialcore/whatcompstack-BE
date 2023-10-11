@@ -57,6 +57,7 @@ class DataControlController extends Controller
 
 
         $scraper = new ScraperService($request->input('company'), $request->input('data_source'), $request->input('stack'));
+        
         $scraper->dataSource();
 
         return to_route('admin.preview.results', ['company' => $request->input('company')]);

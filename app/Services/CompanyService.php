@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\Company;
@@ -20,8 +22,6 @@ class CompanyService
 
     public function storeCompanyData(Request $request, Company $company): Company
     {
-
-
         $request->validate([
             'name' => 'required',
             'about' => 'required',
@@ -46,5 +46,11 @@ class CompanyService
         } catch (\Exception $e) {
             return $e;
         }
+    }
+
+    public function showCompany(int $id): Company
+    {
+        $company = Company::find($id);
+        return $company;
     }
 }
