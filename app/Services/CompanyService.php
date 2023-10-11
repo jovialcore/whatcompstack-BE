@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Models\Company;
+use App\Traits\companyPreviewTrait;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ use Illuminate\Validation\ValidationException;
 class CompanyService
 {
 
+    use companyPreviewTrait;
     public function getAllCompanies(): array
     {
         $companies = Company::all();
@@ -50,7 +52,7 @@ class CompanyService
 
     public function showCompany(int $id): Company
     {
-        $company = Company::find($id);
+        $company = $this->companyWithTechData()->find($id);
         return $company;
     }
 }

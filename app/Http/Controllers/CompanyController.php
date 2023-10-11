@@ -46,6 +46,9 @@ class CompanyController extends Controller
     {
 
         $company = $this->companyService->showCompany($id);
-        return view('admin.company.show', $company);
+
+
+    
+        return view('admin.company.show', ['company' => $company ]);
     }
 }
