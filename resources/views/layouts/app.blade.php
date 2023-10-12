@@ -157,7 +157,7 @@
                             <ul class="menu-sub">
                                 <li class="menu-item {{ request()->routeIs('admin.company.add') ? 'active' : '' }}">
                                     <a href="{{ route('admin.company.add') }}" class="menu-link">
-                                        <div data-i18n="Without menu">View Sources</div>
+                                        <div data-i18n="Without menu">Add Companies</div>
                                     </a>
                                 </li>
                             </ul>
