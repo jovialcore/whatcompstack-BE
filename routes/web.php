@@ -39,6 +39,11 @@ Route::prefix('/dashboard')->group(function () {
     Route::get('/companies/{id}/show',  [App\Http\Controllers\CompanyController::class, 'show'])->name('admin.company.show');
 
     Route::post('/preview/confirm/results/{company}',  [App\Http\Controllers\DataControlController::class, 'confirmResults'])->name('admin.preview.result.confirm');
+
+
+    //source
+
+    Route::get('/source/create', [App\Http\Controllers\DataSourceController::class, 'create'])->name('admin.source.create');
 });
 
 

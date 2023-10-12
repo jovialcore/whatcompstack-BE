@@ -132,19 +132,16 @@
                             </a>
                         </li>
 
-                        <!-- Scarping -->
+
                         <li class="menu-item  {{ request()->routeIs('admin.dataControl.index') ? 'active' : '' }}">
                             <a href="{{ route('admin.dataControl.index') }}" class=" menu-link ">
                                 <i class="menu-icon tf-icons bx bx-cube-alt"></i>
                                 <div data-i18n="Analytics">Data Control</div>
                             </a>
                         </li>
-                        <!-- / Scarping -->
 
-                        <!-- Layouts -->
                         <li class="menu-item  ">
-                            <a href="javascript:void(0);"
-                                class="menu-link menu-toggle">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
                                 <i class="menu-icon tf-icons bx bx-layout"></i>
                                 <div data-i18n="Layouts">Companies</div>
                             </a>
@@ -165,6 +162,33 @@
                                 </li>
                             </ul>
                         </li>
+
+
+                        <li class="menu-item  ">
+
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+
+                                <i class="menu-icon bx bxl-baidu "></i>
+                                <div data-i18n="Layouts">Source</div>
+                            </a>
+
+                            <ul class="menu-sub">
+                                <li class="menu-item {{ request()->routeIs('admin.source.create') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.source.create') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Add Source</div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- I want to become a disciplined successful accomplished  -->
+                            <ul class="menu-sub">
+                                <li class="menu-item {{ request()->routeIs('admin.company.add') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.company.add') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Add Companies</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
 
                         {{-- <li class="menu-header small text-uppercase">
                             <span class="menu-header-text">Page</span>
