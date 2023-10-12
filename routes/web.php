@@ -44,6 +44,8 @@ Route::prefix('/dashboard')->group(function () {
     //source
 
     Route::get('/source/create', [App\Http\Controllers\DataSourceController::class, 'create'])->name('admin.source.create');
+    Route::get('/source/index', [App\Http\Controllers\DataSourceController::class, 'index'])->name('admin.source.index');
+    Route::post('/source/store', [App\Http\Controllers\DataSourceController::class, 'store'])->name('admin.source.store');
 });
 
 

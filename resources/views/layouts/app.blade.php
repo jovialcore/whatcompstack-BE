@@ -157,7 +157,7 @@
                             <ul class="menu-sub">
                                 <li class="menu-item {{ request()->routeIs('admin.company.add') ? 'active' : '' }}">
                                     <a href="{{ route('admin.company.add') }}" class="menu-link">
-                                        <div data-i18n="Without menu">Add Companies</div>
+                                        <div data-i18n="Without menu">View Sources</div>
                                     </a>
                                 </li>
                             </ul>
@@ -173,6 +173,15 @@
                             </a>
 
                             <ul class="menu-sub">
+                                <li class="menu-item {{ request()->routeIs('admin.source.index') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.source.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">View Sources</div>
+                                    </a>
+                                </li>
+                            </ul>
+
+                        
+                            <ul class="menu-sub">
                                 <li class="menu-item {{ request()->routeIs('admin.source.create') ? 'active' : '' }}">
                                     <a href="{{ route('admin.source.create') }}" class="menu-link">
                                         <div data-i18n="Without menu">Add Source</div>
@@ -180,13 +189,7 @@
                                 </li>
                             </ul>
                             <!-- I want to become a disciplined successful accomplished  -->
-                            <ul class="menu-sub">
-                                <li class="menu-item {{ request()->routeIs('admin.company.add') ? 'active' : '' }}">
-                                    <a href="{{ route('admin.company.add') }}" class="menu-link">
-                                        <div data-i18n="Without menu">Add Companies</div>
-                                    </a>
-                                </li>
-                            </ul>
+
                         </li>
 
 

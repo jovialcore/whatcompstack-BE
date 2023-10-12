@@ -16,6 +16,14 @@ class DataSourceController extends Controller
     {
         $this->dataSourceService = new DataSourceService;
     }
+
+
+    public function index(): View
+    {
+        $sources = $this->dataSourceService->getAllDataSources();
+
+        return view('admin.source.index', ['sources' => $sources]);
+    }
     public function create(): View
     {
         return view('admin.source.create');
@@ -24,7 +32,7 @@ class DataSourceController extends Controller
     public function store(Request $request): RedirectResponse
     {
         if ($this->dataSourceService->addDataSource($request)) {
-            return to_route('admin.source.create');
+            return to_route('admin.source.index');
         }
 
         return to_route('admin.source.create')->with('msg', 'Something went wrong with saving data source');

@@ -14,13 +14,13 @@
 
             <h5 class="card-header">Add Source 🐾 </h5>
             <div class="card-body">
-                <form method="POST" action="{{ route('admin.company.store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('admin.source.store') }}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mb-3">
                         <label class="form-label" for="basic-default-fullname">Source name</label>
                         <input type="text" name="data_source_name" class="form-control" id="basic-default-fullname"
-                            placeholder="www.something.com" value="{{ old('data_source_name') }}">
+                            placeholder="source name" value="{{ old('data_source_name') }}">
                     </div>
 
                     <div class="mb-3">
