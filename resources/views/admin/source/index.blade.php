@@ -26,7 +26,7 @@
                                     <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
                                         <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
                                             class="avatar avatar-xs pull-up" title="Lilian Fuller">
-                                            <img src="{{ $company->logo ?? '' }}" alt="Avatar" class="rounded-circle" />
+                                            <img src="{{ $source->logo }}" alt="Avatar" class="rounded-circle" />
                                         </li>
 
                                     </ul>
@@ -39,8 +39,7 @@
                                             <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item"
-                                                href="{{ route('admin.company.show', $source->id ?? '') }}"><i
+                                            <a class="dropdown-item" href="{{route('admin.company.show', $source->id ?? '') }}"><i
                                                     class="bx bx-edit-alt me-1"></i>View</a>
                                             <a class="dropdown-item" href="javascript:void(0);"><i
                                                     class="bx bx-trash me-1"></i>
@@ -60,4 +59,3 @@
         <!--/ Striped Rows -->
     </div>
 @endsection
-
