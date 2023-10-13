@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Scraper;
 
 use Goutte\Client;
 use Illuminate\Http\Request;
@@ -11,7 +11,7 @@ use App\Models\Framework;
 use App\Models\Plang;
 use DonatelloZa\RakePlus\RakePlus;
 
-class ScraperService
+class ScraperBE
 {
     const published = 2;
     const draft = 1;
