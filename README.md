@@ -8,6 +8,10 @@
 
 ### Sneak Peek of Admin: 
  Some other features are currently under development.
-![watch video]file:///home/jovialcore/Downloads/admin%20layout%20of%20whatcompstack.gif)
+
+![admin layout of whatcompstack](https://github.com/jovialcore/whatcompstack-BE/assets/32295501/287bdc90-ec9c-4be6-a7c0-173422c0d8b1)
+
+
+
 
 
