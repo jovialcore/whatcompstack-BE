@@ -8,4 +8,4 @@
 
 ### Sneak Peek of Admin: 
  Some other features are currently under development.
-[Screencast_from_15-10-2023_15_34_30.webm](https://github.com/jovialcore/whatcompstack-BE/assets/32295501/6178d0c9-1669-4805-af84-2d44598788d1)
+
