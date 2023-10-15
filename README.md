@@ -7,6 +7,8 @@
 ![image](https://github.com/jovialcore/whatcompstack-BE/assets/32295501/0f322691-226d-4671-b779-e64f7aedf413)
 
 ### Sneak Peek of Admin: 
-![video](https://asset.cloudinary.com/chidiebere/2d97f9340a82f23dc48eb5a0419ec9a0)
+
+
+![watch video](https://res.cloudinary.com/chidiebere/video/upload/v1697380682/Screencast_from_15-10-2023_15_34_30.webm)
 
 
