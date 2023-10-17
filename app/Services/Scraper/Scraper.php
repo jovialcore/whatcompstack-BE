@@ -11,7 +11,7 @@ use App\Models\Framework;
 use App\Models\Plang;
 use DonatelloZa\RakePlus\RakePlus;
 
-class ScraperBE
+class Scraper
 {
     const published = 2;
     const draft = 1;
@@ -19,12 +19,16 @@ class ScraperBE
     protected $company;
     protected $dataSource;
     protected $stack;
+    protected  $noOfResultsPerPage;
+    protected $stackOptions = [];
 
-    public function __construct($company, $dataSource, $stack)
+    public function __construct($company, $dataSource, $stack,  $noOfResultsPerPage, $stackOptions)
     {
         $this->company = $company;
         $this->dataSource = $dataSource;
         $this->stack = $stack;
+        $this->noOfResultsPerPage = $noOfResultsPerPage;
+        $this->stackOptions = $stackOptions;
     }
     public function dataSource()
     {
@@ -36,6 +40,7 @@ class ScraperBE
 
         $noOfResultsTracker = 0;
         $noOfResultsPerPage = 17;
+        // $this->noOfResultsPerPage 
         $cc = '';
         $pagination = 1;
         $keyword = "";
@@ -126,8 +131,9 @@ class ScraperBE
         // get the second link that matches the nodes specified 
         $website->filter('p > strong')->each(function ($node) use (&$text, $website) {
 
-            $pattern = '/\b(requirements|nice to haves|requirement|Required competency and skillset to be a Waver|What Your Day to Day Activities Will Be Like:|required|Qualifications|Characteristics | Qualifications Characteristics|What We Look For in You)\b/i';
+            $requirmentBe = implode('|', Backend::getStack('requirement_keywords'));
 
+            $pattern = '/\b(' . $requirmentBe . ')\b/i';
 
             $r =  strtolower($node->text());
 

@@ -5,13 +5,14 @@ namespace App\Helpers;
 
 class Backend
 {
-    public static function getBeStack($type)
+    public static function getStack($type)
     {
-        $p = [
+        $stackDetails = [
             'allstacks' => require(resource_path('StackArray/backendstacks.php')),
             'p_lang' => require(resource_path('StackArray/programming_lang.php')),
             'be_format_for_db' => require(resource_path('StackArray/beformatfordb.php')),
+            'requirement_keywords' => require(resource_path('StackArray/keyword_req.php'))
         ];
-        return $p[$type];
+        return $stackDetails[$type];
     }
 }
