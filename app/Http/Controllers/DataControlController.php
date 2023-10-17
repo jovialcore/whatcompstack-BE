@@ -11,6 +11,8 @@ use App\Traits\companyPreviewTrait;
 use  Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
+use App\Helpers\Backend;
+
 
 class DataControlController extends Controller
 {
@@ -56,10 +58,7 @@ class DataControlController extends Controller
             'data_source' => 'required',
         ]);
 
-
-        $scraper = new Scraper($request->input('company'), $request->input('data_source'), $request->input('stack'));
-        
-        $scraper->dataSource();
+        $this->dataControlService->initiateDataSourcing($request);
 
         return to_route('admin.preview.results', ['company' => $request->input('company')]);
     }

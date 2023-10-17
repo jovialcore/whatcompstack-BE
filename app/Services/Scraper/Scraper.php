@@ -5,7 +5,6 @@ namespace App\Services\Scraper;
 use Goutte\Client;
 use Illuminate\Http\Request;
 
-use App\Helpers\Backend;
 use App\Models\Company;
 use App\Models\Framework;
 use App\Models\Plang;
@@ -87,7 +86,7 @@ class Scraper
                     // sieve the key word 
                 });
             }
-            
+
             if ($noOfResultsTracker   <=  18) {
 
                 $pagination = $pagination + 1;

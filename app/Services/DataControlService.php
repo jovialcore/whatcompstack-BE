@@ -2,11 +2,13 @@
 
 namespace App\Services;
 
+use App\Helpers\Backend;
 use App\Models\Company;
 use App\Models\DataSource;
 use App\Models\Framework;
 use App\Models\Plang;
 use App\Models\Stack;
+use App\Services\Scraper\Scraper;
 
 class DataControlService
 {
@@ -20,6 +22,13 @@ class DataControlService
         $dataSources = DataSource::all();
 
         return  compact('companies', 'stacks', 'dataSources');
+    }
+
+    public function initiateDataSourcing($request)
+    {
+        $scraper = new Scraper($request->input('company'), $request->input('data_source'), $request->input('stack'), new Backend);
+
+        return $scraper->dataSource();
     }
 
     public function confirmResult($company): bool
@@ -55,7 +64,7 @@ class DataControlService
         }
 
         // suprisingly, this saving approach can track if a record has been updted before--even if you run this function before,it has an update it will return 0 ( reason being that it has been updated before)---nicee 
-        
+
         return  $updateForPlang ?? false;
     }
 }
