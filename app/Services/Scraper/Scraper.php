@@ -20,14 +20,14 @@ class Scraper
     protected $dataSource;
     protected $stack;
     protected  $noOfResultsPerPage;
-    protected $stackOptions = [];
+    protected $stackOptions;
 
-    public function __construct($company, $dataSource, $stack,  $noOfResultsPerPage, $stackOptions)
+    public function __construct($company, $dataSource, $stack,   $stackOptions)
     {
         $this->company = $company;
         $this->dataSource = $dataSource;
         $this->stack = $stack;
-        $this->noOfResultsPerPage = $noOfResultsPerPage;
+
         $this->stackOptions = $stackOptions;
     }
     public function dataSource()
@@ -40,7 +40,6 @@ class Scraper
 
         $noOfResultsTracker = 0;
         $noOfResultsPerPage = 17;
-        // $this->noOfResultsPerPage 
         $cc = '';
         $pagination = 1;
         $keyword = "";
@@ -67,7 +66,7 @@ class Scraper
                     $purgedTitles =  strtolower(preg_replace('/[^a-z]/i', ' ', $jobTitles));
 
                     // get the particular keyword, which  in this case, it is "backend"
-                    $keyword = substr($purgedTitles, strpos($purgedTitles, 'backend'));
+                    $keyword = substr($purgedTitles, strpos($purgedTitles,  $this->stack));
 
                     // further extraction to return only one word i.e backend 
                     $keyword = preg_replace("/\s.*/", '', ltrim($keyword));
@@ -75,15 +74,11 @@ class Scraper
                     // click on the job description wit backend 
                     if ($keyword == $this->stack) {
 
-
                         // find the link
                         $link = $node->selectLink($jobTitles)->link();
 
-
                         // click on the link
                         $website = $client->click($link);
-
-
 
                         //  👀  side note or bud:  this stuff loops two times? why ? 👀 
                         $this->fetch($company, $website);
@@ -92,8 +87,7 @@ class Scraper
                     // sieve the key word 
                 });
             }
-
-
+            
             if ($noOfResultsTracker   <=  18) {
 
                 $pagination = $pagination + 1;
@@ -131,7 +125,7 @@ class Scraper
         // get the second link that matches the nodes specified 
         $website->filter('p > strong')->each(function ($node) use (&$text, $website) {
 
-            $requirmentBe = implode('|', Backend::getStack('requirement_keywords'));
+            $requirmentBe = implode('|', $this->stackOptions::getStack('requirement_keywords'));
 
             $pattern = '/\b(' . $requirmentBe . ')\b/i';
 
@@ -148,15 +142,17 @@ class Scraper
             }
         });
         // etract keywords
-        $keywords = RakePlus::create($text, ['.js'], 3)->keywords();
 
+        if ($this->stack == 'backend') {
+            $keywords = RakePlus::create($text, ['.js'], 3)->keywords();
+        }
 
 
         $result = [];
         // get all backend stack 
 
-        $backendArr  =  Backend::getStack('allstacks');
-        $be_format_for_db  =  Backend::getStack('be_format_for_db');
+        $backendArr  = $this->stackOptions::getStack('allstacks');
+        $be_format_for_db  =   $this->stackOptions::getStack('format_for_db');
 
         /** ######    This section is used to select all stacks possible  #######  */
 
@@ -185,8 +181,8 @@ class Scraper
         //array_splice($result, 0); // assuming there is no programming language 
         //lets get frameworks 
 
-        $result[] = 'Spring Boot';
-        $result[] = 'Laravel';
+        // $result[] = 'Spring Boot';
+        // $result[] = 'Laravel';
 
         // $result[] = 'Ruby on Rails';
         // $result[] = 'Django';
@@ -236,7 +232,6 @@ class Scraper
 
         // lets assume we have the Id of the company we want to save
         $company = $company->with('plangs.frameworks.companies', 'frameworks')->where('name', $this->company)->first();
-
 
 
         // dd( $company );

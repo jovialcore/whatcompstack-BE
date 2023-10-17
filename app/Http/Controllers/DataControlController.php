@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Services\DataControlService;
 use Illuminate\Http\Request;
 use App\Services\Scraper\ScraperBE;
+use App\Services\Scraper\Scraper;
 use App\Traits\companyPreviewTrait;
 use  Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -56,7 +57,7 @@ class DataControlController extends Controller
         ]);
 
 
-        $scraper = new ScraperBE($request->input('company'), $request->input('data_source'), $request->input('stack'));
+        $scraper = new Scraper($request->input('company'), $request->input('data_source'), $request->input('stack'));
         
         $scraper->dataSource();
 
