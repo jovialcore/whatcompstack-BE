@@ -124,7 +124,7 @@ class Scraper
         // get the second link that matches the nodes specified 
         $website->filter('p > strong')->each(function ($node) use (&$text, $website) {
 
-            $requirmentBe = implode('|', $this->stackOptions::getStack('requirement_keywords'));
+            $requirmentBe = implode('|', $this->stackOptions['requirement_keywords']);
 
             $pattern = '/\b(' . $requirmentBe . ')\b/i';
 
