@@ -26,7 +26,7 @@ class DataControlService
 
     public function initiateDataSourcing($request)
     {
-        $scraper = new Scraper($request->input('company'), $request->input('data_source'), $request->input('stack'), new Backend);
+               $scraper = new Scraper($request->input('company'), $request->input('data_source'), $request->input('stack'), new Backend);
 
         return $scraper->dataSource();
     }
@@ -43,7 +43,7 @@ class DataControlService
         }
     }
 
-
+    
     private function confirmResultForFramework($company): bool
     {
         $company  = Company::where('name', $company)->with('frameworks')->first();

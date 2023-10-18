@@ -51,7 +51,6 @@ class DataControlController extends Controller
 
         // then this where whatcompanystack comes in !
 
-
         $request->validate([
             'company' => 'required', // actuallly the company id
             'stack' => 'required',
