@@ -13,8 +13,8 @@ use Illuminate\Validation\ValidationException;
 
 class CompanyService
 {
-
     use companyPreviewTrait;
+
     public function getAllCompanies(): array
     {
         $companies = Company::all();

@@ -2,7 +2,8 @@
 
 namespace App\Traits;
 
-use App\Helpers\Backend;
+
+use App\Helpers\StackDetails;
 
 trait SourceTrait
 {
@@ -11,8 +12,8 @@ trait SourceTrait
     {
 
         $stackHelperArr = [
-            'backend' => new Backend,
-            'frontend' => "frontend helper",
+            'backend' => StackDetails::backend($stack),
+            'frontend' => StackDetails::frontend($stack)
         ];
 
         return $stackHelperArr[$stack];
