@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use OpenTelemetry\SDK\Logs\Exporter\ConsoleExporterFactory;
+use OpenTelemetry\SDK\Trace\TracerProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+  
+
     }
 }

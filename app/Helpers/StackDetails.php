@@ -5,7 +5,7 @@ namespace App\Helpers;
 
 class StackDetails
 {
-    public static function backend()
+    public static function backend() : array
     {
         $stackDetails = [
             'allstacks' => require(resource_path('StackArray/backendstacks.php')),
@@ -16,7 +16,7 @@ class StackDetails
         return $stackDetails;
     }
 
-    public static function frontend()
+    public static function frontend() : array
     {
         $stackDetails = [
             'allstacks' => require(resource_path('StackArray/backendstacks.php')),

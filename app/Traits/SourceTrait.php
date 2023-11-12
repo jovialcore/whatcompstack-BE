@@ -8,7 +8,7 @@ use App\Helpers\StackDetails;
 trait SourceTrait
 {
 
-    public  function getStackHelper($stack)
+    public  function getStackHelper(string $stack): array
     {
 
         $stackHelperArr = [

@@ -150,8 +150,8 @@ class Scraper
         $result = [];
         // get all backend stack 
 
-        $backendArr  = $this->stackOptions::getStack('allstacks');
-        $be_format_for_db  =   $this->stackOptions::getStack('format_for_db');
+        $backendArr  = $this->stackOptions['allstacks'];
+        $be_format_for_db  =   $this->stackOptions['format_for_db'];
 
         /** ######    This section is used to select all stacks possible  #######  */
 

@@ -9,12 +9,16 @@
         "aws/aws-sdk-php": "^3.269",
         "donatello-za/rake-php-plus": "^1.0",
         "guzzlehttp/guzzle": "^7.8",
+        "keepsuit/laravel-opentelemetry": "^0.3.2",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "maatwebsite/excel": "^3.1",
+        "open-telemetry/opentelemetry": "^1.0",
+        "open-telemetry/sdk": "^1.0",
         "orhanerday/open-ai": "^4.7",
+        "php-http/httplug": "^2.4",
         "weidner/goutte": "^2.3"
     },
     "require-dev": {
