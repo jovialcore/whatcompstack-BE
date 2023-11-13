@@ -5,11 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Services\DashboardService;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 use OpenTelemetry\API\Globals;
-use OpenTelemetry\SDK\Trace\SpanExporter\ConsoleSpanExporterFactory;
-use OpenTelemetry\SDK\Trace\TracerProviderFactory;
-
+use OpenTelemetry\API\Trace\StatusCode;
 
 
 class DashboardController extends Controller
@@ -30,15 +27,20 @@ class DashboardController extends Controller
 
         $span =  $this->tracer->spanBuilder('first_span')->startSpan();
 
-        $result = random_int(1, 6);
+        try {
+            $result = random_int(1, 6);
 
-        $data = $this->dashboardService->getAppStats();
+            $data = $this->dashboardService->getAppStats();
+        } catch (\Exception $e) {
 
-        $exporter = new  ConsoleSpanExporterFactory;
+            $span->recordException($e)->setStatus(StatusCode::STATUS_ERROR);
+            throw $e;
+        } finally {
+            $span->addEvent('called homepage', ['result' => $result])
+                ->end();
+        }
 
-        $span->addEvent('called the home page', ['result' => $result])
-            ->end();
-       
+
         return view('admin.dashboard', $data);
     }
 }
