@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 
 use App\Services\DashboardService;
+use Exception;
 use Illuminate\Contracts\View\View;
 use OpenTelemetry\API\Globals;
+use OpenTelemetry\API\Trace\SpanKind;
 use OpenTelemetry\API\Trace\StatusCode;
-
+use OpenTelemetry\SDK\Trace\Tracer;
+use OpenTelemetry\SDK\Trace\TracerProvider;
 
 class DashboardController extends Controller
 {
@@ -25,19 +28,21 @@ class DashboardController extends Controller
     public function index(): View
     {
 
-        $span =  $this->tracer->spanBuilder('first_span')->startSpan();
+        $span =  $this->tracer->spanBuilder('first_span')->setSpanKind(SpanKind::KIND_INTERNAL)->startSpan();
 
         try {
+
             $result = random_int(1, 6);
+
+            throw new Exception('an example of an exemption that can be thrown');
 
             $data = $this->dashboardService->getAppStats();
         } catch (\Exception $e) {
 
             $span->recordException($e)->setStatus(StatusCode::STATUS_ERROR);
-            throw $e;
-        } finally {
-            $span->addEvent('called homepage', ['result' => $result])
-                ->end();
+
+            $span->addEvent('called homepage', ['result' => $result]);
+            $span->end();
         }
 
 
