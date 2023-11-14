@@ -9,6 +9,7 @@
         "aws/aws-sdk-php": "^3.269",
         "donatello-za/rake-php-plus": "^1.0",
         "guzzlehttp/guzzle": "^7.8",
+        "keepsuit/laravel-opentelemetry": "^0.3.2",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
