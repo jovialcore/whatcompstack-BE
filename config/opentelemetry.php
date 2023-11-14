@@ -60,7 +60,7 @@ return [
         ],
 
         'http' => [
-            'endpoint' => env('OT_OTLP_HTTP_ENDPOINT', 'http://localhost:4318'),
+            'endpoint' => env('OT_OTLP_HTTP_ENDPOINT', 'https://otel.highlight.io:4318/v1/traces'),
         ],
 
         'grpc' => [
