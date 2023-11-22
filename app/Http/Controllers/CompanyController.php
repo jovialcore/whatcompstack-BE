@@ -16,9 +16,9 @@ class CompanyController extends Controller
     protected $companyService;
 
 
-    public function __construct()
+    public function __construct(CompanyService $companyService)
     {
-        $this->companyService = new CompanyService;
+        $this->companyService = $companyService;
     }
 
     public function index(): View
@@ -46,9 +46,8 @@ class CompanyController extends Controller
     {
 
         $company = $this->companyService->showCompany($id);
+        // dd( $company);
 
-
-    
-        return view('admin.company.show', ['company' => $company ]);
+        return view('admin.company.show', ['company' => $company]);
     }
 }

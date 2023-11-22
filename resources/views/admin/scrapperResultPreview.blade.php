@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
     <div class="col-md-12 ">
-        This page is for previewing data you just scrapped
-        (e.g backened) you just sourced
+        This page is for previewing data you just sourced
+        (e.g backend)
         <!--- if there are no new result -->
         @if ($oldResult->plangs->count() > 0)
             <div class="accordion mt-3" id="accordionExample">
