@@ -36,6 +36,7 @@ class PlangSeeder extends Seeder
             ['id' => 20, 'name' => 'R'],
             ['id' => 19, 'name' => 'Lua'],
             ['id' => 21, 'name' => 'Julia'],
+            ['id' => 22, 'name' => '.NET'],
         ];
 
         foreach ($programmingLanguages as $language) {

@@ -11,5 +11,6 @@ return [
     'Qualifications',
     'Characteristics',
     'Qualifications Characteristics',
-    'What We Look For in You'
+    'What We Look For in You',
+    'Required competency and skillset to be a Waver'
 ];

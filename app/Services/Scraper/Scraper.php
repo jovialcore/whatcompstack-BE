@@ -26,13 +26,12 @@ class Scraper
         $this->company = $company;
         $this->dataSource = $dataSource;
         $this->stack = $stack;
-
         $this->stackOptions = $stackOptions;
     }
     public function dataSource()
     {
 
-        // dd( $this->company );
+
         $company = new  Company();
 
         $client = new Client();
@@ -52,6 +51,7 @@ class Scraper
 
             $isItEndOfPaginationResult = $homepage->filter('.job-list > .job-list-li')->first()->count();
 
+
             if ($noOfResultsTracker < $noOfResultsPerPage) { /// controls no of sections per page 
 
 
@@ -67,12 +67,13 @@ class Scraper
                     // get the particular keyword, which  in this case, it is "backend"
                     $keyword = substr($purgedTitles, strpos($purgedTitles,  $this->stack));
 
+
                     // further extraction to return only one word i.e backend 
                     $keyword = preg_replace("/\s.*/", '', ltrim($keyword));
 
-                    // click on the job description wit backend 
-                    if ($keyword == $this->stack) {
 
+                    // click on the job description that has the keyword backend 
+                    if ($keyword == $this->stack) {
                         // find the link
                         $link = $node->selectLink($jobTitles)->link();
 
@@ -87,18 +88,21 @@ class Scraper
                 });
             }
 
+
+
+
             if ($noOfResultsTracker   <=  18) {
 
                 $pagination = $pagination + 1;
 
-                // dump( 'Page ' . $pagination . ' initiated.  and this is the value of tracker ' . $noOfResultsTracker );
+                dump('Page ' . $pagination . ' initiated.  and this is the value of tracker ' . $noOfResultsTracker);
 
                 if ($isItEndOfPaginationResult === 0) {
 
                     $pagination =  $pagination - 2;
-                    // echo 'this is key word at the end of page ' . $keyword;
+                    dump('this is key word at the end of page ' . $keyword);
 
-                    //echo 'We have reached the maximun no of pages which is ' . $pagination;
+                    dump('We have reached the maximun no of pages which is ' . $pagination);
 
                     return $cc;
 
@@ -180,7 +184,6 @@ class Scraper
         //array_splice($result, 0); // assuming there is no programming language 
         //lets get frameworks 
 
-        // $result[] = 'Spring Boot';
         // $result[] = 'Laravel';
 
         // $result[] = 'Ruby on Rails';
@@ -202,14 +205,16 @@ class Scraper
         $k = [];
 
 
+
         foreach ($result as $key => $value) {
 
             // check if p_lang from scraped results match that of keys in the speculative db format arrangment
             if (array_key_exists($value, $be_format_for_db)) {
-                // the framework
+                // match the framework to the specific language from the scraped results or get the framework
                 $framework = array_intersect($be_format_for_db[$value], $result);
                 // then use the $value i.e programming langauge and assign the returned framework inside the new collector: $k array
                 $k[$value] = $framework;
+
                 // if no programming language are found, that means we have only frameworks, then assign the scrapped framework results to their respective programming languages  
             } else {
                 foreach ($be_format_for_db as $keyy => $fwk) {
@@ -227,27 +232,24 @@ class Scraper
             }
         }
 
-        // dump($k);
 
-        // lets assume we have the Id of the company we want to save
+
         $company = $company->with('plangs.frameworks.companies', 'frameworks')->where('name', $this->company)->first();
 
 
-        // dd( $company );
-
         // if the language is already in the database
+        foreach ($k as  $plangKey => $framework) {
 
-        if ($company->plangs->count() > 0) {
-            foreach ($company->plangs as $progrLang) {
-
-                if (array_key_exists($progrLang->name, $k)) {
-
-
-                    // just update the rating coulmn on pivot table                       // add plus one to the rating  column
+            $progrLangQuery = $company->plangs->where('name', 'Java');
+            if (($company->plangs->count() > 0) && ($company->plangs->pluck('name')->contains($plangKey))) {
+              
+                $progrLang =    $progrLangQuery->first();
+                if ($progrLang) {
+                    // just update the rating coulmn on pivot table        // add plus one to the rating  column
 
                     $company->plangs()->updateExistingPivot($progrLang->id, ['draft_rating' => $progrLang->pivot->draft_rating + 1, 'is_draft' => 1, 'is_published' => 0]);
 
-                    // if there are any frameworks and they are what we had before ? do the following
+                    // if there are any frameworks from scraped results and they are what we had before ? do the following
                     if (!empty($k[$progrLang->name])) {
 
                         // loop through the ssupposedly frameworks that we have
@@ -260,49 +262,30 @@ class Scraper
                             }
                         }
                     }
-                } else {
-                    // this is not doing anything
-                    $company->plangs()->attach($progrLang->id, ['draft_rating' => 1, 'is_draft' => 1, 'is_published' => 0]);
                 }
-            }
-        } else {
-            // if the language does not exist in the database ?
-            $allPlangs = Plang::with('frameworks')->get();
-            foreach ($allPlangs as $plang) {
+            } else {
 
-                // check if the  programming lang from scraped result matches with the one in db
+                $progrLang = Plang::with('frameworks')->where('name', $plangKey)->first();
+                $company->plangs()->attach($progrLang->id, ['draft_rating' => 1, 'is_draft' => 1, 'is_published' => 0]);
 
-                if (array_key_exists($plang->name, $k)) {
-                    // attach a programming language with the company
+                if (isset($framework) && $framework != "" && !is_null($framework)) {
 
-                    $company->plangs()->attach($plang->id, ['draft_rating' => 1, 'is_draft' => 1, 'is_published' => 0]);
+                    foreach ($framework  as $frameworkName) {
 
-                    // attach the  framework under the programmming language
+                        // get the id of the framework that matched
+                        $frameworkMatched =   $progrLang->frameworks->where('name', $frameworkName)->first();
 
-                    if (isset($k[$plang->name]) && $k[$plang->name] != "" && !is_null($k[$plang->name])) {
-
-
-                        foreach ($k[$plang->name]  as $frameworkName) {
-
-                            // get the id of the framework that matched
-
-                            $framework_id = $plang->frameworks->where('name', $frameworkName)->first();
-
-                            if ($framework_id) {
-                                // dd($framework_id);
-                                // attach to compnay_framework table 
-                                $company->frameworks()->attach($framework_id->id, ['draft_rating' => 1, 'is_draft' => 1, 'is_published' => 0]);
-                            } else {
-                                // dump($plang->frameworks);
-                                dd('cant find ' . $frameworkName . ' cos it is related to ' . $plang->name);
-                            }
+                        if ($frameworkMatched) {
+                            // insert to compnay_framework table 
+                            $company->frameworks()->attach($frameworkMatched->id, ['draft_rating' => 1, 'is_draft' => 1, 'is_published' => 0]);
+                        } else {
+                            dd('cant find ' . $frameworkName . ' cos it is related to ' . $plangKey);
                         }
                     }
                 }
+                // if a scraped result have only programming laguages, you should detect the framework
+                // after that, changed the model to use "hasManyThrough-- suggestion
             }
-
-            // if a scraped result have only programming laguages, you should detect the framework
-            // after that, changed the model to use "hasManyThrough
         }
     }
 }
