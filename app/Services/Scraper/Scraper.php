@@ -176,8 +176,6 @@ class Scraper
 
             $matchedKeys = array_keys($backendArr, $keyword); // note that array_keys can act as filters too 
 
-
-            // dump($matchedKeys);
             // push (merge) the matching item to the result  array
             $result = array_merge($result, $matchedKeys);
         }
@@ -200,7 +198,7 @@ class Scraper
         // $result[] = 'Express.js'; 
 
 
-        // dd($result);
+  
         /** ######    Group frameworks into their respective programming languages (as Assoc Array) #######  */
         $k = [];
 
