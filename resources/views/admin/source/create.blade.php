@@ -4,10 +4,6 @@
 
         <div class="card mb-4">
 
-            {{-- @if ($errors->any())
-                {!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
-            @endif --}}
-
             @if ($errors->any())
                 {!! implode('', $errors->all('<div class="alert alert-danger"> :message </div>')) !!}
             @endif
