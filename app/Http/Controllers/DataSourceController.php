@@ -24,7 +24,7 @@ class DataSourceController extends Controller
 
         return view('admin.source.index', ['sources' => $sources]);
     }
-    public function create(): View
+    public function  create(): View
     {
         return view('admin.source.create');
     }

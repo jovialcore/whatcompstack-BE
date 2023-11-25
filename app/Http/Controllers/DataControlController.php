@@ -19,13 +19,12 @@ class DataControlController extends Controller
 
     use companyPreviewTrait;
 
-    protected $dataControlService;
+
     protected $dashBoardService;
 
 
-    public function __construct()
+    public function __construct(protected DataControlService  $dataControlService)
     {
-        $this->dataControlService = new DataControlService;
 
         // unforseen rules, if you are fetching result, your return type should be redirect response
         //if you are fetching results, your return type should as views
@@ -41,7 +40,6 @@ class DataControlController extends Controller
 
     public function initiateDataSourcing(Request  $request): RedirectResponse
     {
-
 
         // upload cv
         // we list companies based on your profile
