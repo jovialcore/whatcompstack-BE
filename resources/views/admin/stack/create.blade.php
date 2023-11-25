@@ -19,7 +19,7 @@
 
                     <div class="mb-3">
                         <label for="exampleFormControlSelect1" class="form-label">Select Company </label>
-                        <select name="plangs[]" class="form-select" id="exampleFormControlSelect1"
+                        <select name="company" class="form-select" id="exampleFormControlSelect1"
                             aria-label="Default select example">
                             @foreach ($allStackInfo['allCompanies'] as $company)
                                 <option value="{{ $company->id }}"> {{ $company->name }} </option>
@@ -30,10 +30,10 @@
 
                     <div class="mb-3">
                         <label for="exampleFormControlSelect1" class="form-label">Programming Language </label>
-                        <select name="frameworks[]" class="form-select stackSelect2MultiPlang" id=""
+                        <select name="plangs[]" class="form-select stackSelect2MultiPlang" id=""
                             aria-label="Default select example" multiple>
-                            @foreach ($allStackInfo['allPlangs'] as $comapany)
-                                <option value="{{ $comapany->id }}"> {{ $comapany->name }} </option>
+                            @foreach ($allStackInfo['allPlangs'] as $plang)
+                                <option value="{{ $plang->id }}"> {{ $plang->name }} </option>
                             @endforeach
 
                         </select>
@@ -41,7 +41,7 @@
 
                     <div class="mb-3">
                         <label for="exampleFormControlSelect1" class="form-label">Programming Language </label>
-                        <select name="company" class="form-select stackSelect2MultiFramework" id=""
+                        <select name="frameworks[]" class="form-select stackSelect2MultiFramework" id=""
                             aria-label="Default select example" multiple>
                             @foreach ($allStackInfo['allFrameworks'] as $framework)
                                 <option value="{{ $framework->id }}"> {{ $framework->name }} </option>

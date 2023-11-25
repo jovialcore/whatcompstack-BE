@@ -24,13 +24,14 @@ class StackController extends Controller
 
         $allStackInfo = $this->stackService->getAllStackInfo();
 
-    
+
         return View('admin.stack.create', ['allStackInfo' => $allStackInfo]);
     }
 
 
 
-    public function store(): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
+        return $this->stackService->store($request);
     }
 }

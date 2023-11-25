@@ -23,18 +23,19 @@ class StackService
     public function store($request): RedirectResponse
     {
 
+      
         $request->validate([
             'frameworks' => 'required|array',
             'plangs' => 'required|array',
-            'company' => 'required|string'
+            'company' => 'required|integer'
         ]);
 
         try {
             $company = Company::findOrFail($request->company);
 
             DB::transaction(function () use ($company, $request) {
-                $company->plangs()->attach($request->plangs);
-                $company->frameworks()->attach($request->framorks);
+                $company->plangs()->attach($request->plangs, ['is_draft' => 0, 'is_published' => 1]);
+                $company->frameworks()->attach($request->frameworks,  ['is_draft' => 0, 'is_published' => 1]);
             });
 
             return redirect()->back()->with('success', 'Data was saved successfully');
