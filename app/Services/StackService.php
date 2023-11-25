@@ -24,19 +24,17 @@ class StackService
     {
 
         $request->validate([
-
             'frameworks' => 'required|array',
             'plangs' => 'required|array',
             'company' => 'required|string'
         ]);
 
-
         try {
             $company = Company::findOrFail($request->company);
 
             DB::transaction(function () use ($company, $request) {
-                $company->plangs()->sync($request->plangs);
-                $company->frameworks()->sync($request->framorks);
+                $company->plangs()->attach($request->plangs);
+                $company->frameworks()->attach($request->framorks);
             });
 
             return redirect()->back()->with('success', 'Data was saved successfully');
