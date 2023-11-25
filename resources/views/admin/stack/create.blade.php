@@ -17,8 +17,8 @@
                     @csrf
                     <div class="mb-3">
                         <label for="exampleFormControlSelect1" class="form-label">Company </label>
-                        <select name="company" class="form-select" id="exampleFormControlSelect1"
-                            aria-label="Default select example">
+                        <select name="company" class="form-select stackSelect2Multi" id="exampleFormControlSelect1"
+                            aria-label="Default select example" multiple>
                             <option value="all"> All companies are here </option>
 
                             <option value="all"> Second company </option>
@@ -44,5 +44,11 @@
 
     @push('select2script')
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+        <script>
+            $(".stackSelect2Multi").select2({
+
+            });
+        </script>
     @endpush
 @endsection
