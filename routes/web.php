@@ -14,10 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/scrapper/company', [App\Http\Controllers\ScraperController::class, 'fetch']);
 
-Route::get('/scrapper/home', [App\Http\Controllers\ScraperController::class, 'homepageScrape']);
-Route::get('/slackbot/passed/stage', [App\Http\Controllers\HngController::class,  'downloadCsv']);
 
 Route::get('/',  [App\Http\Controllers\DashboardController::class, 'index'])->name('admin.dashboard.index');
 
@@ -28,7 +25,6 @@ Route::prefix('/dashboard')->group(function () {
     Route::post('/intialize',  [App\Http\Controllers\DataControlController::class, 'initiateDataSourcing'])->name('admin.datasource.initialize');
 
     Route::get('/preview/soruced-results/{company}',  [App\Http\Controllers\DataControlController::class, 'preview'])->name('admin.preview.results');
-
 
     Route::get('/companies/add',  [App\Http\Controllers\CompanyController::class, 'create'])->name('admin.company.add');
 
@@ -46,6 +42,13 @@ Route::prefix('/dashboard')->group(function () {
     Route::get('/source/create', [App\Http\Controllers\DataSourceController::class, 'create'])->name('admin.source.create');
     Route::get('/source/index', [App\Http\Controllers\DataSourceController::class, 'index'])->name('admin.source.index');
     Route::post('/source/store', [App\Http\Controllers\DataSourceController::class, 'store'])->name('admin.source.store');
+
+
+    //stacks
+
+    Route::get('/stack/create', [App\Http\Controllers\StackController::class, 'create'])->name('admin.stack.create');
+    Route::get('/stack/index', [App\Http\Controllers\StackController::class, 'index'])->name('admin.stack.index');
+    Route::post('/stak/store', [App\Http\Controllers\StackController::class, 'store'])->name('admin.stack.store');
 });
 
 

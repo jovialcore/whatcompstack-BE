@@ -169,6 +169,35 @@
                             <a href="javascript:void(0);" class="menu-link menu-toggle">
 
                                 <i class="menu-icon bx bxl-baidu "></i>
+                                <div data-i18n="Layouts">Stack</div>
+                            </a>
+
+                            <ul class="menu-sub">
+                                <li class="menu-item {{ request()->routeIs('admin.stack.index') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.stack.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">View Stacks</div>
+                                    </a>
+                                </li>
+                            </ul>
+
+
+                            <ul class="menu-sub">
+                                <li class="menu-item {{ request()->routeIs('admin.source.create') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.source.create') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Add Stack</div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- I want to become a disciplined successful accomplished  -->
+
+                        </li>
+
+
+                        <li class="menu-item  ">
+
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+
+                                <i class="menu-icon bx bxl-baidu "></i>
                                 <div data-i18n="Layouts">Source</div>
                             </a>
 
@@ -180,7 +209,7 @@
                                 </li>
                             </ul>
 
-                        
+
                             <ul class="menu-sub">
                                 <li class="menu-item {{ request()->routeIs('admin.source.create') ? 'active' : '' }}">
                                     <a href="{{ route('admin.source.create') }}" class="menu-link">
