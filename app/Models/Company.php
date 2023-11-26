@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Psy\CodeCleaner\FunctionReturnInWriteContextPass;
 
 class Company extends Model
 {
@@ -52,6 +54,12 @@ class Company extends Model
     public function frameworks() // frameworks via company
     {
         return $this->belongsToMany(Framework::class, 'framework_company')->withPivot(['draft_rating', 'is_draft', 'is_published', 'rating']);
+    }
+
+
+    public function feFrameworks(): BelongsToMany
+    {
+        return $this->belongsToMany(FeFramework::class, 'fe_framework_company')->withPivot(['draft_rating', 'is_draft', 'is_published', 'rating']);
     }
 
     public function scopeFetchAllFeDetails($query)

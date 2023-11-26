@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Company;
 use App\Models\Framework;
 use App\Models\Plang;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 
@@ -22,14 +23,44 @@ class StackService
 
     public function store($request): RedirectResponse
     {
-
-      
         $request->validate([
             'frameworks' => 'required|array',
             'plangs' => 'required|array',
-            'company' => 'required|integer'
+            'company' => 'required|integer',
         ]);
 
+
+        switch ($request->stack) {
+            case 'plangs':
+                $model =  $request->stack;
+                break;
+            case 'frameworks':
+                $model = $request->stack;
+                break;
+                return $this->stackToSave($model, $request);
+        }
+    }
+
+
+    private function saveBackendStack(string $model, $request)
+    {
+        try {
+            $company = Company::findOrFail($request->company);
+
+            DB::transaction(function () use ($company, $request) {
+                $company->plangs()->attach($request->plangs, ['is_draft' => 0, 'is_published' => 1]);
+                $company->frameworks()->attach($request->frameworks,  ['is_draft' => 0, 'is_published' => 1]);
+            });
+
+            return redirect()->back()->with('msg', 'Data was saved successfully');
+        } catch (\Exception $e) {
+
+            return redirect()->back()->withErrors(['errors' => $e->getMessage()]);
+        }
+    }
+
+    private function saveFrontendStack(string $model, $request)
+    {
         try {
             $company = Company::findOrFail($request->company);
 
