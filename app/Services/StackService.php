@@ -38,7 +38,7 @@ class StackService
                 $company->frameworks()->attach($request->frameworks,  ['is_draft' => 0, 'is_published' => 1]);
             });
 
-            return redirect()->back()->with('success', 'Data was saved successfully');
+            return redirect()->back()->with('msg', 'Data was saved successfully');
         } catch (\Exception $e) {
 
             return redirect()->back()->withErrors(['errors' => $e->getMessage()]);
