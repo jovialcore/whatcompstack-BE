@@ -35,7 +35,8 @@
             <div class="col-sm-6 col-lg-4 mb-4">
                 <div class="card bg-white text-dark  p-2">
                     <div class="card-body">
-                        <h5 class="card-title">Product Design</h5>
+                        <h5 class="card-title ">Product Design <span class="badge bg-label-dark"
+                                style="font-size: 12px;">Upcoming</span> </h5>
                         <p class="card-text">Select to add product design tools</p>
                     </div>
                 </div>
