@@ -45,9 +45,16 @@ Route::prefix('/dashboard')->group(function () {
 
 
     //stacks
+    Route::get('/stack/index', [App\Http\Controllers\GeneralStackController::class, 'index'])->name('admin.stack.index');
 
-    Route::get('/stack/{stactType}/create', [App\Http\Controllers\StackController::class, 'create'])->name('admin.stack.create');
-    Route::get('/stack/index', [App\Http\Controllers\StackController::class, 'index'])->name('admin.stack.index');
+    //backend
+    Route::get('/stack/backend/create', [App\Http\Controllers\BackendController::class, 'create'])->name('admin.stack.backend.create');
+
+    //frontend
+    Route::get('/stack/frontend/create', [App\Http\Controllers\FrontendController::class, 'create'])->name('admin.stack.frontend.create');
+
+
+
     Route::post('/stak/store', [App\Http\Controllers\StackController::class, 'store'])->name('admin.stack.store');
 });
 

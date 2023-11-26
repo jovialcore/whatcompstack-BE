@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\StackService;
+use Illuminate\Http\Request;
+use App\Services\FrontEndService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 
-class StackController extends Controller
+
+class FrontendController extends Controller
 {
-    public function __construct(protected StackService $stackService)
+    public function __construct(protected FrontEndService $frontEndService)
     {
     }
 
@@ -18,19 +19,17 @@ class StackController extends Controller
     {
         return View('admin.stack.index');
     }
-
-    public function create(Request $request, $stackType): View
+    public function create($stackType): View
     {
 
-        $allStackInfo = $this->stackService->getAllStackInfo();
+        $allStackInfo = $this->frontEndService->getAllStackInfo($stackType);
 
         return View("admin.stack.create.{$stackType}", ['allStackInfo' => $allStackInfo]);
     }
 
 
-
     public function store(Request $request): RedirectResponse
     {
-        return $this->stackService->store($request);
+        return $this->frontEndService->store($request);
     }
 }

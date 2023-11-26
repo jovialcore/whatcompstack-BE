@@ -30,21 +30,10 @@
 
                     <div class="mb-3">
                         <label for="exampleFormControlSelect1" class="form-label">Programming Language </label>
-                        <select name="plangs[]" class="form-select stackSelect2MultiPlang" id=""
+                        <select name="frameworks[]" class="form-select stackSelect2MultiFeFramework" id=""
                             aria-label="Default select example" multiple>
-                            @foreach ($allStackInfo['allPlangs'] as $plang)
-                                <option value="{{ $plang->id }}"> {{ $plang->name }} </option>
-                            @endforeach
-
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="exampleFormControlSelect1" class="form-label">Programming Language </label>
-                        <select name="frameworks[]" class="form-select stackSelect2MultiFramework" id=""
-                            aria-label="Default select example" multiple>
-                            @foreach ($allStackInfo['allFrameworks'] as $framework)
-                                <option value="{{ $framework->id }}"> {{ $framework->name }} </option>
+                            @foreach ($allStackInfo['allFeFrameworks'] as $feFramework)
+                                <option value="{{ $feFramework->id }}"> {{ $feFramework->name }} </option>
                             @endforeach
 
                         </select>
@@ -62,13 +51,8 @@
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
         <script>
-            $(".stackSelect2MultiPlang").select2({
-
-                placeholder: "Select Programming Language"
-
-            });
-            $(".stackSelect2MultiFramework").select2({
-                placeholder: "Select Framework"
+            $(".stackSelect2MultiFeFramework").select2({
+                placeholder: "Select Fe Framework"
             });
         </script>
     @endpush

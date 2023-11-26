@@ -6,7 +6,7 @@
         <div class="row">
 
             <div class="col-sm-6 col-lg-4 mb-4">
-                <a href="{{ route('admin.stack.create', 'backend') }}" >
+                <a href="{{ route('admin.stack.backend.create') }}">
                     <div class="card bg-white text-dark  p-2">
                         <div class="card-body">
                             <h5 class="card-title">Backend</h5>
@@ -19,7 +19,7 @@
 
             <div class="col-sm-6 col-lg-4 mb-4">
 
-                <a href="{{ route('admin.stack.create', 'frontend') }}" >
+                <a href="{{ route('admin.stack.frontend.create') }}">
                     <div class="card bg-white text-dark  p-2">
                         <div class="card-body">
                             <h5 class="card-title">Frontend </h5>

@@ -15,7 +15,7 @@ class DashboardController extends Controller
     {
         $this->dashboardService =   $dashboardService;
     }
-
+    
     public function index(): View
     {
         $data = $this->dashboardService->getAppStats();
