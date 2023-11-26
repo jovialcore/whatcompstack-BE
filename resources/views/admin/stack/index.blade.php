@@ -6,22 +6,28 @@
         <div class="row">
 
             <div class="col-sm-6 col-lg-4 mb-4">
-                <div class="card bg-white text-dark  p-2">
-                    <div class="card-body">
-                        <h5 class="card-title">Backend</h5>
-                        <p class="card-text">Select to add backend tools </p>
+                <a href="{{ route('admin.stack.create', 'backend') }}" >
+                    <div class="card bg-white text-dark  p-2">
+                        <div class="card-body">
+                            <h5 class="card-title">Backend</h5>
+                            <p class="card-text">Select to add backend tools </p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
 
 
             <div class="col-sm-6 col-lg-4 mb-4">
-                <div class="card bg-white text-dark  p-2">
-                    <div class="card-body">
-                        <h5 class="card-title">Frontend </h5>
-                        <p class="card-text">Select to add frontend tools </p>
+
+                <a href="{{ route('admin.stack.create', 'frontend') }}" >
+                    <div class="card bg-white text-dark  p-2">
+                        <div class="card-body">
+                            <h5 class="card-title">Frontend </h5>
+                            <p class="card-text">Select to add frontend tools </p>
+                        </div>
                     </div>
-                </div>
+
+                </a>
             </div>
 
 

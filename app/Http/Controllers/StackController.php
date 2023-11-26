@@ -19,13 +19,12 @@ class StackController extends Controller
         return View('admin.stack.index');
     }
 
-    public function create(): View
+    public function create(Request $request, $stackType): View
     {
 
         $allStackInfo = $this->stackService->getAllStackInfo();
 
-
-        return View('admin.stack.create', ['allStackInfo' => $allStackInfo]);
+        return View("admin.stack.create.{$stackType}", ['allStackInfo' => $allStackInfo]);
     }
 
 

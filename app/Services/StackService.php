@@ -30,19 +30,19 @@ class StackService
         ]);
 
 
-        switch ($request->stack) {
-            case 'plangs':
-                $model =  $request->stack;
+        switch ($request->stackType) {
+            case 'backend':
+                return $this->saveBackendStack($request);
                 break;
-            case 'frameworks':
-                $model = $request->stack;
+            case 'frontend':
+                return $this->saveBackendStack($request);
                 break;
-                return $this->stackToSave($model, $request);
+                return redirect()->bakc()->with(['errors' => 'compay stack was not specified. confirm you have the right url']);
         }
     }
 
 
-    private function saveBackendStack(string $model, $request)
+    private function saveBackendStack($request)
     {
         try {
             $company = Company::findOrFail($request->company);
@@ -59,16 +59,11 @@ class StackService
         }
     }
 
-    private function saveFrontendStack(string $model, $request)
+    private function saveFrontendStack($request)
     {
         try {
             $company = Company::findOrFail($request->company);
-
-            DB::transaction(function () use ($company, $request) {
-                $company->plangs()->attach($request->plangs, ['is_draft' => 0, 'is_published' => 1]);
-                $company->frameworks()->attach($request->frameworks,  ['is_draft' => 0, 'is_published' => 1]);
-            });
-
+            $company->feFrameworks()->attach($request->frameworks,  ['is_draft' => 0, 'is_published' => 1]);
             return redirect()->back()->with('msg', 'Data was saved successfully');
         } catch (\Exception $e) {
 
