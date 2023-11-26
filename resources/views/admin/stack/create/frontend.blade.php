@@ -14,7 +14,7 @@
 
             <h5 class="card-header">Add Stack 🌠</h5>
             <div class="card-body">
-                <form method="POST" action="{{ route('admin.stack.store') }}">
+                <form method="POST" action="{{ route('admin.stack.frontend.store') }}">
                     @csrf
 
                     <div class="mb-3">

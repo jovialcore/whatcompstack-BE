@@ -48,14 +48,17 @@ Route::prefix('/dashboard')->group(function () {
     Route::get('/stack/index', [App\Http\Controllers\GeneralStackController::class, 'index'])->name('admin.stack.index');
 
     //backend
-    Route::get('/stack/backend/create', [App\Http\Controllers\BackendController::class, 'create'])->name('admin.stack.backend.create');
+    Route::prefix('/stack/backend')->group(function () {
+        Route::get('/stack/backend/create', [App\Http\Controllers\BackendController::class, 'create'])->name('admin.stack.backend.create');
+        Route::post('/stak/store', [App\Http\Controllers\BackendController::class, 'store'])->name('admin.stack.backend.store');
+    });
 
     //frontend
-    Route::get('/stack/frontend/create', [App\Http\Controllers\FrontendController::class, 'create'])->name('admin.stack.frontend.create');
+    Route::prefix('/stack/frontend')->group(function () {
 
-
-
-    Route::post('/stak/store', [App\Http\Controllers\StackController::class, 'store'])->name('admin.stack.store');
+        Route::get('/create', [App\Http\Controllers\FrontendController::class, 'create'])->name('admin.stack.frontend.create');
+        Route::post('/store', [App\Http\Controllers\FrontendController::class, 'store'])->name('admin.stack.frontend.store');
+    });
 });
 
 

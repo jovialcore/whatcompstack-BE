@@ -19,12 +19,12 @@ class FrontendController extends Controller
     {
         return View('admin.stack.index');
     }
-    public function create($stackType): View
+    public function create(): View
     {
 
-        $allStackInfo = $this->frontEndService->getAllStackInfo($stackType);
+        $allStackInfo = $this->frontEndService->getAllStackInfo();
 
-        return View("admin.stack.create.{$stackType}", ['allStackInfo' => $allStackInfo]);
+        return View("admin.stack.create.frontend", ['allStackInfo' => $allStackInfo]);
     }
 
 
