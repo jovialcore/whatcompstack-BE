@@ -14,11 +14,10 @@ class CompanyStackController extends Controller
 
     public function index(Request $req, Company $company)
     {
-        $companies  = $company::FetchAllFeDetails()->paginate(10);
+        $companies = $company::FetchAllClientDetails()->get();
 
 
         //if larvel had a "orWithWhereHAs" 🙂
-
 
         if ($companies->count() > 0) {
 
@@ -34,7 +33,7 @@ class CompanyStackController extends Controller
     {
         $company = new Company();
 
-        $companyStack = $company->FetchAllFeDetails()->find($id);
+        $companyStack = $company->FetchAllClientDetails()->find($id);
 
         if ($companyStack) {
 

@@ -21,22 +21,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/company/stack/all', [App\Http\Controllers\Api\CompanyStackController::class, 'index']);
 
 
-Route::apiResource('crud',  CrudController::class);
 
 Route::get('/company/stack/details/{id}', [App\Http\Controllers\Api\CompanyStackController::class, 'show']);
 
 
-
 //for explain ai 
-
 Route::post('/extract/imagetext', [App\Http\Controllers\Api\AiController::class, 'upload']);
-
-
-
-// x
-Route::apiResource('/slackbot', HngController::class);
-
-
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
