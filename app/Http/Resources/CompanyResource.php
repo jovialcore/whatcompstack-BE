@@ -15,7 +15,10 @@ class CompanyResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+
+        // dd($this->resource);
         return  [
+
             'id' => $this->id,
             'company' => $this->name,
             'about' => $this->about,
@@ -27,11 +30,14 @@ class CompanyResource extends JsonResource
             'hr_name' => $this->hr,
             'hr_contact' => $this->hr_contact,
             'logo' => $this->logo,
-
             'stack_be_plang' => $this->plangs->map(function ($item) {
                 return [$item->name => ['rating' => $item->pivot->rating]];
             }),
             'stack_be_framework' => $this->frameworks->map(function ($item) {
+                return [$item->name => ['rating' => $item->pivot->rating]];
+            }),
+
+            'stack_fe_framework' => $this->feFrameworks->map(function ($item) {
                 return [$item->name => ['rating' => $item->pivot->rating]];
             }),
         ];

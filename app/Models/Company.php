@@ -68,6 +68,8 @@ class Company extends Model
             $query->where('is_published', 1);
         })->with('frameworks', function ($query) {
             $query->where('is_published', 1);
+        })->with('feFrameworks', function ($query) {
+            $query->where('is_published', 1);
         });
     }
 }
