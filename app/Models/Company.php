@@ -45,17 +45,14 @@ class Company extends Model
 
     public function plangs() // plangs via company
     {
-
         $this->wasRecentlyCreated;
         return $this->belongsToMany(Plang::class, 'plang_company')->withPivot(['draft_rating', 'is_draft', 'is_published',  'rating']);
     }
 
-
-    public function frameworks() // frameworks via company
+    public function frameworks() // frameworks via company // this is for be right
     {
         return $this->belongsToMany(Framework::class, 'framework_company')->withPivot(['draft_rating', 'is_draft', 'is_published', 'rating']);
     }
-
 
     public function feFrameworks(): BelongsToMany
     {
@@ -64,7 +61,7 @@ class Company extends Model
 
     public function scopeFetchAllClientDetails($query)
     {
-        return $query->with('plangs', function ($query) {
+        return $query->withWhereHas('plangs', function ($query) {
             $query->where('is_published', 1);
         })->with('frameworks', function ($query) {
             $query->where('is_published', 1);
