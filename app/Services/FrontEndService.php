@@ -37,7 +37,8 @@ class FrontEndService
     {
         try {
             $company = Company::findOrFail($request->company);
-            $company->feFrameworks()->attach($request->frameworks,  ['is_draft' => 0, 'is_published' => 1]);
+            //update fameworks--do not remove previous framewoks and don't create duplicates
+            $company->feFrameworks()->sync($request->frameworks,  ['is_draft' => 0, 'is_published' => 1], false);
             return redirect()->back()->with('msg', 'Data was saved successfully');
         } catch (\Exception $e) {
 

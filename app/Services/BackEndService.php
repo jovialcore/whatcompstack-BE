@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\DB;
 
 class BackEndService
 {
-
-
     public function getAllStackInfo(): array
     {
 
@@ -34,15 +32,15 @@ class BackEndService
         return $this->saveBackendStack($request);
     }
 
-
     private function saveBackendStack($request)
     {
         try {
             $company = Company::findOrFail($request->company);
 
             DB::transaction(function () use ($company, $request) {
-                $company->plangs()->attach($request->plangs, ['is_draft' => 0, 'is_published' => 1]);
-                $company->frameworks()->attach($request->frameworks,  ['is_draft' => 0, 'is_published' => 1]);
+                //update fameworks--do not remove previous framewoks and don't create duplicates
+                $company->plangs()->syncWithPivotValues($request->plangs, ['is_draft' => 0, 'is_published' => 1], false);
+                $company->frameworks()->syncWithPivotValues($request->frameworks,  ['is_draft' => 0, 'is_published' => 1], false);
             });
 
             return redirect()->back()->with('msg', 'Data was saved successfully');

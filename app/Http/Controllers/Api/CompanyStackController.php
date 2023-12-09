@@ -16,19 +16,15 @@ class CompanyStackController extends Controller
     {
         $companies = $company::FetchAllClientDetails()->get();
 
-
-        //if larvel had a "orWithWhereHAs" 🙂
+        //if larvel had an "orWithWhereHAs" 🙂
 
         if ($companies->count() > 0) {
-
             return CompanyResource::collection($companies);
         } else {
-
             return response()->json(['message' => 'No  Results found'], 200);
         }
     }
 
-    // retrieving details about a particular stack 
     public function show($id)
     {
         $company = new Company();
@@ -36,7 +32,6 @@ class CompanyStackController extends Controller
         $companyStack = $company->FetchAllClientDetails()->find($id);
 
         if ($companyStack) {
-
             return new CompanyResource($companyStack);
         } else {
 
