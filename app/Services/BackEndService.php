@@ -14,7 +14,6 @@ class BackEndService
 {
     public function getAllStackInfo(): array
     {
-
         $allCompanies =  Company::get();
         $allPlangs = Plang::get();
         $allFrameworks = Framework::get();
