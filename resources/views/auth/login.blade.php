@@ -67,7 +67,7 @@
                     </form> --}}
 
                         <p class="card-text">
-                            Hey Champ 👋, Our Admin is LIVE but it is meant for only ADMINS 😎
+                            Hey Champ 👋, Our Admin is LIVE but you are not an ADMIN 😎
                             <br> <br>
                             Please be of good Cheer! 😎 We will released a test version - <b>testAdmin.whatcompanystack.com</b>
                             - so you can
