@@ -268,8 +268,10 @@
                                         </div>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end">
-                                
-                                        @if (Route::has('login'))
+
+                                        @guest
+
+
                                             <li class="">
                                                 <a class="dropdown-item"
                                                     href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -284,8 +286,12 @@
                                                     <span class="align-middle"> {{ __('Logout') }}</span>
                                                 </a>
 
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                    class="d-none">
+                                                    @csrf
+                                                </form>
                                             </li>
-                                        @endif
+                                        @endguest
                                     </ul>
                                 </li>
                                 <!--/ User -->

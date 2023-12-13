@@ -20,10 +20,11 @@ use Illuminate\Support\Facades\View;
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Auth::routes(['register' => false, 'reset' => false, 'verify' => false]);
 
 Route::group(['middleware' => 'admin'], function () {
 
-    Auth::routes(['register' => false]);
+
 
     Route::get('/',  [App\Http\Controllers\DashboardController::class, 'index'])->name('admin.dashboard.index');
 
