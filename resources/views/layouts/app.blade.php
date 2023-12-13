@@ -11,7 +11,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Admin dashboard ') }}</title>
+    <title>{{ config('app.name', 'Admin dashboard What company stack') }}</title>
 
 
 
