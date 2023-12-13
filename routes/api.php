@@ -24,10 +24,3 @@ Route::get('/company/stack/all', [App\Http\Controllers\Api\CompanyStackControlle
 
 Route::get('/company/stack/details/{id}', [App\Http\Controllers\Api\CompanyStackController::class, 'show']);
 
-
-//for explain ai 
-Route::post('/extract/imagetext', [App\Http\Controllers\Api\AiController::class, 'upload']);
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
