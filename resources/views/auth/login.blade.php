@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Login') }}</div>
+                    <div class="card-header">{{ __('Admin Login') }}</div>
 
                     <div class="card-body">
                         {{-- <form method="POST" action="{{ route('login') }}">
@@ -67,11 +67,12 @@
                     </form> --}}
 
                         <p class="card-text">
-                            Hey Champ 👋, You know you are not supposed to access this right.
-                            <br>    <br>  
-                            But be of good Cheer! We are walking on a test version for the admin that you can use to
-                            explore all these
-                            features
+                            Hey Champ 👋, Our Admin is LIVE but it is meant for only ADMINS 😎
+                            <br> <br>
+                            Please be of good Cheer! 😎 We will released a test mode - <b>test  Admin.whatcompanystack.com</b>
+                            -so you can
+                            explore all the admin
+                            features.
                         </p>
                     </div>
                 </div>
