@@ -69,9 +69,9 @@
                         <p class="card-text">
                             Hey Champ 👋, Our Admin is LIVE but it is meant for only ADMINS 😎
                             <br> <br>
-                            Please be of good Cheer! 😎 We will released a test mode - <b>test  Admin.whatcompanystack.com</b>
-                            -so you can
-                            explore all the admin
+                            Please be of good Cheer! 😎 We will released a test mode - <b>testAdmin.whatcompanystack.com</b>
+                            - so you can
+                            experiment with all the admin
                             features.
                         </p>
                     </div>
