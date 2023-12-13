@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Login') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <div class="card-body">
+                        {{-- <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="row mb-3">
@@ -64,10 +64,18 @@
                                 @endif
                             </div>
                         </div>
-                    </form>
+                    </form> --}}
+
+                        <p class="card-text">
+                            Hey Champ 👋, You know you are not supposed to access this right.
+                            <br>    <br>  
+                            But be of good Cheer! We are walking on a test version for the admin that you can use to
+                            explore all these
+                            features
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
