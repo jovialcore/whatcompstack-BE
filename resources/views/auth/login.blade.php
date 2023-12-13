@@ -66,14 +66,6 @@
                         </div>
                     </form> --}}
 
-                        <p class="card-text">
-                            Hey Champ 👋, Our Admin is LIVE but you are not an ADMIN 😎
-                            <br> <br>
-                            Please be of good Cheer! 😎 We will release a test version - <b>testAdmin.whatcompanystack.com</b>
-                            - so you can
-                            test all of our admin
-                            features. 
-                        </p>
                     </div>      
                 </div>
             </div>

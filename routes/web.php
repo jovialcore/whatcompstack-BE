@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CrudController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes(['register' => false]);
+
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
+Route::group(['middleware' => 'admin'], function () {
 
-Route::group(['middleware' => 'auth'], function () {    
+    Auth::routes(['register' => false]);
 
     Route::get('/',  [App\Http\Controllers\DashboardController::class, 'index'])->name('admin.dashboard.index');
 
@@ -66,3 +70,8 @@ Route::group(['middleware' => 'auth'], function () {
         });
     });
 });
+
+
+Route::get('/not-an-admin', function () {
+    return View('nonAdmin.home');
+})->name('non.admin.user');
