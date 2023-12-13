@@ -74,7 +74,7 @@
                             test all of our admin
                             features. 
                         </p>
-                    </div>
+                    </div>      
                 </div>
             </div>
         </div>
