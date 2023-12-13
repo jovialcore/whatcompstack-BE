@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 
 
+Auth::routes();
+
 Route::get('/',  [App\Http\Controllers\DashboardController::class, 'index'])->name('admin.dashboard.index');
 
 Route::prefix('/dashboard')->group(function () {
@@ -62,10 +64,7 @@ Route::prefix('/dashboard')->group(function () {
 });
 
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
