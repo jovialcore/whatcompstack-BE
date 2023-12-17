@@ -30,7 +30,9 @@ class DataControlService
     public function initiateDataSourcing($request)
     {
 
+      
         $source_slug = Company::where('name', $request->input('company'))->first()->source_slug;    
+     
         $scraper = new Scraper(
             company: $request->input('company'),
             sourceSlug: $source_slug,

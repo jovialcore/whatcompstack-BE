@@ -41,12 +41,17 @@ class DataControlController extends Controller
     public function initiateDataSourcing(Request  $request): RedirectResponse
     {
 
+
         $request->validate([
             'company' => 'required', // actuallly the company id
             'stack' => 'required',
             'data_source' => 'required',
         ]);
-  
+
+   
+
+        $this->dataControlService->initiateDataSourcing($request);
+
         return to_route('admin.preview.results', ['company' => $request->input('company')]);
     }
 
