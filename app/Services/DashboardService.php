@@ -10,11 +10,6 @@ use App\Models\Plang;
 class DashboardService
 {
 
-    public function __construct()
-    {
-    }
-
-
     // this is a utility method,it does some calculation, search or some functionanl stuff
     public function getAppStats(): array
     {

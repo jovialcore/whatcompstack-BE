@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('salary_range')->nullable();
             $table->text('about')->nullable();
             $table->text('url')->nullable();
-            $table->string('source_slug');
+            $table->text('source_slug')->nullable();
             $table->string('logo')->nullable();
 
             $table->timestamps();

@@ -21,7 +21,7 @@ class Scraper
     protected  $noOfResultsPerPage;
     protected $stackOptions;
 
-    public function __construct($company, $dataSource, $stack,   $stackOptions)
+    public function __construct($company, $sourceSlug, $dataSource, $stack,   $stackOptions)
     {
         $this->company = $company;
         $this->dataSource = $dataSource;
@@ -41,13 +41,13 @@ class Scraper
         $cc = '';
         $pagination = 1;
         $keyword = "";
-        $companyToSourceFor = strtolower($this->company);
+        $slugToSourceFor = strtolower($this->company);
 
 
         while (true) { // controls moving to next page asin controls flow of pagination
 
             // use paystack to test for nodejs cases ..flutterwave to test for getting frameworks too
-            $homepage = $client->request('GET', "{$this->dataSource}{$companyToSourceFor}/{$pagination}");
+            $homepage = $client->request('GET', "{$this->dataSource}{$slugToSourceFor}/{$pagination}");
 
             $isItEndOfPaginationResult = $homepage->filter('.job-list > .job-list-li')->first()->count();
 

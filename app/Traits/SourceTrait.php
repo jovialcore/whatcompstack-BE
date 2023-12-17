@@ -10,7 +10,6 @@ trait SourceTrait
 
     public  function getStackHelper(string $stack): array
     {
-
         $stackHelperArr = [
             'backend' => StackDetails::backend($stack),
             'frontend' => StackDetails::frontend($stack)

@@ -22,7 +22,7 @@ class CompanyService
         return compact('companies');
     }
 
-    public function storeCompanyData(Request $request, Company $company): Company
+    public function storeCompanyData(Request $request, Company $company)
     {
         $request->validate([
             'name' => 'required',
@@ -36,6 +36,8 @@ class CompanyService
             'logo' => 'mimes:png,jpeg',
             'source_slug' => 'required|string|unique:companies,source_slug'
         ]);
+
+        
 
         try {
             $companyData = $request->all();

@@ -3,6 +3,14 @@
     <div class="col-md-10 mx-auto">
 
         <div class="card mb-4">
+
+            @if (session('msg'))
+                <div class="alert alert-warning  alert-dismissible fade show" role="alert">
+                    {{ session('msg') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             <h5 class="card-header">Initiate Data Sourcing🪚</h5>
             <div class="card-body">
                 <form method="POST" action="{{ route('admin.datasource.initialize') }}">

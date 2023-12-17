@@ -41,21 +41,15 @@ class DataControlController extends Controller
     public function initiateDataSourcing(Request  $request): RedirectResponse
     {
 
-        // upload cv
-        // we list companies based on your profile
-        // this companies listed on your profil, you cna send them a cold mail. 
-        // organise your job hunting.
-        // if you must shoot you shots as in your tech job hunting, make sure you are shooting in the right direction
-
-        // then this where whatcompanystack comes in !
-
         $request->validate([
             'company' => 'required', // actuallly the company id
             'stack' => 'required',
             'data_source' => 'required',
         ]);
 
-        $this->dataControlService->initiateDataSourcing($request);
+        if (!$this->dataControlService->initiateDataSourcing($request)) {
+            return redirect()->back()->with('msg', 'Please add a source slug');
+        }
 
         return to_route('admin.preview.results', ['company' => $request->input('company')]);
     }
