@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
     <div class="col-md-10 mx-auto">
 
         <div class="card mb-4">
@@ -43,6 +42,17 @@
                             <input name="url" type="text" id="basic-icon-default-company" class="form-control"
                                 placeholder="ACME Inc." aria-label="ACME Inc."
                                 aria-describedby="basic-icon-default-company2" value="{{ old('url') }}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="basic-icon-default-company">Source Slug</label>
+                        <div class="input-group input-group-merge">
+                            <span id="basic-icon-default-company2" class="input-group-text"><i
+                                    class="bx bx-code-curly "></i></span>
+                            <input name="source_slug" type="text" id="basic-icon-default-company" class="form-control"
+                                placeholder="Job source slug." aria-label="JOb source slug."
+                                aria-describedby="basic-icon-default-company2" value="{{ old('source_slug') }}">
                         </div>
                     </div>
 
@@ -93,5 +103,4 @@
             </div>
         </div>
     </div>
-
 @endsection

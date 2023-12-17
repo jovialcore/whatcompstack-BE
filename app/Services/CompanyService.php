@@ -34,6 +34,7 @@ class CompanyService
             'hr_name' => 'string|nullable',
             'hr_contact' => 'url |nullable',
             'logo' => 'mimes:png,jpeg',
+            'source_slug' => 'required|string|unique:companies,source_slug'
         ]);
 
         try {
