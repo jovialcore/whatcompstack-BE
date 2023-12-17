@@ -31,7 +31,7 @@ class CompanyService
             'ceo_name' => 'string|nullable',
             'cto_contact' => 'url|nullable',
             'cto_name' => 'string|nullable',
-            'hr_name' => 'string',
+            'hr_name' => 'string|nullable',
             'hr_contact' => 'url |nullable',
             'logo' => 'mimes:png,jpeg',
         ]);
