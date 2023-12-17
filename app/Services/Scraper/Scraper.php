@@ -20,6 +20,7 @@ class Scraper
     protected $stack;
     protected  $noOfResultsPerPage;
     protected $stackOptions;
+    protected $sourceSlug;
 
     public function __construct($company, $sourceSlug, $dataSource, $stack,   $stackOptions)
     {
@@ -27,6 +28,7 @@ class Scraper
         $this->dataSource = $dataSource;
         $this->stack = $stack;
         $this->stackOptions = $stackOptions;
+        $this->sourceSlug = $sourceSlug;
     }
     public function dataSource()
     {
@@ -41,7 +43,7 @@ class Scraper
         $cc = '';
         $pagination = 1;
         $keyword = "";
-        $slugToSourceFor = strtolower($this->company);
+        $slugToSourceFor = strtolower($this->sourceSlug);
 
 
         while (true) { // controls moving to next page asin controls flow of pagination
@@ -198,7 +200,7 @@ class Scraper
         // $result[] = 'Express.js'; 
 
 
-  
+
         /** ######    Group frameworks into their respective programming languages (as Assoc Array) #######  */
         $k = [];
 
@@ -240,7 +242,7 @@ class Scraper
 
             $progrLangQuery = $company->plangs->where('name', 'Java');
             if (($company->plangs->count() > 0) && ($company->plangs->pluck('name')->contains($plangKey))) {
-              
+
                 $progrLang =    $progrLangQuery->first();
                 if ($progrLang) {
                     // just update the rating coulmn on pivot table        // add plus one to the rating  column

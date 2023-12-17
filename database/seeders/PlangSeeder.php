@@ -13,8 +13,6 @@ class PlangSeeder extends Seeder
      */
     public function run(): void
     {
-
-
         $programmingLanguages = [
             ['id' => 1, 'name' => 'PHP'],
             ['id' => 2, 'name' => 'Python'],

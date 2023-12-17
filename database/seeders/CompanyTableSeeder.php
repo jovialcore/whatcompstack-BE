@@ -31,8 +31,9 @@ class CompanyTableSeeder extends Seeder
             'hr' => 'Mrs chidinma',
             'testimonials' => NULL,
             'salary_range' => NULL,
+            'source_slug' => 'paystack',
             'about' => "Paystack is a technology company solving payments problems for ambitious businesses. Our mission is to help businesses in Africa become profitable, envied, and loved.",
-            'logo' => "https://res.cloudinary.com/chidiebere/image/upload/v1679843515/paysatack.png"
+            'logo' => "https://res.cloudinary.com/chidiebere/image/upload/v1701677203/paystasss.png"
 
         ]);
 
@@ -50,8 +51,9 @@ class CompanyTableSeeder extends Seeder
             'hr' => 'Mrs chidiadi',
             'testimonials' => NULL,
             'salary_range' => NULL,
+            'source_slug' => NULL,
             'about' => "Excellent customer service, top-notch service providers, and easy-to-use technology. That's our recipe for brewing you a stress-free life.",
-            'logo' => "https://res.cloudinary.com/chidiebere/image/upload/v1679843521/edenliffee.jpg"
+            'logo' => "https://media.licdn.com/dms/image/D4D0BAQH4h0bn8VqOww/company-logo_200_200/0/1699776218827/ouredenlife_logo?e=2147483647&v=beta&t=tfAPz6EqLwkpT3Km63udIJJPJcxA9qaPxEOg9MGXjM8"
 
         ]);
 
@@ -71,18 +73,19 @@ class CompanyTableSeeder extends Seeder
             'hr_contact' => 'twitter.com/jovial_core',
             'testimonials' => NULL,
             'salary_range' => NULL,
+            'source_slug' => 'chowdeck',
             "about" => "Chowdeck is a technology company that provides logistics services to both vendors and consumers. This potentially allows food vendors to deliver meals seamlessly while also providing consumers with an easy platform to order meals from their favourite restaurants in their city.",
-            'logo' => "https://res.cloudinary.com/chidiebere/image/upload/v1679843515/paysatack.png"
+            'logo' => "https://res.cloudinary.com/chidiebere/image/upload/v1701550675/chowdeck.png"
 
         ]);
-     
+
 
         Company::create([
             'name' => 'FlutterWave',
             'url' => "https://www.flutterwave.com/",
-            'stack_be' => [ 'java', 'rubyonrails'],
-            'stack_fe' => [ 'vuejs', 'svelte'],
-            'devops' =>['digitalOcean'],
+            'stack_be' => ['java', 'rubyonrails'],
+            'stack_fe' => ['vuejs', 'svelte'],
+            'devops' => ['digitalOcean'],
             'database_driver' => ['mysql'],
             'ceo' => 'Olugbenga Agboola ',
             'ceo_contact' => 'https://www.linkedin.com/in/gbagboola',
@@ -92,9 +95,10 @@ class CompanyTableSeeder extends Seeder
             'hr_contact' => 'https://www.linkedin.com/in/victoria-vodunnu-2237757a/',
             'testimonials' => NULL,
             'salary_range' => NULL,
+            'source_slug' => 'flutterwave',
             'about' => "Sell anything online without a website. Create a secure checkout page in a few clicks. Create a free account to generate secure payment links and get paid in any currency.",
-            'logo' => "https://res.cloudinary.com/chidiebere/image/upload/v1679843619/flutterwave.png"
-        
+            'logo' => "https://res.cloudinary.com/chidiebere/image/upload/v1701676999/flutterwaveee.png"
+
 
         ]);
     }

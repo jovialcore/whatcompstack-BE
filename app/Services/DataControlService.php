@@ -30,20 +30,15 @@ class DataControlService
     public function initiateDataSourcing($request)
     {
 
-        $source_slug = Company::where('name', $request->input('company'))->first()->source_slug;
-
-        if ($source_slug) {
-            $scraper = new Scraper(
-                company: $request->input('company'),
-                sourceSlug: $source_slug,
-                dataSource: $request->input('data_source'),
-                stack: $request->input('stack'),
-                stackOptions: $this->getStackHelper('backend')
-            );
-            return $scraper->dataSource();
-        } else {
-            return false;
-        }
+        $source_slug = Company::where('name', $request->input('company'))->first()->source_slug;    
+        $scraper = new Scraper(
+            company: $request->input('company'),
+            sourceSlug: $source_slug,
+            dataSource: $request->input('data_source'),
+            stack: $request->input('stack'),
+            stackOptions: $this->getStackHelper('backend')
+        );
+        return $scraper->dataSource();
     }
 
     public function confirmResult($company): bool

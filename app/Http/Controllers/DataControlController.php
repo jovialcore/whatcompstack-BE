@@ -46,11 +46,7 @@ class DataControlController extends Controller
             'stack' => 'required',
             'data_source' => 'required',
         ]);
-
-        if (!$this->dataControlService->initiateDataSourcing($request)) {
-            return redirect()->back()->with('msg', 'Please add a source slug');
-        }
-
+  
         return to_route('admin.preview.results', ['company' => $request->input('company')]);
     }
 
