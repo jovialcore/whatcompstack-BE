@@ -57,7 +57,6 @@ class CompanyTableSeeder extends Seeder
 
         ]);
 
-
         Company::create([
             'name' => 'Chowdeck',
             'url' => "https://chowdeck.com/",
@@ -76,9 +75,7 @@ class CompanyTableSeeder extends Seeder
             'source_slug' => 'chowdeck',
             "about" => "Chowdeck is a technology company that provides logistics services to both vendors and consumers. This potentially allows food vendors to deliver meals seamlessly while also providing consumers with an easy platform to order meals from their favourite restaurants in their city.",
             'logo' => "https://res.cloudinary.com/chidiebere/image/upload/v1701550675/chowdeck.png"
-
         ]);
-
 
         Company::create([
             'name' => 'FlutterWave',
@@ -98,7 +95,6 @@ class CompanyTableSeeder extends Seeder
             'source_slug' => 'flutterwave',
             'about' => "Sell anything online without a website. Create a secure checkout page in a few clicks. Create a free account to generate secure payment links and get paid in any currency.",
             'logo' => "https://res.cloudinary.com/chidiebere/image/upload/v1701676999/flutterwaveee.png"
-
 
         ]);
     }
