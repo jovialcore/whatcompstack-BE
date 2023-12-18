@@ -45,7 +45,6 @@ class Company extends Model
 
     public function plangs() // plangs via company
     {
-        $this->wasRecentlyCreated;
         return $this->belongsToMany(Plang::class, 'plang_company')->withPivot(['draft_rating', 'is_draft', 'is_published',  'rating']);
     }
 
