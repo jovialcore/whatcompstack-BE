@@ -36,13 +36,12 @@ class CompanyService
             'cto_name' => 'string|nullable',
             'hr_name' => 'string|nullable',
             'hr_contact' => 'url |nullable',
-            'logo' => 'mimes:png,jpeg',
+            'logo' => 'required|mimes:png,jpeg',
             'source_slug' => 'required|string|unique:companies,source_slug'
         ]);
 
         try {
             $companyData = $request->all();
-
 
             if ($request->has('logo')) {
                 $logoUrl = Cloudinary::upload(
@@ -56,11 +55,10 @@ class CompanyService
                 $companyData['logo'] = $logoUrl;
             }
 
-
             return Company::create($companyData);
         } catch (\Exception $e) {
 
-            return $e->getMessage();
+            return $e->getMessage(); // ??
         }
     }
 
