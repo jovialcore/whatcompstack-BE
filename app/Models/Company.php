@@ -31,6 +31,7 @@ class Company extends Model
         'logo',
         'about',
         'url',
+        'source_slug'
     ];
 
     protected $casts = [

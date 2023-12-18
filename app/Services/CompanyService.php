@@ -42,7 +42,6 @@ class CompanyService
 
         try {
             $companyData = $request->all();
-
             if ($request->has('logo')) {
                 $logoUrl = Cloudinary::upload(
                     $request->file('logo')->getRealPath(),
@@ -54,7 +53,6 @@ class CompanyService
                 $companyData = $request->except('logo');
                 $companyData['logo'] = $logoUrl;
             }
-
             return Company::create($companyData);
         } catch (\Exception $e) {
 
