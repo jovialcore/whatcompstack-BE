@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\DB;
 
 class FrontEndService
 {
-
-
     public function getAllStackInfo(): array
     {
 
@@ -25,7 +23,7 @@ class FrontEndService
     public function store($request): RedirectResponse
     {
         $request->validate([
-            'frameworks' => 'required|array',
+            'frameworks' => 'array|nullable',
             'company' => 'required|integer',
         ]);
 
