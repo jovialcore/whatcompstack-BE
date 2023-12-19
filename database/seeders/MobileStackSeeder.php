@@ -18,7 +18,7 @@ class MobileStackSeeder extends Seeder
             "Objective-C",
             "Java",
             "Kotlin",
-            "ReactNative",
+            "React Native",
             "Dart",
             "Flutter"
         ];

@@ -22,7 +22,8 @@ return new class extends Migration
             $table->integer('is_published')->default(0);
             $table->timestamps();
 
-            $table->foreign('company_id')->references('id')->on('companies')->onDelete();
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+
         });
     }
 
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('mobile_company');
     }
 };
