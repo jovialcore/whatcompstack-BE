@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <h4 class="fw-bold py-2 mb-4"><span class="text-muted fw-light">Stack /</span> Add Frontend Stack </h4>
+    <h4 class="fw-bold py-2 mb-4"><span class="text-muted fw-light">Stack /</span> Add Mobile Stack </h4>
 
     @push('select2style')
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -37,6 +37,11 @@
                             @endforeach
 
                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-check-input" type="checkbox" name="mobileOnly" value="1" checked>
+                        <span class="text-danger"> Please confirm if company stack is mobile only ( i.e no frontend )
+                            ?</span>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Submit</button>

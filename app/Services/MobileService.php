@@ -24,10 +24,11 @@ class MobileService
     public function store($request): RedirectResponse
     {
         $request->validate([
-            'frameworks' => 'array|nullable',
+            'frameworks' => 'required|array|nullable',
             'company' => 'required|integer',
             'mobileOnly' => 'required'
         ]);
+
 
         return $this->saveMobileStack($request);
     }
@@ -38,8 +39,9 @@ class MobileService
             $company = Company::findOrFail($request->company);
             DB::transaction(function () use ($company, $request) {
 
-                if ($request->onlyMobile) {
-                    $company->mobileAndBeStackOnly = self::mobileOrBeOnlyStack;
+                if ($request->mobileOnly) {
+                    $company->is_mobile_only = self::mobileOrBeOnlyStack;
+                 
                     $company->save();
                 }
                 //update fameworks--do not remove previous framewoks and don't create duplicates
