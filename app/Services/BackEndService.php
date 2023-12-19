@@ -23,7 +23,7 @@ class BackEndService
     public function store($request): RedirectResponse
     {
         $request->validate([
-            'frameworks' => 'required|array',
+            'frameworks' => 'array|nullable',
             'plangs' => 'required|array',
             'company' => 'required|integer',
         ]);
