@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="col-lg-12 col-md-4 order-1">
-        <h4 class="fw-bold py-2 mb-4"><span class="text-muted fw-light">Stack /</span> Add Backend Stack </h4>
+        <h4 class="fw-bold py-2 mb-4"><span class="text-muted fw-light">Stack /</span> Select Stacks to Add  </h4>
 
         <div class="row">
 
