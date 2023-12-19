@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-
         $this->call(CompanyTableSeeder::class);
         $this->call(PlangSeeder::class);
         $this->call(FrameworkAndProgrammingLangSeeder::class);
