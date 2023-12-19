@@ -59,6 +59,12 @@ class Company extends Model
         return $this->belongsToMany(FeFramework::class, 'fe_framework_company')->withPivot(['draft_rating', 'is_draft', 'is_published', 'rating']);
     }
 
+
+    public function mobilePlangs(): BelongsToMany
+    {
+        return $this->belongsToMany(Mobile::class, 'mobile_company')->withPivot(['draft_rating', 'is_draft', 'is_published', 'rating']);
+    }
+
     public function scopeFetchAllClientDetails($query)
     {
         return $query->withWhereHas('plangs', function ($query) {

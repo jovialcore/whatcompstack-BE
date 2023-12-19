@@ -16,4 +16,6 @@ class FeFramework extends Model
     {
         return $this->belongsToMany(Company::class, 'fe_framework_company')->withPivot(['draft_rating', 'is_draft', 'is_published', 'rating']);
     }
+
+    
 }
