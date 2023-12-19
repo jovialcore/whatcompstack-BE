@@ -67,12 +67,11 @@ class Scraper
                     $purgedTitles =  strtolower(preg_replace('/[^a-z]/i', ' ', $jobTitles));
 
                     // get the particular keyword, which  in this case, it is "backend"
-                    $keyword = substr($purgedTitles, strpos($purgedTitles,  $this->stack));
 
+                    $keyword = substr($purgedTitles, strpos($purgedTitles,  $this->stack));
 
                     // further extraction to return only one word i.e backend 
                     $keyword = preg_replace("/\s.*/", '', ltrim($keyword));
-
 
                     // click on the job description that has the keyword backend 
                     if ($keyword == $this->stack) {
@@ -82,7 +81,7 @@ class Scraper
                         // click on the link
                         $website = $client->click($link);
 
-                        //  👀  side note or bud:  this stuff loops two times? why ? 👀 
+                        //  👀  side note or bud:  this stuff loops two times? why ?  it should be fixed now though: Dec 19-12-2023 👀 
                         $this->fetch($company, $website);
                     }
 
