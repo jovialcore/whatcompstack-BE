@@ -68,7 +68,7 @@ Route::group(['middleware' => 'admin'], function () {
 
 
         //mobile
-        Route::prefix('/stack/frontend')->group(function () {
+        Route::prefix('/stack/mobile')->group(function () {
 
             Route::get('/create', [App\Http\Controllers\MobileController::class, 'create'])->name('admin.stack.mobile.create');
             Route::post('/store', [App\Http\Controllers\MobileController::class, 'store'])->name('admin.stack.mobile.store');

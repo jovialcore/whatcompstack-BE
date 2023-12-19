@@ -46,7 +46,7 @@ class MobileService
                 $company->mobilePlangs()->syncWithPivotValues($request->frameworks,  ['is_draft' => 0, 'is_published' => 1], false);
             });
 
-            return redirect()->back()->with('msg', 'Mobile was saved successfully');
+            return redirect()->back()->with('msg', 'Mobile Stack was saved successfully');
         } catch (\Exception $e) {
 
             return redirect()->back()->withErrors(['errors' => $e->getMessage()]);

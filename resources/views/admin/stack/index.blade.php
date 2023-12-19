@@ -31,6 +31,18 @@
             </div>
 
 
+            <div class="col-sm-6 col-lg-4 mb-4">
+
+                <a href="{{ route('admin.stack.mobile.create') }}">
+                    <div class="card bg-white text-dark  p-2">
+                        <div class="card-body">
+                            <h5 class="card-title">Mobile </h5>
+                            <p class="card-text">Select to add mobile tools </p>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
 
             <div class="col-sm-6 col-lg-4 mb-4">
                 <div class="card bg-white text-dark  p-2">
