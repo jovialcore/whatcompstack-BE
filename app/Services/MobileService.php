@@ -26,7 +26,7 @@ class MobileService
         $request->validate([
             'frameworks' => 'required|array|nullable',
             'company' => 'required|integer',
-            'mobileOnly' => 'required'
+            'mobileOnly' => 'nullable'
         ]);
 
 
