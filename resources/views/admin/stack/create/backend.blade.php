@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <h4 class="fw-bold py-2 mb-4"><span class="text-muted fw-light">Stack /</span> Add Stack </h4>
+    <h4 class="fw-bold py-2 mb-4"><span class="text-muted fw-light">Stack /</span> Add Backend Stack </h4>
 
     @push('select2style')
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />

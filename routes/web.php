@@ -56,7 +56,7 @@ Route::group(['middleware' => 'admin'], function () {
         //backend
         Route::prefix('/stack/backend')->group(function () {
             Route::get('/stack/backend/create', [App\Http\Controllers\BackendController::class, 'create'])->name('admin.stack.backend.create');
-            Route::post('/stak/store', [App\Http\Controllers\BackendController::class, 'store'])->name('admin.stack.backend.store');
+            Route::post('/stack/store', [App\Http\Controllers\BackendController::class, 'store'])->name('admin.stack.backend.store');
         });
 
         //frontend

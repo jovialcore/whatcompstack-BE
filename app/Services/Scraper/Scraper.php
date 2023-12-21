@@ -18,11 +18,11 @@ class Scraper
     protected $company;
     protected $dataSource;
     protected $stack;
-    protected  $noOfResultsPerPage;
+    protected $noOfResultsPerPage;
     protected $stackOptions;
     protected $sourceSlug;
 
-    public function __construct($company, $sourceSlug, $dataSource, $stack,   $stackOptions)
+    public function __construct($company, $sourceSlug, $dataSource, $stack, $stackOptions)
     {
         $this->company = $company;
         $this->dataSource = $dataSource;
@@ -54,7 +54,7 @@ class Scraper
             $isItEndOfPaginationResult = $homepage->filter('.job-list > .job-list-li')->first()->count();
 
 
-            if ($noOfResultsTracker < $noOfResultsPerPage) { /// controls no of sections per page 
+            if ($noOfResultsTracker < $noOfResultsPerPage) { /// controls no of sections per page
 
 
                 $homepage->filter('.job-info > ul > .mag-b ')->each(function ($node, $key) use ($client, $company, &$keyword, &$cc, &$noOfResultsTracker) {
@@ -63,17 +63,17 @@ class Scraper
 
                     $noOfResultsTracker++;
 
-                    // remove parentensis --just incase and any other stuff aside letters and alphabets and format to smaller letters too 
+                    // remove parentensis --just incase and any other stuff aside letters and alphabets and format to smaller letters too
                     $purgedTitles =  strtolower(preg_replace('/[^a-z]/i', ' ', $jobTitles));
 
                     // get the particular keyword, which  in this case, it is "backend"
 
                     $keyword = substr($purgedTitles, strpos($purgedTitles,  $this->stack));
 
-                    // further extraction to return only one word i.e backend 
+                    // further extraction to return only one word i.e backend
                     $keyword = preg_replace("/\s.*/", '', ltrim($keyword));
 
-                    // click on the job description that has the keyword backend 
+                    // click on the job description that has the keyword backend
                     if ($keyword == $this->stack) {
                         // find the link
                         $link = $node->selectLink($jobTitles)->link();
@@ -81,11 +81,11 @@ class Scraper
                         // click on the link
                         $website = $client->click($link);
 
-                        //  👀  side note or bud:  this stuff loops two times? why ?  it should be fixed now though: Dec 19-12-2023 👀 
+                        //  👀  side note or bud:  this stuff loops two times? why ?  it should be fixed now though: Dec 19-12-2023 👀
                         $this->fetch($company, $website);
                     }
 
-                    // sieve the key word 
+                    // sieve the key word
                 });
             }
 
@@ -126,7 +126,7 @@ class Scraper
 
         $text = "";
 
-        // get the second link that matches the nodes specified 
+        // get the second link that matches the nodes specified
         $website->filter('p > strong')->each(function ($node) use (&$text, $website) {
 
             $requirmentBe = implode('|', $this->stackOptions['requirement_keywords']);
@@ -153,7 +153,7 @@ class Scraper
 
 
         $result = [];
-        // get all backend stack 
+        // get all backend stack
 
         $backendArr  = $this->stackOptions['allstacks'];
         $be_format_for_db  =   $this->stackOptions['format_for_db'];
@@ -175,13 +175,13 @@ class Scraper
                 $keyword = 'node.js'; // converted to the small form so we can use array_keys to get the properdb formate name, see below 👇👇👇
             }
 
-            $matchedKeys = array_keys($backendArr, $keyword); // note that array_keys can act as filters too 
+            $matchedKeys = array_keys($backendArr, $keyword); // note that array_keys can act as filters too
 
             // push (merge) the matching item to the result  array
             $result = array_merge($result, $matchedKeys);
         }
-        //array_splice($result, 0); // assuming there is no programming language 
-        //lets get frameworks 
+        //array_splice($result, 0); // assuming there is no programming language
+        //lets get frameworks
 
         // $result[] = 'Laravel';
 
@@ -196,7 +196,7 @@ class Scraper
         // $result[] = 'Lua';
 
         // $result[] = 'CakePHP';
-        // $result[] = 'Express.js'; 
+        // $result[] = 'Express.js';
 
 
 
@@ -214,7 +214,7 @@ class Scraper
                 // then use the $value i.e programming langauge and assign the returned framework inside the new collector: $k array
                 $k[$value] = $framework;
 
-                // if no programming language are found, that means we have only frameworks, then assign the scrapped framework results to their respective programming languages  
+                // if no programming language are found, that means we have only frameworks, then assign the scrapped framework results to their respective programming languages
             } else {
                 foreach ($be_format_for_db as $keyy => $fwk) {
 
@@ -255,7 +255,7 @@ class Scraper
                         foreach ($k[$progrLang->name] as $frameworkName) {
                             // get the related framework id
                             $frameworkId = $progrLang->frameworks->where('name', $frameworkName)->first()->id;
-                            // loop through company frameworks and update the pivot table of ids that match 
+                            // loop through company frameworks and update the pivot table of ids that match
                             foreach ($company->frameworks as $fw) {
                                 $company->frameworks()->updateExistingPivot($frameworkId, ['draft_rating' => $fw->pivot->draft_rating + 1, 'is_draft' => 1, 'is_published' => 0]);
                             }
@@ -275,7 +275,7 @@ class Scraper
                         $frameworkMatched =   $progrLang->frameworks->where('name', $frameworkName)->first();
 
                         if ($frameworkMatched) {
-                            // insert to compnay_framework table 
+                            // insert to compnay_framework table
                             $company->frameworks()->attach($frameworkMatched->id, ['draft_rating' => 1, 'is_draft' => 1, 'is_published' => 0]);
                         } else {
                             dd('cant find ' . $frameworkName . ' cos it is related to ' . $plangKey);
