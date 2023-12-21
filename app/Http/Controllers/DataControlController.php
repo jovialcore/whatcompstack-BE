@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Services\Scraper\ScraperBE;
 use App\Services\Scraper\Scraper;
 use App\Traits\companyPreviewTrait;
-use  Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
 use App\Helpers\Backend;
@@ -48,7 +48,7 @@ class DataControlController extends Controller
             'data_source' => 'required',
         ]);
 
-   
+
 
         $this->dataControlService->initiateDataSourcing($request);
 

@@ -34,6 +34,12 @@
                             Frontend
                         </button>
                     </li>
+                    <li class="nav-item">
+                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
+                            data-bs-target="#navs-top-profile" aria-controls="navs-top-profile" aria-selected="false">
+                            Mobile
+                        </button>
+                    </li>
 
                 </ul>
                 <div class="tab-content">
@@ -64,7 +70,7 @@
                         <p>No Stack yet </p>
                         @endif
 
-                      
+
 
 
                     </div>
