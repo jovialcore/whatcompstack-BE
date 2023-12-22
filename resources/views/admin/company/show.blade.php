@@ -36,7 +36,7 @@
                     </li>
                     <li class="nav-item">
                         <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
-                            data-bs-target="#navs-top-profile" aria-controls="navs-top-profile" aria-selected="false">
+                            data-bs-target="#navs-top-mobile" aria-controls="navs-top-profile" aria-selected="false">
                             Mobile
                         </button>
                     </li>
@@ -67,7 +67,7 @@
                                 </div>
                             @endforeach
                         @else
-                        <p>No Stack yet </p>
+                            <p>No Stack yet </p>
                         @endif
 
 
@@ -76,9 +76,56 @@
                     </div>
 
                     <div class="tab-pane fade" id="navs-top-profile" role="tabpanel">
-                        <p>
-                            No stack for frontend for now
-                        </p>
+                        @if (isset($company->feFraneworks) && count($company->feFraneworks) > 0)
+                            @foreach ($company->feFrameworks as $plang)
+                                <div class="d-flex mb-3">
+                                    <div class="flex-shrink-0">
+                                        <img src="{{ asset('/assets/img/icons/brands/google.png') }}" alt="google"
+                                            class="me-3" height="30" />
+                                    </div>
+                                    <div class="flex-grow-1 row">
+                                        <div class="col-9 mb-sm-0 mb-2">
+                                            <h6 class="mb-0">{{ $plang->name }}</h6>
+                                            <small class="text-muted">Rated {{ $plang->pivot->rating }}</small>
+                                        </div>
+                                        <div class="col-3 text-end">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input float-end" type="checkbox" role="switch" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <p>No Frontend yet </p>
+                        @endif
+
+                    </div>
+
+                    <div class="tab-pane fade" id="navs-top-mobile" role="tabpanel">
+                        @if (count($company->mobilePlangs) > 0)
+                            @foreach ($company->mobilePlangs as $plang)
+                                <div class="d-flex mb-3">
+                                    <div class="flex-shrink-0">
+                                        <img src="{{ asset('/assets/img/icons/brands/google.png') }}" alt="google"
+                                            class="me-3" height="30" />
+                                    </div>
+                                    <div class="flex-grow-1 row">
+                                        <div class="col-9 mb-sm-0 mb-2">
+                                            <h6 class="mb-0">{{ $plang->name }}</h6>
+                                            <small class="text-muted">Rated {{ $plang->pivot->rating }}</small>
+                                        </div>
+                                        <div class="col-3 text-end">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input float-end" type="checkbox" role="switch" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <p>No Mobile Stack yet </p>
+                        @endif
 
                     </div>
 

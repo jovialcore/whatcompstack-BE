@@ -40,6 +40,9 @@ class CompanyResource extends JsonResource
             'stack_fe_framework' => $this->feFrameworks->map(function ($item) {
                 return [$item->name => ['rating' => $item->pivot->rating]];
             }),
+            'stack_mobile' => $this->mobilePlangs->map(function ($item) {
+                return [$item->name => ['rating' => $item->pivot->rating]];
+            }),
         ];
     }
 }
