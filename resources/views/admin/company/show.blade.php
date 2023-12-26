@@ -2,7 +2,7 @@
 @section('content')
     <div class="col-md-11 mx-auto">
         <div class="card">
-            <h5 class="card-header">{{ $company->name }}</h5>
+            <h5 class="card-header">{{ $company->name }}!</h5>
 
             <div class="card-body">
                 <div class="d-flex align-items-start align-items-sm-center gap-4">
