@@ -70,11 +70,9 @@
                             <p>No Stack yet </p>
                         @endif
 
-
-
-
                     </div>
 
+                    
                     <div class="tab-pane fade" id="navs-top-profile" role="tabpanel">
                         @if (isset($company->feFraneworks) && count($company->feFraneworks) > 0)
                             @foreach ($company->feFrameworks as $plang)

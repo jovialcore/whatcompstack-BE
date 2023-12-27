@@ -36,7 +36,7 @@ class CompanyService
             'cto_name' => 'string|nullable',
             'hr_name' => 'string|nullable',
             'hr_contact' => 'url |nullable',
-            'logo' => 'required|mimes:png,jpeg',
+            'logo' => 'required|mimes:png,jpeg,svg',
             'source_slug' => 'required|string|unique:companies,source_slug'
         ]);
 
