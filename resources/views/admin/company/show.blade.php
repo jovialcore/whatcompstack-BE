@@ -74,7 +74,7 @@
 
                     
                     <div class="tab-pane fade" id="navs-top-profile" role="tabpanel">
-                        @if (isset($company->feFraneworks) && count($company->feFraneworks) > 0)
+                        @if (isset($company->feFrameworks) && count($company->feFrameworks) > 0)
                             @foreach ($company->feFrameworks as $plang)
                                 <div class="d-flex mb-3">
                                     <div class="flex-shrink-0">

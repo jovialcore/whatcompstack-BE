@@ -39,7 +39,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <input class="form-check-input" type="checkbox" name="mobileOnly" value>
+                        <input class="form-check-input" type="checkbox" name="mobileOnly" value="1">
                         <span class="text-danger"> Please confirm if company stack is mobile only ( i.e no frontend )
                             ?</span>
                     </div>

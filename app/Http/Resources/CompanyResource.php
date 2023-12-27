@@ -31,6 +31,7 @@ class CompanyResource extends JsonResource
             'hr_contact' => $this->hr_contact,
             'source_slug' => $this->source_slug,
             'logo' => $this->logo ? asset($this->logo) : null,
+            'is_mobile_only' => $this->is_mobile_only == 1 ? true : false,
             'stack_be_plang' => $this->plangs->map(function ($item) {
                 return [$item->name => ['rating' => $item->pivot->rating]];
             }),

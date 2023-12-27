@@ -29,7 +29,6 @@ class MobileService
             'mobileOnly' => 'nullable'
         ]);
 
-
         return $this->saveMobileStack($request);
     }
 
@@ -41,7 +40,7 @@ class MobileService
 
                 if ($request->mobileOnly) {
                     $company->is_mobile_only = self::mobileOrBeOnlyStack;
-                 
+
                     $company->save();
                 }
                 //update fameworks--do not remove previous framewoks and don't create duplicates
