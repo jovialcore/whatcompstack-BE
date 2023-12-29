@@ -14,7 +14,7 @@ class CompanyStackController extends Controller
 
     public function index(Request $req, Company $company)
     {
-        $companies = $company::FetchAllClientDetails()->paginate(15);
+        $companies = $company::FetchAllClientDetails()->get();
 
         //if larvel had an "orWithWhereHAs" 🙂
 
