@@ -20,7 +20,7 @@ class CompanyService
 
     public function getAllCompanies(): array
     {
-        $companies = Company::paginate(15);
+        $companies = Company::all();
 
         return compact('companies');
     }
