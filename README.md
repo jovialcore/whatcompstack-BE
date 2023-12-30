@@ -8,15 +8,14 @@ You want to see it as a insightful resource base for your tech research...etc
 <img alt="What-company-stack front page" src="https://res.cloudinary.com/chidiebere/image/upload/v1703944384/Screenshot_from_2023-12-30_14-52-05.png" />
 
 ### How do we get the information  ?
-The project has an admin [admin.whatcompanystack.com](https://admin.whatcompanystack.com/not-an-admin). This is where the technological stacks are sourced for. 
+The project has an admin interface [admin.whatcompanystack.com](https://admin.whatcompanystack.com/not-an-admin). This is where the technological stacks are sourced for. 
 We get the information about the tools these companies use from job postings. We scrape these info from online job postings but we also manually do our research and store the information when we have to. 
 
 ### Key Features
 
 - **📚 List tech staks used by companies:** You can see a listing of some tech companies/startups with a display of programming languages, frameworks they use. 
-- **   Search feature base on tech stack, programming language, etc ( Frontend )
-- ** 🧑‍🍳 Source (scrape) programming languages and frameworks of listed companies  (Admin)
-- ** There is an interace for manual addition of tech tools
+- **❄️ **Intuitive Search:** Search feature base on tech stack, programming language, etc ( Frontend )
+- ** 🧑‍🍳 **Auto Sourcing Source:** (scrape) programming languages and frameworks of listed companies  (Admin). There is an interace for manual addition of tech tools
 - **🔒 Fully open source:** You can self-host the entire stack on your servers. Both the frontend and admin interface is fully open source
 
 ### Roadmap Features
