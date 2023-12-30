@@ -7,6 +7,9 @@ You want to see it as a insightful resource base for your tech research...etc
 
 <img alt="What-company-stack front page" src="https://res.cloudinary.com/chidiebere/image/upload/v1703944384/Screenshot_from_2023-12-30_14-52-05.png" />
 
+### Frontend Repo :
+Please see our [frontend github repo ](https://github.com/jovialcore/whatcompstack-FE)
+
 ### How do we get the information  ?
 The project has an admin interface [admin.whatcompanystack.com](https://admin.whatcompanystack.com/not-an-admin). This is where the technological stacks are sourced for. 
 We get the information about the tools these companies use from job postings. We scrape these info from online job postings but we also manually do our research and store the information when we have to. 
