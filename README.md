@@ -28,7 +28,7 @@ We get the information about the tools these companies use from job postings. We
 
 Please reach out to any of us on twitter on if you have any feature request.
 
-[chidiebere ~Maintainer ](https://twitter.com/jovial_core) 
+[Chidiebere ~Maintainer ](https://twitter.com/jovial_core) 
 
 [Daniel ~maintainer ](https://twitter.com/danieliheonu) 
 
