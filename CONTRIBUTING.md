@@ -1,4 +1,4 @@
-## ✨ Your-Laravel-Project-Name
+## ✨ What-Company-Stack Backend and Admin
 
 
 ### Installation
@@ -12,8 +12,8 @@ Before you begin, ensure you have met the following requirements:
 ### Installation
 
 ```bash
-git clone https://github.com/your-username/your-laravel-project.git
-cd your-laravel-project
+git clone  https://github.com/jovialcore/whatcompstack-BE.git
+cd whatcompstack-BE
 composer install
 npm install
 cp .env.example .env
