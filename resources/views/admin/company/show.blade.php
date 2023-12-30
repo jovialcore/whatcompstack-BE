@@ -49,10 +49,10 @@
                         @if (count($company->plangs) > 0)
                             @foreach ($company->plangs as $plang)
                                 <div class="d-flex mb-3">
-                                    <div class="flex-shrink-0">
+                                    {{-- <div class="flex-shrink-0">
                                         <img src="{{ asset('/assets/img/icons/brands/google.png') }}" alt="google"
                                             class="me-3" height="30" />
-                                    </div>
+                                    </div> --}}
                                     <div class="flex-grow-1 row">
                                         <div class="col-9 mb-sm-0 mb-2">
                                             <h6 class="mb-0">{{ $plang->name }}</h6>
@@ -77,10 +77,10 @@
                         @if (isset($company->feFrameworks) && count($company->feFrameworks) > 0)
                             @foreach ($company->feFrameworks as $plang)
                                 <div class="d-flex mb-3">
-                                    <div class="flex-shrink-0">
+                                    {{-- <div class="flex-shrink-0">
                                         <img src="{{ asset('/assets/img/icons/brands/google.png') }}" alt="google"
                                             class="me-3" height="30" />
-                                    </div>
+                                    </div> --}}
                                     <div class="flex-grow-1 row">
                                         <div class="col-9 mb-sm-0 mb-2">
                                             <h6 class="mb-0">{{ $plang->name }}</h6>
@@ -104,10 +104,10 @@
                         @if (count($company->mobilePlangs) > 0)
                             @foreach ($company->mobilePlangs as $plang)
                                 <div class="d-flex mb-3">
-                                    <div class="flex-shrink-0">
+                                    {{-- <div class="flex-shrink-0">
                                         <img src="{{ asset('/assets/img/icons/brands/google.png') }}" alt="google"
                                             class="me-3" height="30" />
-                                    </div>
+                                    </div> --}}
                                     <div class="flex-grow-1 row">
                                         <div class="col-9 mb-sm-0 mb-2">
                                             <h6 class="mb-0">{{ $plang->name }}</h6>
