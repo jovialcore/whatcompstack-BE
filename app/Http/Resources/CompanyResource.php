@@ -22,7 +22,7 @@ class CompanyResource extends JsonResource
             'id' => $this->id,
             'company' => $this->name,
             'about' => $this->about,
-            'company_url' => $this->company_url,
+            'company_url' => $this->url,
             'ceo' => $this->ceo,
             'ceo_contact' => $this->ceo_contact,
             'cto_contact' => $this->cto_contact,
