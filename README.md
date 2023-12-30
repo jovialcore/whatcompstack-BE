@@ -3,7 +3,7 @@
 <p align="center"><a href="https://whatcompanystack.com" target="_blank"><img src="https://res.cloudinary.com/chidiebere/image/upload/c_thumb,w_200,g_face/v1703702998/WCS_1.png" width="200" alt="What-company-stack logo"></a></p>
 
 Having a directory where you can quickly lookup at technologies used by African companies/startups so you can narrow your job search and increase your precision with job hunting or cold emailing is really helpful. WhatCompanyStack is an open source  web application that curates tech stacks used by African startups/companies. It gives a clue into what tech stacks are used in a company for backend, frontend, DevOps, database, etc.
-You want to see it as a insightful resource base for your tech research...etc
+You want to see it as a insightful resource base for your tech research...etc Please star this project. Thanks.
 
 <img alt="What-company-stack front page" src="https://res.cloudinary.com/chidiebere/image/upload/v1703944384/Screenshot_from_2023-12-30_14-52-05.png" />
 
