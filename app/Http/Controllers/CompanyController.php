@@ -40,7 +40,11 @@ class CompanyController extends Controller
     {
         $this->companyService->storeCompanyData($request);
         
-        return to_route('admin.company.index');   
+        if($response === true) {
+            return to_route('admin.company.index');   
+        }else {
+            return back()->with('message', $response)->withInput();
+        }  
     }
 
     public function show(int $id): View
