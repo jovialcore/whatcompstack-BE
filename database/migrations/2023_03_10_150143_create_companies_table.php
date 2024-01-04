@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->json('stack')->nullable();
+            $table->json('stack_be')->nullable();
+            $table->json('stack_fe')->nullable();
             $table->json('database_driver')->nullable();
             $table->json('devops')->nullable();
             $table->string('ceo')->nullable();
@@ -25,6 +26,11 @@ return new class extends Migration
             $table->string('hr_contact')->nullable();
             $table->string('testimonials')->nullable();
             $table->string('salary_range')->nullable();
+            $table->text('about')->nullable();
+            $table->text('url')->nullable();
+            $table->text('source_slug')->nullable();
+            $table->string('logo')->nullable();
+
             $table->timestamps();
         });
     }

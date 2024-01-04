@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\CrudController;
+use App\Http\Controllers\HngController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::get('/company/stack/results', [App\Http\Controllers\Api\SearchController::class, 'search']);
+
+Route::get('/company/stack/all', [App\Http\Controllers\Api\CompanyStackController::class, 'index']);
+
+
+
+Route::get('/company/stack/details/{id}', [App\Http\Controllers\Api\CompanyStackController::class, 'show']);
+
