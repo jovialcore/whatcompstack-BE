@@ -12,6 +12,10 @@
                 {!! implode('', $errors->all('<div class="alert alert-danger"> :message </div>')) !!}
             @endif
 
+            @if (Session::has('message'))
+                <div class="alert alert-danger">{{ Session::get('message') }}</div>
+            @endif
+
             <h5 class="card-header">Add Company 👜</h5>
             <div class="card-body">
                 <form method="POST" action="{{ route('admin.company.store') }}" enctype="multipart/form-data">
@@ -20,7 +24,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="basic-default-fullname">Company Name</label>
                         <input type="text" name="name" class="form-control" id="basic-default-fullname"
-                            placeholder="John Doe" value="{{ old('name') }}">
+                            placeholder="Company Limited" value="{{ old('name') }}">
                     </div>
 
                     <div class="mb-3">
@@ -29,7 +33,7 @@
                             <span id="basic-icon-default-message2" class="input-group-text"><i
                                     class="bx bx-comment"></i></span>
                             <textarea name="about" id="basic-icon-default-message" class="form-control"
-                                placeholder="Hi, Do you have a moment to talk Joe?" aria-label="Hi, Do you have a moment to talk Joe?"
+                                placeholder="What is the company all about?" aria-label="Hi, Do you have a moment to talk Joe?"
                                 aria-describedby="basic-icon-default-message2">{{ old('about') }}</textarea>
                         </div>
                     </div>
@@ -40,7 +44,7 @@
                             <span id="basic-icon-default-company2" class="input-group-text"><i
                                     class="bx bx-buildings"></i></span>
                             <input name="url" type="text" id="basic-icon-default-company" class="form-control"
-                                placeholder="ACME Inc." aria-label="ACME Inc."
+                                placeholder="https://company.com" aria-label="ACME Inc."
                                 aria-describedby="basic-icon-default-company2" value="{{ old('url') }}">
                         </div>
                     </div>
@@ -58,38 +62,38 @@
 
                     <div class="mb-3">
                         <label class="form-label" for="basic-default-fullname">CEO Name</label>
-                        <input type="text" name="ceo_name" class="form-control" id="basic-default-fullname"
-                            placeholder="John Doe" value="{{ old('ceo_name') }}">
+                        <input type="text" name="ceo" class="form-control" id="basic-default-fullname"
+                            placeholder="John Doe" value="{{ old('ceo') }}">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label" for="basic-default-fullname">CEO Contact</label>
                         <input type="text" name="ceo_contact" class="form-control" id="basic-default-fullname"
-                            placeholder="John Doe" value="{{ old('ceo_contact') }}">
+                            placeholder="https://ceo-contact-url.com" value="{{ old('ceo_contact') }}">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label" for="basic-default-fullname">CTO Name</label>
-                        <input type="text" name="cto_name" class="form-control" id="basic-default-fullname"
-                            placeholder="John Doe" value="{{ old('cto_name') }}">
+                        <input type="text" name="cto" class="form-control" id="basic-default-fullname"
+                            placeholder="John Doe" value="{{ old('cto') }}">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label" for="basic-default-fullname">CTO Contact</label>
                         <input type="text" name="cto_contact" class="form-control" id="basic-default-fullname"
-                            placeholder="John Doe" value="{{ old('cto_contact') }}">
+                            placeholder="https://cto-contact-url.com" value="{{ old('cto_contact') }}">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label" for="basic-default-fullname">Hr Name</label>
-                        <input type="text" name="hr_name" class="form-control" id="basic-default-fullname"
-                            placeholder="John Doe" value="{{ old('hr_name') }}">
+                        <input type="text" name="hr" class="form-control" id="basic-default-fullname"
+                            placeholder="John Doe" value="{{ old('hr') }}">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label" for="basic-default-fullname">Hr Contact</label>
                         <input type="text" name="hr_contact" class="form-control" id="basic-default-fullname"
-                            placeholder="John Doe" value="{{ old('hr_contact') }}">
+                            placeholder="https://hr-contact-url.com" value="{{ old('hr_contact') }}">
                     </div>
 
                     <div class="mb-3">
