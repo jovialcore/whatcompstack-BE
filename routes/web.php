@@ -80,4 +80,4 @@ Route::group(['middleware' => 'admin'], function () {
 
 Route::get('/not-an-admin', function () {
     return View('nonAdmin.home');
-})->name('non.admin.user');
+})->name('non.admin.user')->middleware('not.an.admin');
