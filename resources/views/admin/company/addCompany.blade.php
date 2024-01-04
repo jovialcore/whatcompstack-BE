@@ -18,7 +18,7 @@
 
             <h5 class="card-header">Add Company 👜</h5>
             <div class="card-body">
-                <form method="POST" action="{{ route('admin.company.store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('admin.companies.store') }}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mb-3">

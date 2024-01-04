@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\CrudController;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CrudController;
+use App\Http\Controllers\CompanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,13 +33,7 @@ Route::group(['middleware' => 'admin'], function () {
 
         Route::get('/preview/soruced-results/{company}',  [App\Http\Controllers\DataControlController::class, 'preview'])->name('preview.results');
 
-        Route::get('/companies/add',  [App\Http\Controllers\CompanyController::class, 'create'])->name('company.add');
-
-        Route::get('/companies',  [App\Http\Controllers\CompanyController::class, 'index'])->name('company.index');
-
-        Route::post('/companies/store',  [App\Http\Controllers\CompanyController::class, 'store'])->name('company.store');
-
-        Route::get('/companies/{id}/show',  [App\Http\Controllers\CompanyController::class, 'show'])->name('company.show');
+        Route::resource('companies', CompanyController::class);
 
         Route::post('/preview/confirm/results/{company}',  [App\Http\Controllers\DataControlController::class, 'confirmResults'])->name('preview.result.confirm');
 

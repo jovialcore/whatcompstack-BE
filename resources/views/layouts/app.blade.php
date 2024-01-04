@@ -108,16 +108,16 @@
                             </a>
 
                             <ul class="menu-sub">
-                                <li class="menu-item {{ request()->routeIs('admin.company.index') ? 'active' : '' }}">
-                                    <a href="{{ route('admin.company.index') }}" class="menu-link">
+                                <li class="menu-item {{ request()->routeIs('admin.companies.index') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.companies.index') }}" class="menu-link">
                                         <div data-i18n="Without menu">View Companies</div>
                                     </a>
                                 </li>
                             </ul>
                             <!-- I want to become a disciplined successful accomplished  -->
                             <ul class="menu-sub">
-                                <li class="menu-item {{ request()->routeIs('admin.company.add') ? 'active' : '' }}">
-                                    <a href="{{ route('admin.company.add') }}" class="menu-link">
+                                <li class="menu-item {{ request()->routeIs('admin.companies.create') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.companies.create') }}" class="menu-link">
                                         <div data-i18n="Without menu">Add Companies</div>
                                     </a>
                                 </li>
