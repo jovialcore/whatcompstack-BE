@@ -1,5 +1,10 @@
 ## ✨ What-Company-Stack Backend and Admin
 
+### Contribution git flow
+To make a pull request, create a branch on the github repo. Typically, the branch name should be the name of the issue you are making a pull request for. If there are no exisiting issues, you should still create a branch and make a pull request to the branch you just created . Please do not make a pull request to dev branch or main.  
+
+Once a pull request has been made, the maintainer will pull that branch and test the recent changes before taking the next action. 
+
 
 ### Installation
 
