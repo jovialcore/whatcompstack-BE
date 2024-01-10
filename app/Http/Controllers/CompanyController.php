@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use Illuminate\Http\Request;
 use App\Services\CompanyService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\StoreCompanyDataRequest;
 
 class CompanyController extends Controller
 {
@@ -35,7 +36,7 @@ class CompanyController extends Controller
     }
 
 
-    public function store(Request $request, Company $company): RedirectResponse
+    public function store(StoreCompanyDataRequest $request, Company $company): RedirectResponse
     {
         $this->companyService->storeCompanyData($request, $company);
 

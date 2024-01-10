@@ -27,19 +27,6 @@ class CompanyService
 
     public function storeCompanyData(Request $request, Company $company)
     {
-        $request->validate([
-            'name' => 'required',
-            'about' => 'required',
-            'url' => 'url|unique:companies,url',
-            'ceo_name' => 'string|nullable',
-            'cto_contact' => 'url|nullable',
-            'cto_name' => 'string|nullable',
-            'hr_name' => 'string|nullable',
-            'hr_contact' => 'url |nullable',
-            'logo' => 'required|mimes:png,jpeg,svg',
-            'source_slug' => 'nullable|string|unique:companies,source_slug'
-        ]);
-
         try {
             $companyData = $request->all();
             if ($request->has('logo')) {
