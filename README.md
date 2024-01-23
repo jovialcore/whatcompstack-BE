@@ -28,9 +28,10 @@ We get the information about the tools these companies use from job postings. We
 ### Roadmap Features
 
 1. **Automatic sourcing of information:** While we automatically source (scrape) information at times, we aim to fully automate the sourcing of tech stack information about companies.
-2. **Adding a Rating Feature** : We want to display tech stacks base on the one that is most used by a company. All stack are relevant but a stack can be what is powering a major aspect of their system.
-3. **Job Posting** : To ease tech job hunting, we aim to provide a feature where we post active jobs for which the companies on our list are hiring.
-4. **Stay tuned for more update** : Please sign up on our [newsletter](https://mailchi.mp/fc7ca4ca9623/what-company-stack-news-letter) so as not to miss any of these updates. 
+2. **Adding a Rating Feature** : This is simply adding a rating feature to index the most used stack of these startups or companies. We want to display tech stacks base on the one that is most used by a company. All stack are relevant but a stack can be what is powering a major aspect of their system.
+3. **A what-company-stack Community** : We want to have a what-company-stack community that helps to add additional accuracy to the data we already provide.
+4. **Job Posting** : To ease tech job hunting, we aim to provide a feature where we post active jobs for which the companies on our list are hiring for.
+5. **Stay tuned for more update** : Please sign up on our [newsletter](https://mailchi.mp/fc7ca4ca9623/what-company-stack-news-letter) so as not to miss any of these updates. 
 
 Please reach out to any of us on twitter on if you have any feature request.
 
