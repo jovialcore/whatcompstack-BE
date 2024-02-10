@@ -7,7 +7,10 @@ You want to see it as a insightful resource base for your tech research...etc Pl
 
 
 
-https://github.com/jovialcore/whatcompstack-BE/assets/32295501/902b1f7a-4aea-485f-905a-22f4a1fb8992
+
+https://github.com/jovialcore/whatcompstack-BE/assets/32295501/de6d6053-f0d1-4604-8532-6110894ff38f
+
+
 
 
 
