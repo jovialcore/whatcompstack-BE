@@ -14,11 +14,15 @@ class CompanyStackController extends Controller
 
     public function index(Request $req, Company $company)
     {
-        $companies = $company::FetchAllClientDetails()->get();
 
-        //if larvel had an "orWithWhereHAs" 🙂
+        $companies = $company::FetchAllClientDetails();
 
-        if ($companies->count() > 0) {
+        //if laravel had an "orWithWhereHAs" 🙂
+
+        if ($companies->exists() > 0) {
+
+            $companies = $companies->paginate(20);
+
             return CompanyResource::collection($companies);
         } else {
             return response()->json(['message' => 'No  Results found'], 200);
