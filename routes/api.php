@@ -22,5 +22,5 @@ Route::get('/company/stack/all', [App\Http\Controllers\Api\CompanyStackControlle
 
 
 
-Route::get('/company/stack/details/{id}', [App\Http\Controllers\Api\CompanyStackController::class, 'show']);
+Route::get('/company/stack/details/{source_slug}', [App\Http\Controllers\Api\CompanyStackController::class, 'show']);
 

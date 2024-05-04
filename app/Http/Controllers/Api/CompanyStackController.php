@@ -17,11 +17,11 @@ class CompanyStackController extends Controller
 
         $companies = $company::FetchAllClientDetails();
 
-        //if laravel had an "orWithWhereHAs" 🙂
+        //if laravel had an "orWithWhereHAs" ðŸ™‚
 
         if ($companies->exists() > 0) {
 
-            $companies = $companies->paginate(20);
+            $companies = $companies->paginate(21);
 
             return CompanyResource::collection($companies);
         } else {
@@ -29,11 +29,12 @@ class CompanyStackController extends Controller
         }
     }
 
-    public function show($id)
+    public function show($source_slug)
     {
         $company = new Company();
 
-        $companyStack = $company->FetchAllClientDetails()->find($id);
+    
+        $companyStack = $company->FetchAllClientDetails()->whereName($source_slug)->first();
 
         if ($companyStack) {
             return new CompanyResource($companyStack);
