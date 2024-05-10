@@ -5,10 +5,21 @@
 Having a directory where you can quickly lookup at technologies used by African companies/startups so you can narrow your job search and increase your precision with job hunting or cold emailing is really helpful. WhatCompanyStack is an open source  web application that curates tech stacks used by African startups/companies. It gives a clue into what tech stacks are used in a company for backend, frontend, DevOps, database, etc.
 You want to see it as a insightful resource base for your tech research...etc Please star this project. Thanks.
 
-<img alt="What-company-stack front page" src="https://res.cloudinary.com/chidiebere/image/upload/v1703944384/Screenshot_from_2023-12-30_14-52-05.png" />
+
+
+
+https://github.com/jovialcore/whatcompstack-BE/assets/32295501/de6d6053-f0d1-4604-8532-6110894ff38f
+
+
+
+
+
+### FrontEnd / main website: 
+[whatcompanystack.com](https://whatcompanystack.com)
 
 ### Frontend Repo :
 Please see our [frontend github repo ](https://github.com/jovialcore/whatcompstack-FE)
+
 
 ### How do we get the information  ?
 The project has an admin interface [admin.whatcompanystack.com](https://admin.whatcompanystack.com/not-an-admin). This is where the technological stacks are sourced for. 
@@ -24,9 +35,10 @@ We get the information about the tools these companies use from job postings. We
 ### Roadmap Features
 
 1. **Automatic sourcing of information:** While we automatically source (scrape) information at times, we aim to fully automate the sourcing of tech stack information about companies.
-2. **Adding a Rating Feature** : We want to display tech stacks base on the one that is most used by a company. All stack are relevant but a stack can be what is powering a major aspect of their system.
-3. **Job Posting** : To ease tech job hunting, we aim to provide a feature where we post active jobs for which the companies on our list are hiring.
-4. **Stay tuned for more update** : Please sign up on our [newsletter](https://mailchi.mp/fc7ca4ca9623/what-company-stack-news-letter) so as not to miss any of these updates. 
+2. **Adding a Rating Feature** : This is simply adding a rating feature to index the most used stack of these startups or companies. We want to display tech stacks base on the one that is most used by a company. All stack are relevant but a stack can be what is powering a major aspect of their system.
+3. **A what-company-stack Community** : We want to have a what-company-stack community that helps to add additional accuracy to the data we already provide.
+4. **Job Posting** : To ease tech job hunting, we aim to provide a feature where we post active jobs for which the companies on our list are hiring for.
+5. **Stay tuned for more update** : Please sign up on our [newsletter](https://mailchi.mp/fc7ca4ca9623/what-company-stack-news-letter) so as not to miss any of these updates. 
 
 Please reach out to any of us on twitter on if you have any feature request.
 

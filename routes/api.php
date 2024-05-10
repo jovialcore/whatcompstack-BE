@@ -18,9 +18,14 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('/company/stack/results', [App\Http\Controllers\Api\SearchController::class, 'search']);
 
-Route::get('/company/stack/all', [App\Http\Controllers\Api\CompanyStackController::class, 'index']);
+Route::group([
+    'prefix' => 'company',
+    'controller' => App\Http\Controllers\Api\CompanyStackController::class
+], function () {
+    Route::get('/stack/all', 'index');
+    Route::get('/stack/details/{source_slug}', 'show');
+    Route::post('/', 'store');
+});
 
-
-
-Route::get('/company/stack/details/{id}', [App\Http\Controllers\Api\CompanyStackController::class, 'show']);
-
+// Route::get('/company/stack/all', [App\Http\Controllers\Api\CompanyStackController::class, 'index']);
+// Route::get('/company/stack/details/{source_slug}', [App\Http\Controllers\Api\CompanyStackController::class, 'show']);
