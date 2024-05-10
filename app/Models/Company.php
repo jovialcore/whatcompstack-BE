@@ -31,16 +31,16 @@ class Company extends Model
         'logo',
         'about',
         'url',
-        'source_slug'
+        'source_slug',
+        'linkedin_url',
+        'user_id',
     ];
 
     protected $casts = [
-
         'stack_be' => 'array',
         'stack_fe' => 'array',
         'devops' => 'array',
         'database_driver' => 'array'
-
     ];
 
 
