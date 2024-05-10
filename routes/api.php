@@ -22,9 +22,9 @@ Route::group([
     'prefix' => 'company',
     'controller' => App\Http\Controllers\Api\CompanyStackController::class
 ], function () {
-    Route::get('stack/all', 'index');
-    Route::get('stack/details/{source_slug}', 'show');
-    Route::post('', 'store');
+    Route::get('/stack/all', 'index');
+    Route::get('/stack/details/{source_slug}', 'show');
+    Route::post('/', 'store');
 });
 
 // Route::get('/company/stack/all', [App\Http\Controllers\Api\CompanyStackController::class, 'index']);
