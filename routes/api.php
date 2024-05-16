@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\CrudController;
-use App\Http\Controllers\HngController;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,9 +16,29 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('/company/stack/results', [App\Http\Controllers\Api\SearchController::class, 'search']);
 
-Route::get('/company/stack/all', [App\Http\Controllers\Api\CompanyStackController::class, 'index']);
+
+
+//Auth::routes(['register' => true, 'reset' => true, 'verify' => true]);
+
+Route::post('/login', [App\Http\Controllers\Api\Auth\LoginController::class, 'login']);
+
+Route::post('/community/signup',  [App\Http\Controllers\Api\Auth\SignupController::class, 'signup']);
+
+Route::post('/community/verify/email',  [App\Http\Controllers\Api\Auth\EmailVerficationController::class, 'verify']);
+
+
+Route::middleware('auth:sanctum', 'verified')->group(function () {
+    //  Route::get('/user-profile',);
+
+    Route::get('/company/stack/all', [App\Http\Controllers\Api\CompanyStackController::class, 'index']);
+});
+
+Route::get('/profile', function () {
+    // Only verified users may access this route...
+
+})->middleware(['auth', 'verified']);
+
 
 
 
 Route::get('/company/stack/details/{source_slug}', [App\Http\Controllers\Api\CompanyStackController::class, 'show']);
-

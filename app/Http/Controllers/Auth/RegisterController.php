@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Api\Auth\SignupController;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -23,6 +24,14 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+
+    /**
+     * Extra validation parameters
+     *
+     * @var array
+     */
+
+    protected $extraValidation = [];
 
     /**
      * Where to redirect users after registration.
@@ -53,6 +62,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ...$this->extraValidation
         ]);
     }
 
