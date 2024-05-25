@@ -26,5 +26,6 @@ class SignupController extends RegisterController
 
             return $this->error(message: $th->getMessage());
         }
+        
     }
 }

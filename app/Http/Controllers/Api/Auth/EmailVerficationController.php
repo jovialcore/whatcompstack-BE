@@ -3,29 +3,26 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Auth\VerificationController;
-use App\Http\Controllers\Controller;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
-use Illuminate\Auth\Events\Verified;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Validation\ValidationException;
 
-class EmailVerficationController extends Controller
+class EmailVerficationController extends VerificationController
 {
+    use ApiResponse, VerifiesEmails;
 
 
-    public function verify(EmailVerificationRequest $request)
+    public function verificationHandler(Request $request)
     {
-        if ($request->user()->hasVerifiedEmail()) {
-            return [
-                'message' => 'Email already verified'
-            ];
-        }
+        try {
+            if ($this->verify($request)->getStatusCode() == 204) {
 
-        if ($request->user()->markEmailAsVerified()) {
-            event(new Verified($request->user()));
-        }
+                return $this->success(message: "Email Verified ! You are in 👋");
+            }
+        } catch (ValidationException $th) {
 
-        return [
-            'message' => 'Email has been verified'
-        ];
+            return $this->error(message: $th->getMessage());
+        }
     }
 }

@@ -24,15 +24,13 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::get('email/verify/{id}/{hash}', function (EmailVerificationRequest $r) {
 
-
-    dd('hiti');
     $r->fulfill();
 
     return response()->json([
         'status' => 'success',
         'message' => '👋 you are in !',
     ]);
-})->middleware(['auth'])->name('verification.verify');
+})->middleware(['auth:sanctum', 'signed'])->name('verification.verify');
 
 
 
