@@ -21,14 +21,11 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/company/stack/results', [App\Http\Controllers\Api\SearchController::class, 'search']);
 
 
-
-//Auth::routes(['register' => true, 'reset' => true, 'verify' => true]);
-
 Route::post('/community/signup',  [App\Http\Controllers\Api\Auth\SignupController::class, 'signup']);
 
 
 Route::get('/email/verify/{id}/{hash}', [EmailVerficationController::class, 'verificationHandler'])
-    ->middleware(['auth:sanctum'])->name('verification.verify');
+    ->middleware(['auth:sanctum', 'signed'])->name('verification.verify');
 
 
 
