@@ -15,17 +15,16 @@ class SignupController extends RegisterController
     public function signup(Request $request)
     {
         try {
-            $this->extraValidation = ['linkedin' => ['nullable', 'url']];
+            $this->appendFields = ['linkedin_url' => ['nullable', 'url']];
 
             if ($this->register($request)->getStatusCode() == 201) {
 
-                
-                return $this->success(message: "sent you a verification letter 💌 !");
+
+                return $this->success(message: "Registration Successful. Please confirm your email");
             }
         } catch (ValidationException $th) {
 
             return $this->error(message: $th->getMessage());
         }
-        
     }
 }

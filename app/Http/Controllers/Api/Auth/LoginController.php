@@ -30,6 +30,6 @@ class LoginController extends Controller
             return $this->success(message: "Login was successful");
         }
 
-        return response()->json('The provided credentials do not match our records.');
+        return response()->json(['data' => 'The provided credentials do not match our records.']);
     }
 }

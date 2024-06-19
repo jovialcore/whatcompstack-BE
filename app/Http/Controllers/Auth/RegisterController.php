@@ -31,7 +31,7 @@ class RegisterController extends Controller
      * @var array
      */
 
-    protected $extraValidation = [];
+    protected $appendFields = [];
 
     /**
      * Where to redirect users after registration.
@@ -62,7 +62,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            ...$this->extraValidation
+            ...$this->appendFields
         ]);
     }
 
@@ -77,7 +77,9 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            ...$this->appendFields,
             'password' => Hash::make($data['password']),
+         
         ]);
     }
 }
