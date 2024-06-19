@@ -26,8 +26,7 @@ class CustomVerifyEmailNotification extends  VerifyEmail
 
     protected function verificationUrl($notifiable)
     {
-        Log::info('emaaaiiilll that was okay');
-
+     
         $signedUrl = URL::temporarySignedRoute(
             'verification.verify',
             Carbon::now()->addMinutes(60),
@@ -49,6 +48,5 @@ class CustomVerifyEmailNotification extends  VerifyEmail
     {
         return [
             //
-        ];
-    }
+        ];    }
 }
