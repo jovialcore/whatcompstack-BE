@@ -11,22 +11,42 @@ use Illuminate\Http\Request;
 
 class CompanyStackController extends Controller
 {
+    private function getCompaniesBySearchTerm($term, Company $company)
+    {
+        $term = strtolower($term);
+        $companies = $company->FetchAllClientDetails()
+            ->where(function ($query) use ($term) {
+                $query->where('name', 'LIKE', "%{$term}%")
+                    ->orWhereHas('plangs', function ($query) use ($term) {
+                        $query->where('name', 'LIKE', "%{$term}%");
+                    })
+                    ->orWhereHas('frameworks', function ($query) use ($term) {
+                        $query->where('name', 'LIKE', "%{$term}%");
+                    })
+                    ->orWhereHas('feFrameworks', function ($query) use ($term) {
+                        $query->where('name', 'LIKE', "%{$term}%");
+                    })
+                    ->orWhereHas('mobilePlangs', function ($query) use ($term) {
+                        $query->where('name', 'LIKE', "%{$term}%");
+                    });
+        });
+        return $companies;
+    }
 
     public function index(Request $req, Company $company)
     {
-
-        $companies = $company::FetchAllClientDetails();
-
-        //if laravel had an "orWithWhereHAs" ðŸ™‚
-
-        if ($companies->exists() > 0) {
-
-            $companies = $companies->paginate(21);
-
-            return CompanyResource::collection($companies);
-        } else {
-            return response()->json(['message' => 'No  Results found'], 200);
+        $searchTerm = $req->query('term');
+        if ($searchTerm) {
+            $paginatedCompanies = $this->getCompaniesBySearchTerm($searchTerm, $company)->paginate(21);
+            return CompanyResource::collection($paginatedCompanies);
         }
+
+        $companies = $company->FetchAllClientDetails();
+        if ($companies->exists() === 0) {
+            return response()->json(['message' => 'No  Results found'], 404);
+        }
+        $companies = $companies->paginate(21);
+        return CompanyResource::collection($companies);
     }
 
     public function show($source_slug)
