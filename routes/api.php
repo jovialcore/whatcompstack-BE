@@ -68,4 +68,3 @@ Route::middleware('auth:sanctum')->prefix('/community/member')->group(function (
 
 Route::get('/company/stack/details/{source_slug}', [App\Http\Controllers\Api\CompanyStackController::class, 'show']);
 Route::get('/companies', [App\Http\Controllers\Api\CompanyStackController::class, 'index']);
-
