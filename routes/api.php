@@ -24,5 +24,3 @@ Route::get('/company/stack/all', [App\Http\Controllers\Api\CompanyStackControlle
 
 Route::get('/company/stack/details/{id}', [App\Http\Controllers\Api\CompanyStackController::class, 'show']);
 Route::get('/companies', [App\Http\Controllers\Api\CompanyStackController::class, 'index']);
-Route::get('/companies/search', [App\Http\Controllers\Api\CompanyStackController::class, 'findByName']);
-
