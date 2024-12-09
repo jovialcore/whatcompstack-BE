@@ -6,38 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
 
-use App\Services\SearchService;
+use App\Services\CompanyService;
 use Illuminate\Http\Request;
 
 class CompanyStackController extends Controller
 {
-    private function getCompaniesBySearchTerm($term, Company $company)
+    protected $companyService;
+    public function __construct(CompanyService $companyService)
     {
-        $term = strtolower($term);
-        $companies = $company->FetchAllClientDetails()
-            ->where(function ($query) use ($term) {
-                $query->where('name', 'LIKE', "%{$term}%")
-                    ->orWhereHas('plangs', function ($query) use ($term) {
-                        $query->where('name', 'LIKE', "%{$term}%");
-                    })
-                    ->orWhereHas('frameworks', function ($query) use ($term) {
-                        $query->where('name', 'LIKE', "%{$term}%");
-                    })
-                    ->orWhereHas('feFrameworks', function ($query) use ($term) {
-                        $query->where('name', 'LIKE', "%{$term}%");
-                    })
-                    ->orWhereHas('mobilePlangs', function ($query) use ($term) {
-                        $query->where('name', 'LIKE', "%{$term}%");
-                    });
-        });
-        return $companies;
+        $this->companyService = $companyService;
     }
-
     public function index(Request $req, Company $company)
     {
         $searchTerm = $req->query('term');
         if ($searchTerm) {
-            $paginatedCompanies = $this->getCompaniesBySearchTerm($searchTerm, $company)->paginate(21);
+            $paginatedCompanies = $this->companyService->getCompaniesBySearchTerm($searchTerm, $company)->paginate(21);
             return CompanyResource::collection($paginatedCompanies);
         }
 
