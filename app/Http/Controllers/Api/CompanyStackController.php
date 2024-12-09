@@ -17,7 +17,7 @@ class CompanyStackController extends Controller
 
         $companies = $company::FetchAllClientDetails();
 
-        //if laravel had an "orWithWhereHAs" ðŸ™‚
+        //if laravel had an "orWithWhereHAs" 🙂
 
         if ($companies->exists() > 0) {
 

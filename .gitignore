@@ -17,6 +17,4 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-/app/Http/Controllers/Api/AiController.php
-/sneat-bootstrap-html-admin-template-free
 
