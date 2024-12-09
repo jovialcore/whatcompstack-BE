@@ -30,7 +30,7 @@ class StoreCompanyDataRequest extends FormRequest
             'cto_name' => 'string|nullable',
             'hr_name' => 'string|nullable',
             'hr_contact' => 'url |nullable',
-            'logo' => 'required|mimes:png,jpeg,svg',
+            'logo' => 'required|mimes:png,jpeg,svg,webp',
             'source_slug' => 'nullable|string|unique:companies,source_slug'
         ];
     }
