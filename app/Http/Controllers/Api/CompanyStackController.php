@@ -19,12 +19,7 @@ class CompanyStackController extends Controller
     public function index(Request $req, Company $company)
     {
         $searchTerm = $req->query('term');
-        if ($searchTerm) {
-            $paginatedCompanies = $this->companyService->getCompaniesBySearchTerm($searchTerm, $company)->paginate(21);
-            return CompanyResource::collection($paginatedCompanies);
-        }
-
-        $companies = $company->FetchAllClientDetails();
+        $companies = $searchTerm ? $this->companyService->getCompaniesBySearchTerm($searchTerm, $company) : $this->companyService->getCompanies($company);
         if ($companies->exists() === 0) {
             return response()->json(['message' => 'No  Results found'], 404);
         }

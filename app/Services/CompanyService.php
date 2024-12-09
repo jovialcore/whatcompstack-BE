@@ -69,6 +69,11 @@ class CompanyService
         return $companies;
     }
 
+    public function getCompanies(Company $company)
+    {
+        return $company->FetchAllClientDetails();
+    }
+
     public function showCompany(int $id): Company
     {
         $company = $this->companyWithTechData()->find($id);
