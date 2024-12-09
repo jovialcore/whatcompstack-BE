@@ -47,8 +47,11 @@ class CompanyService
         }
     }
 
-    public function getCompaniesBySearchTerm($term, Company $company)
+    public function getCompanies(Company $company, $term = null)
     {
+        if(!$term){
+            return $company->FetchAllClientDetails();
+        }
         $term = strtolower($term);
         $companies = $company->FetchAllClientDetails()
             ->where(function ($query) use ($term) {
@@ -67,11 +70,6 @@ class CompanyService
                     });
         });
         return $companies;
-    }
-
-    public function getCompanies(Company $company)
-    {
-        return $company->FetchAllClientDetails();
     }
 
     public function showCompany(int $id): Company

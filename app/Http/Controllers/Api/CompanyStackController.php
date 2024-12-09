@@ -19,7 +19,7 @@ class CompanyStackController extends Controller
     public function index(Request $req, Company $company)
     {
         $searchTerm = $req->query('term');
-        $companies = $searchTerm ? $this->companyService->getCompaniesBySearchTerm($searchTerm, $company) : $this->companyService->getCompanies($company);
+        $companies = $this->companyService->getCompanies($company, $searchTerm);
         if ($companies->exists() === 0) {
             return response()->json(['message' => 'No  Results found'], 404);
         }
