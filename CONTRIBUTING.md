@@ -39,3 +39,19 @@ php artisan db:seed
 ```bash
 php artisan serve
 ```
+
+### Running the application via docker
+You can also run the BE via a container if you are experiencing difficulty with the local setup
+
+#### Prerequiste
+Before you begin make sure you have the docker daemon installed and running on your PC. If you don't have docker installed, you have to either download [docker desktop](https://www.docker.com/products/docker-desktop/) or [OrbStack](https://orbstack.dev/download), and install it. Note OrbStack only works on Mac
+
+#### Building and Running the container using docker-compose
+Open a new terminal, navigate to the root directory of the repo, and run the next set of commands to configure and start the container.
+- `docker-compose build` to build the container
+- `docker-compose run app composer install` to install the PHP packages
+- `docker-compose run app npm install` to install the node packages
+- `docker-compose run app php artisan migrate` to run the migrations
+- `docker-compose run app php artisan db:seed` to seed the database
+- `docker-compose up -d app` to start the container
+- Launch the app by opening `http://localhost:8000/` on your web browser
