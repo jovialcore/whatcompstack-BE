@@ -16,11 +16,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/company/stack/results', [App\Http\Controllers\Api\SearchController::class, 'search']);
-
-Route::get('/company/stack/all', [App\Http\Controllers\Api\CompanyStackController::class, 'index']);
-
-
-
 Route::get('/company/stack/details/{id}', [App\Http\Controllers\Api\CompanyStackController::class, 'show']);
-
+Route::get('/companies', [App\Http\Controllers\Api\CompanyStackController::class, 'index']);

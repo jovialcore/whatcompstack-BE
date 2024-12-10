@@ -47,6 +47,31 @@ class CompanyService
         }
     }
 
+    public function getCompanies(Company $company, $term = null)
+    {
+        if(!$term){
+            return $company->FetchAllClientDetails();
+        }
+        $term = strtolower($term);
+        $companies = $company->FetchAllClientDetails()
+            ->where(function ($query) use ($term) {
+                $query->where('name', 'LIKE', "%{$term}%")
+                    ->orWhereHas('plangs', function ($query) use ($term) {
+                        $query->where('name', 'LIKE', "%{$term}%");
+                    })
+                    ->orWhereHas('frameworks', function ($query) use ($term) {
+                        $query->where('name', 'LIKE', "%{$term}%");
+                    })
+                    ->orWhereHas('feFrameworks', function ($query) use ($term) {
+                        $query->where('name', 'LIKE', "%{$term}%");
+                    })
+                    ->orWhereHas('mobilePlangs', function ($query) use ($term) {
+                        $query->where('name', 'LIKE', "%{$term}%");
+                    });
+        });
+        return $companies;
+    }
+
     public function showCompany(int $id): Company
     {
         $company = $this->companyWithTechData()->find($id);
