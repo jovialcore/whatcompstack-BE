@@ -27,7 +27,7 @@ We get the information about the tools these companies use from job postings. We
 
 ### Roadmap Features
 
-1. **Heavily SEO ENABLED**: we want to make sure that we are SEO optimized. As this will provide the value we want to companies that get enlisted and generally for whatcompanystack.  
+1. **Heavily SEO Enabled**: we want to make sure that we are SEO optimized. As this will provide the value we want to companies that get enlisted and generally for whatcompanystack.  
 2. **Automatic sourcing of information:** While we automatically source (scrape) information at times, we aim to fully automate the sourcing of tech stack information about companies.
 3. **Adding a Rating Feature** : This is simply adding a rating feature to index the most used stack of these startups or companies. We want to display tech stacks base on the one that is most used by a company. All stack are relevant but a stack can be what is powering a major aspect of their system.
 4. **A what-company-stack Community** : We want to have a what-company-stack community that helps to add additional accuracy to the data we already provide.
