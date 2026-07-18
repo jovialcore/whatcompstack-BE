@@ -1,4 +1,4 @@
-## ✨ What-Company-Stack
+## What-Company-Stack
 
 <p align="center"><a href="https://whatcompanystack.com" target="_blank"><img src="https://res.cloudinary.com/chidiebere/image/upload/c_thumb,w_200,g_face/v1703702998/WCS_1.png" width="200" alt="What-company-stack logo"></a></p>
 
@@ -20,10 +20,10 @@ We get the information about the tools these companies use from job postings. We
 
 ### Key Features
 
-- **📚 List tech staks used by companies:** You can see a listing of some tech companies/startups with a display of programming languages, frameworks they use. 
-- **❄️ **Intuitive Search:** Search feature base on tech stack, programming language, etc ( Frontend )
-- ** 🧑‍🍳 **Auto Sourcing Source:** (scrape) programming languages and frameworks of listed companies  (Admin). There is an interace for manual addition of tech tools
-- **🔒 Fully open source:** You can self-host the entire stack on your servers. Both the frontend and admin interface is fully open source
+- **List tech staks used by companies:** You can see a listing of some tech companies/startups with a display of programming languages, frameworks they use. 
+- **Intuitive Search:** Search feature base on tech stack, programming language, etc ( Frontend )
+- **Auto Sourcing Source:** (scrape) programming languages and frameworks of listed companies  (Admin). There is an interace for manual addition of tech tools
+- **Fully open source:** You can self-host the entire stack on your servers. Both the frontend and admin interface is fully open source
 
 ### Roadmap Features
 
