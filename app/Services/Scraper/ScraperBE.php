@@ -2,7 +2,7 @@
 
 namespace App\Services\Scraper;
 
-use Goutte\Client;
+use Symfony\Component\BrowserKit\HttpBrowser as Client;
 use Illuminate\Http\Request;
 
 use App\Helpers\Backend;
