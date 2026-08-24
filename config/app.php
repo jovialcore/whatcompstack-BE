@@ -186,8 +186,6 @@ return [
          * Package Service Providers...
          */
 
-         Weidner\Goutte\GoutteServiceProvider::class,
-
         /*
          * Application Service Providers...
          */
@@ -212,7 +210,6 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'Goutte' => Weidner\Goutte\GoutteFacade::class,
     ])->toArray(),
 
 ];

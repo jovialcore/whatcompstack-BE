@@ -7,7 +7,6 @@ namespace App\Services;
 use App\Models\Company;
 use App\Traits\companyPreviewTrait;
 use Cloudinary\Api\Upload\UploadApi;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -30,13 +29,13 @@ class CompanyService
         try {
             $companyData = $request->all();
             if ($request->has('logo')) {
-                $logoUrl = Cloudinary::upload(
+                $logoUrl = (new UploadApi(config('cloudinary.cloud_url')))->upload(
                     $request->file('logo')->getRealPath(),
                     [
                         'folder' => 'wcsLogos',
                         'public_id' => $request->name,
                     ]
-                )->getSecurePath();
+                )['secure_url'];
                 $companyData = $request->except('logo');
                 $companyData['logo'] = $logoUrl;
             }
